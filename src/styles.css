@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
+.text-pink {
+    color: #ab6c6c;
+    /* margin-left: 5px; */
+    text-decoration: none;
+}
+
+.card-back {
+    /* background-color: #283034; */
+    background-color: rgb(33,37,41);
+}
+
+.song-selector {
+    cursor: pointer;
+}
+
+.bg-profile {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/backOG3.png?alt=media&token=07ca8e3a-0ce0-49a8-95d6-4a8c2add230d');
+    background-size: cover;
+}

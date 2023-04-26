@@ -1,0 +1,61 @@
+<div class="form-back bg-profile">
+    <main>
+        <!-- IMPORTAR MODULOS -->
+        <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+            <div>
+                <div class="col-lg-10 mx-auto p-3 py-md-5">
+                    <!-- <h3 class="text-pink"><b>Subir canción</b></h3> -->
+                    <div class="test mt-5 mb-5 d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+
+                        <div class="col-lg-4">
+                            <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
+                                id="inputFile">
+
+                            <label for="inputFile" class="labelInputFile">
+                                <img src="{{foto}}" alt="upload file">
+                            </label>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <!-- <div class="row"> -->
+                            <!-- <th><strong class="text-pink">Titulo</strong></th>
+                            <tr><strong class="text-pink">Subir archivo</strong></tr> -->
+                            <div>
+
+                                <label for="firstName" class="form-label text-pink title-new-song"><b>Título</b></label>
+                                <input formControlName="titulo" type="text" class="form-control" id="firstName"
+                                    placeholder="" value="">
+
+                                <!-- <p class="invalid-error"
+                                    *ngIf="form.get('nombre').invalid && (form.get('nombre').dirty || form.get('nombre').touched)">
+                                    Introduzca un nombre
+                                </p> -->
+                            </div>
+                            <!-- <div class="mt-2">
+                                <label for="inputSong"
+                                    class="form-label text-pink title-new-song"><b>Archivo</b></label>
+                                <input formControlName="cancion" type="file" accept=".mp3, .wav" class="form-control" id="inputSong"
+                                    (change)="onUploadMusic($event)">
+                            </div> -->
+                            <!-- </div> -->
+                            <!-- <div class="col">
+                            
+                        </div>
+                        <div class="col">
+                            
+                        </div> -->
+                        </div>
+
+                    </div>
+
+                    <div class="mt-5 mb-4 d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
+                        <div class="col-lg-2"></div>
+                        <div class="mt-5 mb-3 col-lg-8">
+                            <button class="btn btn-back text-white arreglo" type="submit">Crear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>

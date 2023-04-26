@@ -1,0 +1,148 @@
+.music-cover {
+    margin-bottom: 15px;
+}
+
+.title {
+    margin-left: 5px;
+    
+}
+
+.no-salir {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.section-dispatcher {
+    background-color: #f2ebdc;
+    padding: 100px 0;
+    height: 970px;
+    overflow: hidden;
+    -webkit-transition: height 1s cubic-bezier(.2,.84,.5,1);
+    -o-transition: height 1s cubic-bezier(.2,.84,.5,1);
+    transition: height 1s cubic-bezier(.2,.84,.5,1);
+}
+
+
+// @media screen and (min-width: 1280px) {
+//     .container {
+//         max-width: 1450px;
+//     }
+// }
+// @media screen and (min-width: 1200px) {
+//     .container {
+//         max-width: 1140px;
+//     }
+// }
+// @media screen and (min-width: 992px) {
+//     .container {
+//         max-width: 960px;
+//     }
+// }
+// @media screen and (min-width: 768px) {
+//     .container {
+//         max-width: 720px;
+//     }
+// }
+// @media screen and (min-width: 576px) {
+//     .container {
+//         max-width: 540px;
+//     }
+// }
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1450px;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.section-dispatcher-title {
+    color: #130827;
+    margin-bottom: 90px;
+    padding: 0 62px;
+    font-size: 2.1rem;
+    font-weight: 600;
+    line-height: 1em;
+}
+
+.c-example__tilt {
+    position: relative;
+}
+.c-example__tilt {
+    width: 596px;
+    height: 640px;
+    background: url(../../../assets/img/concierto2.jpg) no-repeat left -250px top -100px;
+    cursor: pointer;
+    margin: 0 auto;
+    -webkit-transition: -webkit-transform 1s cubic-bezier(.2,.84,.5,1);
+    transition: -webkit-transform 1s cubic-bezier(.2,.84,.5,1);
+    -o-transition: transform .1s cubic-bezier(.2,.84,.5,1);
+    transition: transform 1s cubic-bezier(.2,.84,.5,1);
+    transition: transform 1s cubic-bezier(.2,.84,.5,1), -webkit-transform 1s cubic-bezier(.2,.84,.5,1);
+}
+
+.c-example__tilt-overlay {
+    -webkit-transform: translateZ(50px);
+    transform: translateZ(50px);
+    background-color: #00000038;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 14%;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.c-example__tilt-txt {
+    -webkit-transform: translateZ(50px);
+    transform: translateZ(50px);
+    color: #fff;
+    padding: 30px;
+    border: 10px solid #f2ebdc ;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: rgba(171, 108, 108, 0.3);
+}
+
+.c-example__tilt-txt h2 {
+    color: #fff;
+    font-size: 3.6rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.c-example__tilt-txt p {
+    font-weight: 400;
+}
+
+.c-example__tilt.js-tilt-experiences {
+    background: url(../../../assets/img/modelaje-urbano.jpg) no-repeat center;
+    background-size: cover;
+}

@@ -1,0 +1,27 @@
+header {
+    height: 10vh;
+}
+
+.div-pointer {
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #ab6c6c;
+}
+
+.material-symbols-outlined {
+    margin-right: 15px;
+    cursor: pointer;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+.dropdown-toggle:after {
+    content: none;
+}
+
+@media screen and (max-width: 767px) {
+    .ocultar {
+        display: none;
+    }
+}
