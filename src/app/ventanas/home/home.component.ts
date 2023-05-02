@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Cancion } from 'src/app/shared/models/cancion.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CancionService } from 'src/app/shared/services/cancion.service';
-import { UsuarioService } from 'src/app/shared/services/usuario.service';
+// import { CancionService } from 'src/app/shared/services/cancion.service';
+import { ProfilesService } from 'src/app/shared/services/profiles.service';
 
 @Component({
   selector: 'app-home',
@@ -32,8 +32,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
-    private usuarioSrv: UsuarioService,
-    private cancionSrv: CancionService,
+    private usuarioSrv: ProfilesService,
+    // private cancionSrv: CancionService,
     private router: Router,
   ) { }
 
@@ -53,45 +53,45 @@ export class HomeComponent implements OnInit {
 
             this.user = usuario;
 
-            this.cancionSrv.getAllByDate().subscribe(music => {
-              if (this.user.seguidos) {
-                if (this.user.seguidos.length > 0) {
-                  for (let j = 0; j < this.user.seguidos.length; j++) {
-                    for (let i = 0; i < music.length; i++) {
-                      if (music[i].usuario.id != this.user.id) {
+            // this.cancionSrv.getAllByDate().subscribe(music => {
+            //   if (this.user.seguidos) {
+            //     if (this.user.seguidos.length > 0) {
+            //       for (let j = 0; j < this.user.seguidos.length; j++) {
+            //         for (let i = 0; i < music.length; i++) {
+            //           if (music[i].usuario.id != this.user.id) {
 
-                        if (this.user.seguidos.includes(music[i].usuario.id)) {
-                          if (this.friendSongs.length < 4) {
-                            this.friendSongs.push(music[i]);
-                          }
-                        } else {
-                          if (this.newSongs.length < 4) {
-                            this.newSongs.push(music[i]);
-                          }
-                        }
+            //             if (this.user.seguidos.includes(music[i].usuario.id)) {
+            //               if (this.friendSongs.length < 4) {
+            //                 this.friendSongs.push(music[i]);
+            //               }
+            //             } else {
+            //               if (this.newSongs.length < 4) {
+            //                 this.newSongs.push(music[i]);
+            //               }
+            //             }
 
-                      }
-                    }
-                  }
-                } else {
-                  for (let i = 0; i < music.length; i++) {
-                    if (music[i].usuario.id != this.user.id) {
-                      if (this.newSongs.length < 4) {
-                        this.newSongs.push(music[i])
-                      }
-                    }
-                  }
-                }
-              } else {
-                for (let i = 0; i < music.length; i++) {
-                  if (music[i].usuario.id != this.user.id) {
-                    if (this.newSongs.length < 4) {
-                      this.newSongs.push(music[i])
-                    }
-                  }
-                }
-              }
-            })
+            //           }
+            //         }
+            //       }
+            //     } else {
+            //       for (let i = 0; i < music.length; i++) {
+            //         if (music[i].usuario.id != this.user.id) {
+            //           if (this.newSongs.length < 4) {
+            //             this.newSongs.push(music[i])
+            //           }
+            //         }
+            //       }
+            //     }
+            //   } else {
+            //     for (let i = 0; i < music.length; i++) {
+            //       if (music[i].usuario.id != this.user.id) {
+            //         if (this.newSongs.length < 4) {
+            //           this.newSongs.push(music[i])
+            //         }
+            //       }
+            //     }
+            //   }
+            // })
 
           })
         });
@@ -119,9 +119,9 @@ export class HomeComponent implements OnInit {
         this.artistas = artistas;
       });
 
-      this.cancionSrv.getAllMatches(this.form.value.search).subscribe(canciones => {
-        this.canciones = canciones;
-      });
+      // this.cancionSrv.getAllMatches(this.form.value.search).subscribe(canciones => {
+      //   this.canciones = canciones;
+      // });
 
     } else {
       this.busqueda = false;

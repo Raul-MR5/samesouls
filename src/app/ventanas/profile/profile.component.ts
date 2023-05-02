@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { Cancion } from 'src/app/shared/models/cancion.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CancionService } from 'src/app/shared/services/cancion.service';
+// import { CancionService } from 'src/app/shared/services/cancion.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { UsuarioService } from 'src/app/shared/services/usuario.service';
+import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import * as internal from 'stream';
 
 @Component({
@@ -39,8 +39,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private authSrv: AuthService,
-    private usuarioSrv: UsuarioService,
-    private cancionSrv: CancionService,
+    private usuarioSrv: ProfilesService,
+    // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router,
     private activatedRoute: ActivatedRoute
@@ -59,19 +59,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.foto = this.user.foto;
       this.nombre = this.user.username;
 
-      this.followed = this.usuarioSrv.followed(this.user);
+      // this.followed = this.usuarioSrv.followed(this.user);
 
       this.getFollowers();
 
-      this.cancionSrv.getUserMusic(this.user).subscribe((music) => {
-        this.music = music;
+      // this.cancionSrv.getUserMusic(this.user).subscribe((music) => {
+      //   this.music = music;
 
-        if (this.music.length == 0) {
-          this.bool = true;
-        }
+      //   if (this.music.length == 0) {
+      //     this.bool = true;
+      //   }
 
-        this.totalMusic = this.music.length;
-      })
+      //   this.totalMusic = this.music.length;
+      // })
     });
   }
 
@@ -93,16 +93,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   getFollowers() {   
 
-    this.usuarioSrv.followers(this.user.id).subscribe(users => {
-      this.followers = 0;
-      this.usuarios = users;
+    // this.usuarioSrv.followers(this.user.id).subscribe(users => {
+    //   this.followers = 0;
+    //   this.usuarios = users;
 
-      for (let i = 0; i < this.usuarios.length; i++) {        
-        if (this.usuarios[i].seguidos.includes(this.user.id)) {
-          this.followers++;
-        }
-      }
-    });
+    //   for (let i = 0; i < this.usuarios.length; i++) {        
+    //     if (this.usuarios[i].seguidos.includes(this.user.id)) {
+    //       this.followers++;
+    //     }
+    //   }
+    // });
   }
 
   getFollows() {
@@ -131,15 +131,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   follow() {
-    this.usuarioSrv.newFollow(this.userLogged.id, this.user).then(() => {
-      this.followed = true;
-    })
+    // this.usuarioSrv.newFollow(this.userLogged.id, this.user).then(() => {
+    //   this.followed = true;
+    // })
   }
 
   unfollow() {
-    this.usuarioSrv.removeFollow(this.userLogged.id, this.user).then(() => {
-      this.followed = false;
-    })
+    // this.usuarioSrv.removeFollow(this.userLogged.id, this.user).then(() => {
+    //   this.followed = false;
+    // })
   }
 
   prueba() {
@@ -168,6 +168,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   play(song: Cancion) {
-    this.cancionSrv.setSong(song);
+    // this.cancionSrv.setSong(song);
   }
 }

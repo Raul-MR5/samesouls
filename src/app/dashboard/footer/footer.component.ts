@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cancion } from 'src/app/shared/models/cancion.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CancionService } from 'src/app/shared/services/cancion.service';
+// import { CancionService } from 'src/app/shared/services/cancion.service';
 
 @Component({
   selector: 'app-footer',
@@ -22,7 +22,7 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private authSrv: AuthService,
-    private cancionSrv: CancionService,
+    // private cancionSrv: CancionService,
     private router: Router
   ) {
     // this.song = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/canciones%2FADVANCED%20WARFARE%20VS%20DESTINY%20VS%20TITAN%20FALL.mp3?alt=media&amp;token=b6aa69d3-9831-4706-a874-59b7b67c954c"
@@ -30,23 +30,23 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.cancionSrv.cancionActual.subscribe(cancion => {
-      this.song = null;
-      this.song = cancion;
+    // this.cancionSrv.cancionActual.subscribe(cancion => {
+    //   this.song = null;
+    //   this.song = cancion;
 
-      this.cancionSrv.pauseSong();
+    //   this.cancionSrv.pauseSong();
 
-      this.audio = new Audio(cancion.cancion)
-      // console.log(this.audio.currentTime);
-      // console.log(this.audio.duration);
+    //   this.audio = new Audio(cancion.cancion)
+    //   // console.log(this.audio.currentTime);
+    //   // console.log(this.audio.duration);
       
-      this.play();
+    //   this.play();
 
-      // console.log("hola");
+    //   // console.log("hola");
       
-      console.log(this.song);
+    //   console.log(this.song);
       
-    });
+    // });
 
   }
 
@@ -57,25 +57,25 @@ export class FooterComponent implements OnInit {
       this.time = (this.audio.currentTime / this.audio.duration)*100;
     })
 
-    this.cancionSrv.playSong(this.audio);
+    // this.cancionSrv.playSong(this.audio);
   }
 
   pause() {
     this.playB = false;
 
-    this.cancionSrv.pauseSong();
+    // this.cancionSrv.pauseSong();
   }
 
   before() {
-    if (this.audio.currentTime > 5) {
-      this.cancionSrv.resetSong();      
-    } else {
-      this.cancionSrv.previousSong();      
-    }
+    // if (this.audio.currentTime > 5) {
+    //   this.cancionSrv.resetSong();      
+    // } else {
+    //   this.cancionSrv.previousSong();      
+    // }
   }
 
   after() {
-    this.cancionSrv.nextSong();
+    // this.cancionSrv.nextSong();
   }
 
   parseTime(time){

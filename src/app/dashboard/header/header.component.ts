@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CancionService } from 'src/app/shared/services/cancion.service';
-import { UsuarioService } from 'src/app/shared/services/usuario.service';
+// import { CancionService } from 'src/app/shared/services/cancion.service';
+import { ProfilesService } from 'src/app/shared/services/profiles.service';
 
 @Component({
   selector: 'app-header',
@@ -16,8 +16,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authSrv: AuthService,
-    private usuarioSrv: UsuarioService,
-    private cancionSrv: CancionService,
+    private usuarioSrv: ProfilesService,
+    // private cancionSrv: CancionService,
     private router: Router
   ) { }
 
@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     );
 
     // this.cancionSrv.pauseSong();
-    this.cancionSrv.cleanSong();
+    // this.cancionSrv.cleanSong();
 
     this.router.navigate(['/']);
   }

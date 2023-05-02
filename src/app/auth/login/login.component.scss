@@ -1,10 +1,13 @@
+@import "../../../assets/sass/variables";
+
 .form-back {
     height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    color: #ab6c6c;
+    color: $primaryLightColor;
+    // color: #ab6c6c;
 }
 
 .form-img {
@@ -40,7 +43,8 @@
 }
 
 .btn-back {
-    background-color: #ab6c6c;
+    background-color: $primaryLightColor;
+    // background-color: #ab6c6c;
 }
 
 .btn-circle {
@@ -66,7 +70,8 @@
 }
 
 .text-pink {
-    color: #ab6c6c;
+    // color: #ab6c6c;
+    color: $primaryLightColor;
     margin-left: 5px;
     text-decoration: none;
 }

@@ -1,10 +1,12 @@
+@import "../../../assets/sass/variables";
+
 .form-back {
     height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 40px;
     padding-bottom: 40px;
-    color: #ab6c6c;
+    color: $primaryLightColor;
 }
 
 .container {
@@ -43,11 +45,12 @@
 }
 
 .btn-back {
-    background-color: #ab6c6c;
+    background-color: $primaryLightColor;
+    color: $primaryColor;
 }
 
 .text-pink {
-    color: #ab6c6c;
+    color: $primaryLightColor;
     margin-left: 5px;
     text-decoration: none;
 }

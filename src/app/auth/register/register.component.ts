@@ -5,8 +5,10 @@ import { Usuario } from 'src/app/shared/models/usuario.model';
 // import { AccountService } from 'src/app/shared/services/account.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { UsuarioService } from 'src/app/shared/services/usuario.service';
+import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import Swal from 'sweetalert2';
+import { RolesService } from 'src/app/shared/services/roles.service';
+import { Rol } from 'src/app/shared/models/rol.model';
 
 @Component({
   selector: 'app-register',
@@ -21,12 +23,15 @@ export class RegisterComponent implements OnInit {
 
   imagenes: any[] = [];
   avatar: any;
+  
+  rol: Rol[];
 
   constructor(
     private formBuilder: FormBuilder,
     // private accountSrv: AccountService,
     private authSrv: AuthService,
-    private usuarioSrv: UsuarioService,
+    private usuarioSrv: ProfilesService,
+    private rolSrv: RolesService,
     private storageSrv: StorageService,
     private router: Router
   ) { }
@@ -111,16 +116,25 @@ export class RegisterComponent implements OnInit {
               urlImagen = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
             }
 
+            // this.rolSrv.getByCode("USUARIO").subscribe(r => this.rol = r);
+
             let usuario: Usuario = {
               id: user.user.uid,
               username: this.form.value.username,
               nombre: this.form.value.nombre,
               apellidos: this.form.value.apellidos,
               email: this.form.value.email,
-              foto: urlImagen
+              foto: urlImagen,
+              // rol: this.rol[0],
+              rol: {
+                id: 'V44oN0bG1LFiXdkKoE64',
+                code: 'USUARIO'
+              },
+              enabled: 1,
+              created_at: Date.now()
             }
 
-            let h = await this.usuarioSrv.create(usuario);
+            await this.usuarioSrv.create(usuario);
 
             this.authSrv.emailVerified();
             this.authSrv.logout();

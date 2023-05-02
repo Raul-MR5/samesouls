@@ -1,3 +1,5 @@
+@import "../../../assets/sass/variables";
+
 header {
     height: 10vh;
 }
@@ -7,7 +9,7 @@ header {
 }
 
 .btn-back {
-    background-color: #ab6c6c;
+    background-color: $primaryLightColor;
 }
 
 .material-symbols-outlined {

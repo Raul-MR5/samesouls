@@ -10,7 +10,7 @@ import * as jwt_decode from 'jwt-decode';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { UsuarioService } from './usuario.service';
+import { ProfilesService } from './profiles.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private usuarioSrv: UsuarioService,
+    private usuarioSrv: ProfilesService,
     private auth: AngularFireAuth
   ) {
     this.usuarioSubject = new BehaviorSubject<Usuario>(null);

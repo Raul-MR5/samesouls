@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from './shared/models/usuario.model';
 import { AuthService } from './shared/services/auth.service';
-import { UsuarioService } from './shared/services/usuario.service';
+import { ProfilesService } from './shared/services/profiles.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authSrv: AuthService,
-    private usuarioSrv: UsuarioService,
+    private usuarioSrv: ProfilesService,
   ) { }
 
   ngOnInit(): void {

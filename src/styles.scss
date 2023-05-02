@@ -2,16 +2,19 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "assets/sass/variables";
 
 .text-pink {
-    color: #ab6c6c;
+    color: $primaryLightColor;
+    // color: #ab6c6c;
     /* margin-left: 5px; */
     text-decoration: none;
 }
 
 .card-back {
     /* background-color: #283034; */
-    background-color: rgb(33,37,41);
+    background-color: $primaryColor;
+    // background-color: rgb(33,37,41);
 }
 
 .song-selector {

@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { Cancion } from 'src/app/shared/models/cancion.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CancionService } from 'src/app/shared/services/cancion.service';
+// import { CancionService } from 'src/app/shared/services/cancion.service';
 import { StorageService } from 'src/app/shared/services/storage.service';
-import { UsuarioService } from 'src/app/shared/services/usuario.service';
+import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -31,8 +31,8 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
-    private usuarioSrv: UsuarioService,
-    private cancionSrv: CancionService,
+    private usuarioSrv: ProfilesService,
+    // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router
   ) { }

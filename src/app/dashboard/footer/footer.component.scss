@@ -1,13 +1,15 @@
+@import "../../../assets/sass/variables";
+
 footer {
     height: 10vh;
 }
 
 video {
-    color: #ab6c6c;
+    color: $primaryLightColor;
 }
 
 .bg-pink {
-    background-color: #ab6c6c;
+    background-color: $primaryLightColor;
 }
 
 .content-footer {
@@ -118,7 +120,7 @@ progress::-moz-progress-bar {
     width: 33%;
     position: absolute;
     content: '';
-    border-top: 1px solid #ab6c6c;
+    border-top: 1px solid $primaryLightColor;
     // border-top: 1px solid var(--color5);
     top: 47%;
 }
@@ -164,7 +166,7 @@ progress::-moz-progress-bar {
 .footer-social li a .cl-icon {
     height: 23px;
     width: 26px;
-    fill: #ab6c6c;
+    fill: $primaryLightColor;
     // fill: var(--color5);
 }
 
@@ -174,12 +176,18 @@ progress::-moz-progress-bar {
 }
 
 .footer-bottom {
+    color: $primaryLightColor;
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
     padding: 1rem 0 0;
     flex-direction: column;
+}
+
+.footer-bottom  a {
+    color: $primaryLightColor;
+    text-decoration: none;
 }
 
 .footer-logo {
@@ -204,7 +212,7 @@ progress::-moz-progress-bar {
     font-size: 0.75rem;
     line-height: 0.875em;
     // color: var(--color5);
-    color: #ab6c6c;
+    color: $primaryLightColor;
     margin-bottom: 8px;
 }
 
@@ -220,7 +228,7 @@ progress::-moz-progress-bar {
 .footer-copyright ul>li::after {
     display: inline-block;
     font-size: 0.75em;
-    color: #ab6c6c;
+    color: $primaryLightColor;
     // color: var(--color5);
     position: absolute;
     content: '|';

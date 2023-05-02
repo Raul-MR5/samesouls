@@ -1,3 +1,5 @@
+import { Rol } from "./rol.model";
+
 export interface Usuario {
     id?: string;
     username: string;
@@ -6,5 +8,8 @@ export interface Usuario {
     apellidos?: string;
     email: string;
     foto?: any;
+    rol?: Rol;
+    enabled?: number;
+    created_at?: number;
     seguidos?: string[];
 }

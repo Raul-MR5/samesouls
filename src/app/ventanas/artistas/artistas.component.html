@@ -1,54 +1,80 @@
-<!-- CASA -->
-<!-- <div class="col-lg-10 mx-auto p-3 py-md-5">
-    <main>
-        <div class="py-4">
-            <h3 class="fs-4 text-pink">Artistas</h3>
-            <hr class="text-pink">
+<div class="col-lg-11 mx-auto py-md-4">
+  <main>
+    <div class="display-flex row py-4">
+      <h3 class="fs-4 text-pink">Artistas</h3>
+      <hr class="text-pink" />
 
-            <div class="py-2 row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-
-                <div class="col" *ngFor="p of prueba">
-                    <div class="shadow-sm song-selector">
-                        <div class="card-body align-title-lista card-back">
-                            <img class="music-cover rounded-circle me-2"
-                                src="https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/1-edit.png?alt=media&token=7bf7cb6d-f185-47aa-a892-428e91cc8c0f"
-                                width="100px" height="100px">
-
-                            <h5 class="lista-inline text-pink">SameSouls</h5>
-                        </div>
-                    </div>
+      <div class="col-8">
+        <div class="py-2 row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+          <div
+            (click)="goTo('/profile/' + a.id)"
+            class="col"
+            *ngFor="let a of artistas"
+          >
+            <div class="shadow-sm song-selector">
+              <div class="card-body card-back">
+                <div class="d-flex justify-content-center align-items-center">
+                  <img
+                    class="mt-2 music-cover rounded-circle"
+                    src="{{ a.foto }}"
+                    width="130px"
+                    height="130px"
+                  />
                 </div>
-
+                <div
+                  class="mt-3 d-flex justify-content-center align-items-center"
+                >
+                  <h5 class="text-pink no-salir">{{ a.username }}</h5>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </main>
-</div> -->
+      </div>
+      <div class="col-4">
+        <div>
+          <nav class="navbar">
+            <div class="container-fluid row">
+              <div class="col-lg-1"></div>
+              <form class="col-lg-10 d-flex align-items-center justify-content-center" [formGroup]="form" role="search">
+                <input (keyup)="search()" formControlName="search" class="form-control me-2 bg-dark text-light rounded-pill" type="search"
+                  placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+              <div class="col-lg-1"></div>
+            </div>
+          </nav>
+        </div>
+        <div class="text-pink" style="margin-left: 11%;">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="genero" id="flexCheckDefault"/>
+            <label class="form-check-label" for="flexCheckDefault">Género</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="tipo" id="flexCheckDefault"/>
+            <label class="form-check-label" for="flexCheckDefault">Tipo</label>
+          </div>
+        </div>
+        <!-- <div class="py-2 row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3"> -->
 
-<!-- ODEC -->
-<div class="col-lg-10 mx-auto py-md-4">
-    <main>
-        <div class="py-4">
-            <h3 class="fs-4 text-pink">Artistas</h3>
-            <hr class="text-pink">
-
-            <div class="py-2 row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-
-                <div (click)="goTo('/profile/' +a.id)" class="col" *ngFor="let a of artistas">
-                    <div class="shadow-sm song-selector">
-                        <div class="card-body card-back">
-                            <div class="d-flex justify-content-center align-items-center">
-                                <img class="mt-2 music-cover rounded-circle"
-                                    src="{{a.foto}}"
-                                    width="130px" height="130px">
-                            </div>
-                            <div class="mt-3 d-flex justify-content-center align-items-center">
-                                <h5 class="text-pink no-salir">{{a.username}}</h5>
+        <!-- <div (click)="goTo('/profile/' +a.id)" class="col" *ngFor="let a of artistas">
+                        <div class="shadow-sm song-selector">
+                            <div class="card-body card-back">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img class="mt-2 music-cover rounded-circle"
+                                        src="{{a.foto}}"
+                                        width="130px" height="130px">
+                                </div>
+                                <div class="mt-3 d-flex justify-content-center align-items-center">
+                                    <h5 class="text-pink no-salir">{{a.username}}</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </main>
+                    </div> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  </main>
 </div>

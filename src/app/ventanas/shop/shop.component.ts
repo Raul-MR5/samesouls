@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/shared/models/usuario.model';
-import { UsuarioService } from 'src/app/shared/services/usuario.service';
+import { ProfilesService } from 'src/app/shared/services/profiles.service';
 
 @Component({
   selector: 'app-shop',
@@ -15,11 +15,11 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private usuarioSrv: UsuarioService,
+    private usuarioSrv: ProfilesService,
   ) { }
 
   ngOnInit(): void {    
-    document.getElementById("shop").className += " active"
+    // document.getElementById("shop").className += " active"
     
     this.usuario = this.usuarioSrv.getUsuario();
 
@@ -32,7 +32,7 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    document.getElementById("shop").classList.remove("active")
+    // document.getElementById("shop").classList.remove("active")
   }
 
   goTo(url: string) {
