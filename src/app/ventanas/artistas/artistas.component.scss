@@ -1,5 +1,7 @@
+@import "../../../assets/sass/variables";
+
 .color-link {
-    color: #ab6c6c;
+    color: $primaryLightColor;
 }
 
 .lista-inline {
@@ -28,4 +30,31 @@
 
 .div-pointer {
     cursor: pointer
+}
+
+.is-divider {
+    background-color: $primaryLightColor;
+    // margin-top: 0.66em;
+    height: 3px;
+    display: block;
+    margin: 0.3em 0 1em;
+    width: 100%;
+    max-width: 30px;
+}
+
+.genre-list {
+    padding-left: 0;
+}
+
+.genre-list > li {
+    cursor: pointer;
+    padding: 3px;
+    list-style: none;
+    margin: 0; 
+    margin-bottom: 0.3em;
+    text-align: left;
+}
+
+.genre-list > li+li {
+    border-top: 1px solid rgba(255,255,255,0.08);;
 }

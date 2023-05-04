@@ -1,6 +1,8 @@
+@import "../../../assets/sass/variables";
+
 .name {
     font-size: 250%;
-    color: #ab6c6c;
+    color: $primaryLightColor;
     margin-left: 5%;
 }
 
@@ -30,7 +32,7 @@
 }
 
 .btn-back {
-    background-color: #ab6c6c;    
+    background-color: $primaryLightColor;    
     border-radius: 20px;
 }
 
@@ -46,7 +48,7 @@
 }
 
 .color-link {
-    color: #ab6c6c;
+    color: $primaryLightColor;
 }
 
 .div-pointer {
@@ -82,4 +84,34 @@
     .ocultar {
         display: none;
     }
+}
+
+
+
+
+
+.options-list {
+    padding-left: 0;
+}
+
+.options-list > li {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    padding: 3px;
+    list-style: none;
+    margin: 0; 
+    margin-bottom: 0.3em;
+    text-align: left;
+}
+
+.options-list > li:last-child {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' 0,
+  'opsz' 48
 }

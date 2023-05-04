@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
       if (bool) {
         this.authSrv.getUsuario().subscribe(user => {
           this.usuarioSrv.getOne(user.uid).subscribe(usuario => {
+            console.log("user", usuario)
             this.usuarioSrv.setUsuario(usuario);
 
             this.user = usuario;

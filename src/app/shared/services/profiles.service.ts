@@ -30,6 +30,14 @@ export class ProfilesService {
         return this.firestore.collection<Usuario>('profiles', ref => ref.where('rol.code', '==', match)).valueChanges({ idField: 'id' });
     }
 
+    getAllMatchesArtista(match: string): Observable<Usuario[]> {
+        return this.firestore.collection<Usuario>('profiles', ref => ref.where('rol.code', '==', 'ARTISTA').orderBy('username').startAt(match).endAt(match + "\uf8ff")).valueChanges({ idField: 'id' });
+    }
+
+    getAllMatchesGenre(match: string): Observable<Usuario[]> {
+        return this.firestore.collection<Usuario>('profiles', ref => ref.where('genre.code', '==', match).orderBy('username')).valueChanges({ idField: 'id' });
+    }
+
     getOne(id: string): Observable<Usuario> {
         return this.firestore.collection<Usuario>('profiles').doc(id).valueChanges({ idField: 'id' });
     }

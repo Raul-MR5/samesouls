@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { RecuperarPasswordComponent } from '../auth/recuperar-password/recuperar-password.component';
 
 const routes: Routes = [
   {
@@ -31,12 +32,14 @@ const routes: Routes = [
       { path: '', loadChildren: () => import('src/app/ventanas/home/home.module').then(m => m.HomeModule), /* canActivate: [AuthGuard], */ pathMatch: "full" },
       { path: 'artistas', loadChildren: () => import('src/app/ventanas/artistas/artistas.module').then(m => m.ArtistasModule)/* , canActivate: [AuthGuard] */ },
       { path: 'shop', loadChildren: () => import('src/app/ventanas/shop/shop.module').then(m => m.ShopModule)/* , canActivate: [AuthGuard] */ },
-      { path: 'profile/:id', loadChildren: () => import('src/app/ventanas/profile/profile.module').then(m => m.ProfileModule)/* , canActivate: [AuthGuard] */ },
-      { path: 'edit-profile', loadChildren: () => import('src/app/ventanas/profile/edit-profile/edit-profile.module').then(m => m.EditProfileModule)/* , canActivate: [AuthGuard] */ } 
+      { path: 'profile', loadChildren: () => import('src/app/ventanas/profile/profile.module').then(m => m.ProfileModule)/* , canActivate: [AuthGuard] */ },
+      // { path: 'artista/:id', loadChildren: () => import('src/app/ventanas/profile/profile.module').then(m => m.ProfileModule)/* , canActivate: [AuthGuard] */ },
+      // { path: 'edit-profile', loadChildren: () => import('src/app/ventanas/profile/edit-profile/edit-profile.module').then(m => m.EditProfileModule)/* , canActivate: [AuthGuard] */ } 
     ]
   },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'reset-password', component: RecuperarPasswordComponent }
 ];
 
 @NgModule({
@@ -46,7 +49,8 @@ const routes: Routes = [
     MenuComponent,
     FooterComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    RecuperarPasswordComponent
   ],
   imports: [
     CommonModule,

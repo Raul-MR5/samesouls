@@ -1,10 +1,12 @@
+@import "../../../assets/sass/variables";
+
 .mi-menu {
     float: left;
 }
 
 .nav-link.active,
 .show > .nav-link {
-    background-color: #ab6c6c;
+    background-color: $primaryLightColor;
 }
 
 .div-pointer {

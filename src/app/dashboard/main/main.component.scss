@@ -25,7 +25,7 @@
 }
 
 .main-content-samesouls::-webkit-scrollbar-thumb {
-    background-color: #ab6c6c;
+    background-color: $primaryLightColor;
     border-radius: 20px;
     // border: 2px solid #f1f2f3;
 }
@@ -36,7 +36,7 @@
 
 .bg-samesouls {
     // background-color: rgb(45, 50, 54);
-    background-color: rgb(45, 50, 54);
+    background-color: $primaryLightColor;
 }
 // .bg-samesouls {
 //     background-image: url('https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/backOG3.png?alt=media&token=07ca8e3a-0ce0-49a8-95d6-4a8c2add230d');

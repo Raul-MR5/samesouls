@@ -47,13 +47,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id']; console.log(this.id, "hola"); /* let p = this.prueba(); console.log(p) */ });
+    // const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id']; console.log(this.id, "hola"); /* let p = this.prueba(); console.log(p) */ });
 
-    this.suscriptions.push(paramsSubscription);
+    // this.suscriptions.push(paramsSubscription);
 
     this.userLogged = this.usuarioSrv.getUsuario();
 
-    this.usuarioSrv.getOne(this.id).subscribe(usuario => {
+    this.usuarioSrv.getOne(this.userLogged.id).subscribe(usuario => {
       this.user = usuario;
 
       this.foto = this.user.foto;
@@ -76,11 +76,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.suscriptions.forEach(item => item.unsubscribe())
+    // this.suscriptions.forEach(item => item.unsubscribe())
   }
 
   goTo(url: string) {
-    this.router.navigate([url]);
+    this.router.navigate(['/profile' + url]);
   }
 
   async logout() {

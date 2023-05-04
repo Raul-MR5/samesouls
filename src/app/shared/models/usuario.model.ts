@@ -1,3 +1,4 @@
+import { Genre } from "./genre.model";
 import { Rol } from "./rol.model";
 
 export interface Usuario {
@@ -9,6 +10,7 @@ export interface Usuario {
     email: string;
     foto?: any;
     rol?: Rol;
+    genre?: Genre;
     enabled?: number;
     created_at?: number;
     seguidos?: string[];

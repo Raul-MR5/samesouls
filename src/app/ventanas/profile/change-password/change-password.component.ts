@@ -10,11 +10,11 @@ import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
   user: Usuario;

@@ -10,11 +10,11 @@ import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: 'app-invoice',
+  templateUrl: './invoice.component.html',
+  styleUrls: ['./invoice.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class InvoiceComponent implements OnInit {
 
   form: FormGroup;
   user: Usuario;
@@ -39,7 +39,6 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.usuarioSrv.getUsuario();
-    console.log(this.user)
 
     this.form = this.formBuilder.group({
       foto: [''],
@@ -111,7 +110,7 @@ export class EditProfileComponent implements OnInit {
 
         await this.usuarioSrv.update(usuario);
 
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/profile/' + this.user.id]);
       });
 
     } catch (e: any) {

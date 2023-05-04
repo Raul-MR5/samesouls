@@ -12,9 +12,11 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard],
     children: [
-      // { path: '', loadChildren: () => import('src/app/ventanas/canciones/cancion.module').then(m => m.CancionModule), canActivate: [AuthGuard]},
+      { path: '', loadChildren: () => import('src/app/ventanas/profile/edit-profile/edit-profile.module').then(m => m.EditProfileModule), canActivate: [AuthGuard]},
+      { path: 'change-password', loadChildren: () => import('src/app/ventanas/profile/change-password/change-password.module').then(m => m.ChangePasswordModule), canActivate: [AuthGuard]},
+      { path: 'invoice', loadChildren: () => import('src/app/ventanas/profile/invoice/invoice.module').then(m => m.InvoiceModule), canActivate: [AuthGuard]},
       // { path: ':id', component: CancionComponent, canActivate: [AuthGuard]},
-      { path: 'artistas',  loadChildren: () => import('src/app/ventanas/artistas/artistas.module').then(m => m.ArtistasModule), canActivate: [AuthGuard]}
+      // { path: 'artistas',  loadChildren: () => import('src/app/ventanas/artistas/artistas.module').then(m => m.ArtistasModule), canActivate: [AuthGuard]}
     ]
   }
 ];
