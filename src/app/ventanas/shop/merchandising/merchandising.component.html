@@ -1,0 +1,109 @@
+<div class="bg-light">
+    <div class="col-lg-9 mx-auto py-md-4">
+        <div class="col-lg-1 arreglo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#0d0d0d"
+                class="bi bi-arrow-left-circle-fill song-selector" (click)="back()" viewBox="0 0 16 16">
+                <path
+                    d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+            </svg>
+        </div>
+        <div class="display-flex row py-4">
+
+            <div class="col-8">
+                <div class="display-flex row row-cols-2" *ngIf="type == 'clothing'">
+                    <div *ngIf="photo1 == 'front'">
+                        <img class="merchan-photo" src="../../../../assets/img/front.jpg" alt="">
+                    </div>
+                    <div *ngIf="photo2 == 'back'">
+                        <img class="merchan-photo" src="../../../../assets/img/back.jpg" alt="">
+                    </div>
+                    <div *ngIf="photo3 == 'model_front'">
+                        <img class="merchan-photo" src="../../../../assets/img/model_front.jpg" alt="">
+                    </div>
+                    <div *ngIf="photo4 == 'model_back'">
+                        <img class="merchan-photo" src="../../../../assets/img/model_side.jpg" alt="">
+                    </div>
+                    <div *ngIf="photo5 == 'model_side'">
+                        <img class="merchan-photo" src="../../../../assets/img/model_back.jpg" alt="">
+                    </div>
+                </div>
+                <div class="display-flex row" *ngIf="type == 'music'">
+                    <img src="../../../../assets/img/vinilo.webp" alt="">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-back" *ngIf="type == 'clothing'">
+                    <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+                        <div>
+                            <div class="col-lg-11 mx-auto p-2 ps-5">
+                                <div
+                                    class="test d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+
+                                    <h3 class="w-100"><strong>NOMBRE MERCHAN</strong></h3>
+                                    <h3 class="w-100"><strong>--,--€</strong></h3>
+
+                                    <div class="w-100 pt-3">
+                                        <select class="form-select col-12" aria-label="Default select example">
+                                            <option hidden selected>TALLAS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                        </select>
+
+                                        <p class="pt-4" style="text-align: justify;text-justify: inter-word;">Lorem
+                                            Ipsum es simplemente el texto de relleno de las imprentas y archivos de
+                                            texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias
+                                            desde
+                                            el año 1500, cuando un impresor (N. del T. persona que se dedica a la
+                                            imprenta)
+                                            desconocido usó una galería de textos y los mezcló de tal manera que logró
+                                            hacer
+                                            un libro de textos especimen. </p>
+                                    </div>
+
+                                    <!-- <div class="mt-2 row col-lg-12">
+                                    <div class="col-lg-6">
+                                        <label for="nombre" class="form-label text-dark title-new-song"><b>Nombre</b></label>
+                                        <input formControlName="nombre" type="text" class="form-control" id="nombre"
+                                            placeholder="Nombre" value="">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="apellidos" class="form-label text-dark title-new-song"><b>Apellidos</b></label>
+                                        <input formControlName="apellidos" type="text" class="form-control" id="apellidos"
+                                            placeholder="Apellidos" value="">
+                                    </div>
+        
+                                    <div class="mt-2 col-lg-6">
+                                        <label for="username" class="form-label text-dark title-new-song"><b>Nombre de usuario</b></label>
+                                        <input formControlName="username" type="text" class="form-control" id="username"
+                                            placeholder="Nombre de usuario" value="">
+                                    </div>
+                                    
+                                    <div class="mt-2 col-lg-6">
+                                        <label for="email" class="form-label text-dark title-new-song"><b>Email</b></label>
+                                        <input formControlName="email" type="text" class="form-control text-muted" id="email"
+                                            placeholder="Correo electrónico" value="">
+                                    </div>
+                                </div> -->
+
+                                </div>
+
+                                <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
+                                    <!-- <div class="col-lg-2"></div> -->
+                                    <div class="col-lg-12">
+                                        <button class="btn btn-back text-white arreglo" type="submit">Añadir a mi
+                                            cesta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="display-flex row" *ngIf="type == 'music'">
+                    <img src="../../../../assets/img/vinilo.webp" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@
           <div class="col-8">
             <div class="py-2 row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
               <div
-                (click)="goTo('/profile/' + a.id)"
+                (click)="goTo('/artistas/' + a.id)"
                 class="col"
                 *ngFor="let a of artistas"
               >
@@ -20,6 +20,7 @@
                         src="{{ a.foto }}"
                         width="130px"
                         height="130px"
+                        alt="{{ a.username }}"
                       />
                     </div>
                     <div

@@ -33,6 +33,8 @@ const routes: Routes = [
       { path: 'artistas', loadChildren: () => import('src/app/ventanas/artistas/artistas.module').then(m => m.ArtistasModule)/* , canActivate: [AuthGuard] */ },
       { path: 'shop', loadChildren: () => import('src/app/ventanas/shop/shop.module').then(m => m.ShopModule)/* , canActivate: [AuthGuard] */ },
       { path: 'profile', loadChildren: () => import('src/app/ventanas/profile/profile.module').then(m => m.ProfileModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'artistas/:id',  loadChildren: () => import('src/app/ventanas/artistas/artista-profile/artista-profile.module').then(m => m.ArtistaProfileModule)/* , canActivate: [AuthGuard]*/}, 
+      { path: 'shop/:id',  loadChildren: () => import('src/app/ventanas/shop/merchandising/merchandising.module').then(m => m.MerchandisingModule)/* , canActivate: [AuthGuard]*/} 
       // { path: 'artista/:id', loadChildren: () => import('src/app/ventanas/profile/profile.module').then(m => m.ProfileModule)/* , canActivate: [AuthGuard] */ },
       // { path: 'edit-profile', loadChildren: () => import('src/app/ventanas/profile/edit-profile/edit-profile.module').then(m => m.EditProfileModule)/* , canActivate: [AuthGuard] */ } 
     ]

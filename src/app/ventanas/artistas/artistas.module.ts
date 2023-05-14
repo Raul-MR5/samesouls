@@ -17,10 +17,10 @@ const routes: Routes = [
     path: '',
     component: ArtistasComponent,
     // canActivate: [AuthGuard],
-    // children: [
-    //   { path: '', loadChildren: () => import('src/app/ventanas/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard], pathMatch: "full"},
-    //   // { path: 'biblioteca',  loadChildren: () => import('src/app/ventanas/coches/coche/coche.module').then(m => m.CocheModule), canActivate: [AuthGuard]}
-    // ]
+    children: [
+      // { path: '', loadChildren: () => import('src/app/ventanas/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard], pathMatch: "full"},
+      // { path: ':id',  loadChildren: () => import('src/app/ventanas/artistas/artista-profile/artista-profile.module').then(m => m.ArtistaProfileModule)/* , canActivate: [AuthGuard]*/} 
+    ]
   }
 ];
 

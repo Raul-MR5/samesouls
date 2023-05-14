@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authSrv.authenticated().subscribe(bool => {
+
       if (bool) {
         this.authSrv.getUsuario().subscribe(user => {
           this.usuarioSrv.getOne(user.uid).subscribe(usuario => {
@@ -49,12 +50,18 @@ export class HeaderComponent implements OnInit {
 
   async logout() {
     await this.authSrv.logout().then( ()=>{
+      // this.user = false;
+      // this.authSrv.authenticated().subscribe(bool => {
+      //   console.log(bool)
+      // })
+      location.reload();
+      // this.router.navigate(['/']);
     }
     );
 
     // this.cancionSrv.pauseSong();
     // this.cancionSrv.cleanSong();
 
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);
   }
 }
