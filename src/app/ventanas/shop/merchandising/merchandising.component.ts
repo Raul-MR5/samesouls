@@ -34,7 +34,7 @@ export class MerchandisingComponent implements OnInit {
   suscriptions: Subscription[] = [];
 
 
-  type = 'clothing'
+  type = 'music'
   photo1 = 'front'
   photo2 = 'back'
   photo3 = 'model_front'

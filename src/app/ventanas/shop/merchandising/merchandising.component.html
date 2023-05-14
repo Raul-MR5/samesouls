@@ -27,8 +27,8 @@
                         <img class="merchan-photo" src="../../../../assets/img/model_back.jpg" alt="">
                     </div>
                 </div>
-                <div class="display-flex row" *ngIf="type == 'music'">
-                    <img src="../../../../assets/img/vinilo.webp" alt="">
+                <div class="display-flex align-items-center justify-content-center row" *ngIf="type == 'music'">
+                    <img style="width: 75vh;" src="../../../../assets/img/vinilo.webp" alt="">
                 </div>
             </div>
             <div class="col-4">
@@ -61,36 +61,9 @@
                                             hacer
                                             un libro de textos especimen. </p>
                                     </div>
-
-                                    <!-- <div class="mt-2 row col-lg-12">
-                                    <div class="col-lg-6">
-                                        <label for="nombre" class="form-label text-dark title-new-song"><b>Nombre</b></label>
-                                        <input formControlName="nombre" type="text" class="form-control" id="nombre"
-                                            placeholder="Nombre" value="">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="apellidos" class="form-label text-dark title-new-song"><b>Apellidos</b></label>
-                                        <input formControlName="apellidos" type="text" class="form-control" id="apellidos"
-                                            placeholder="Apellidos" value="">
-                                    </div>
-        
-                                    <div class="mt-2 col-lg-6">
-                                        <label for="username" class="form-label text-dark title-new-song"><b>Nombre de usuario</b></label>
-                                        <input formControlName="username" type="text" class="form-control" id="username"
-                                            placeholder="Nombre de usuario" value="">
-                                    </div>
-                                    
-                                    <div class="mt-2 col-lg-6">
-                                        <label for="email" class="form-label text-dark title-new-song"><b>Email</b></label>
-                                        <input formControlName="email" type="text" class="form-control text-muted" id="email"
-                                            placeholder="Correo electrónico" value="">
-                                    </div>
-                                </div> -->
-
                                 </div>
 
                                 <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
-                                    <!-- <div class="col-lg-2"></div> -->
                                     <div class="col-lg-12">
                                         <button class="btn btn-back text-white arreglo" type="submit">Añadir a mi
                                             cesta</button>
@@ -101,7 +74,37 @@
                     </form>
                 </div>
                 <div class="display-flex row" *ngIf="type == 'music'">
-                    <img src="../../../../assets/img/vinilo.webp" alt="">
+                    <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+                        <div>
+                            <div class="col-lg-11 mx-auto p-2 ps-5">
+                                <div
+                                    class="test d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+
+                                    <h3 class="w-100"><strong>NOMBRE MERCHAN</strong></h3>
+                                    <h3 class="w-100"><strong>--,--€</strong></h3>
+
+                                    <div class="w-100 pt-3">
+                                        <p class="pt-4" style="text-align: justify;text-justify: inter-word;">Lorem
+                                            Ipsum es simplemente el texto de relleno de las imprentas y archivos de
+                                            texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias
+                                            desde
+                                            el año 1500, cuando un impresor (N. del T. persona que se dedica a la
+                                            imprenta)
+                                            desconocido usó una galería de textos y los mezcló de tal manera que logró
+                                            hacer
+                                            un libro de textos especimen. </p>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
+                                    <div class="col-lg-12">
+                                        <button class="btn btn-back text-white arreglo" type="submit">Añadir a mi
+                                            cesta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
