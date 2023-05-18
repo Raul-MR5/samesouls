@@ -1,14 +1,18 @@
 <div class="form-back bg-dark">
     <main>
         <!-- IMPORTAR MODULOS -->
-        <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
-            <h1><strong>Editar perfil</strong></h1>
+        <form class="form-signin needs-validation text-pink" [formGroup]="form" (submit)="submit()">
             <div>
-                <div class="col-lg-10 mx-auto p-3 py-md-5">
+                <!-- <div  class="col-lg-10 mx-auto ps-3">
+                    <h1><strong>Editar perfil</strong></h1>
+                </div> -->
+                <div class=" mx-auto ">
                     <!-- <h3 class="text-dark"><b>Subir canción</b></h3> -->
-                    <div class="test mt-3 d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+                    <h3 class="fs-4 text-pink">Perfil</h3>
+                    <hr class="text-pink" />
+                    <div class="test mt-3 d-flex justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
 
-                        <div class="col-lg-12 d-flex align-items-center justify-content-center pe-4">
+                        <div class="col-lg-2 d-flex align-items-center justify-content-start pe-4">
                             <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple
                                 (change)="onUploadImg($event)" id="inputFile">
 
@@ -17,12 +21,20 @@
                             </label>
                         </div>
 
-                        <div class="mt-2 row col-lg-12">
+                        <div class="mt-2 row col-lg-10 text-pink">
+                            <!-- <div class="col-2">
+                                <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple
+                                    (change)="onUploadImg($event)" id="inputFile">
+
+                                <label for="inputFile" class="labelInputFile">
+                                    <img src="../../../../assets/img/animated-capibara-with-a-crown.png" alt="upload file">
+                                </label>
+                            </div> -->
                             <!-- <div class="row"> -->
                             <!-- <th><strong class="text-dark">Titulo</strong></th>
                             <tr><strong class="text-dark">Subir archivo</strong></tr> -->
                             <div class="col-lg-6">
-                                <label for="nombre" class="form-label text-dark title-new-song"><b>Nombre</b></label>
+                                <label for="nombre" class="form-label title-new-song"><b>Nombre</b></label>
                                 <input formControlName="nombre" type="text" class="form-control" id="nombre"
                                     placeholder="Nombre" value="">
 
@@ -32,19 +44,19 @@
                                 </p> -->
                             </div>
                             <div class="col-lg-6">
-                                <label for="apellidos" class="form-label text-dark title-new-song"><b>Apellidos</b></label>
+                                <label for="apellidos" class="form-label title-new-song"><b>Apellidos</b></label>
                                 <input formControlName="apellidos" type="text" class="form-control" id="apellidos"
                                     placeholder="Apellidos" value="">
                             </div>
 
                             <div class="mt-2 col-lg-6">
-                                <label for="username" class="form-label text-dark title-new-song"><b>Nombre de usuario</b></label>
+                                <label for="username" class="form-label title-new-song"><b>Nombre de usuario</b></label>
                                 <input formControlName="username" type="text" class="form-control" id="username"
                                     placeholder="Nombre de usuario" value="">
                             </div>
                             
                             <div class="mt-2 col-lg-6">
-                                <label for="email" class="form-label text-dark title-new-song"><b>Email</b></label>
+                                <label for="email" class="form-label title-new-song"><b>Email</b></label>
                                 <input formControlName="email" type="text" class="form-control text-muted" id="email"
                                     placeholder="Correo electrónico" value="">
 
@@ -65,16 +77,45 @@
                     </div>
 
                     <!-- <div class="mx-auto mt-4">
-                        <label for="textarea" class="text-dark mb-2 title-new-song"><b>Lyrics</b></label>
+                        <label for="textarea" class="mb-2 title-new-song"><b>Lyrics</b></label>
                         <textarea formControlName="lyrics" class="form-control" rows="6"
                             placeholder="Introduzca la letra de su canción" id="textarea"></textarea>
                     </div> -->
 
                     <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
-                            <button class="btn btn-back text-white arreglo" type="submit">Editar</button>
+                        <div class="col-lg-10"></div>
+                        <div class="row d-flex justify-content-end col-lg-2 ps-4 pe-4 mt-4">
+                            <button class="col-lg-5 btn btn-outline-light text-pink me-3" (click)="reset()">Cancelar</button>
+                            <!-- <div class="col-lg-1"></div> -->
+                            <button class="col-lg-5 btn btn-light text-dark" type="submit">Editar</button>
                         </div>
+                        <!-- <div class="col-lg-2 ps-4" style="padding-right: 2rem;">
+                        </div> -->
+                    </div>
+                </div>
+                <div style="margin-top: 10rem;">
+                    <!-- <h3 class="text-dark"><b>Subir canción</b></h3> -->
+                    <h3 class="fs-4 text-pink">Cambiar contraseña</h3>
+                    <hr class="text-pink" />
+                    <div class="test mt-3 d-flex justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+
+                        <div class="mt-2 row col-lg-12 text-pink">
+                            <div class="col-lg-5">
+                                <label for="newPassword" class="form-label title-new-song"><b>Nueva contraseña</b></label>
+                                <input formControlName="newPassword" type="text" class="form-control" id="newPassword"
+                                    placeholder="Nueva contraseña" value="">
+                            </div>
+                            <div class="col-lg-5">
+                                <label for="repeatPassword" class="form-label title-new-song"><b>Repetir contraseña</b></label>
+                                <input formControlName="repeatPassword" type="text" class="form-control" id="repeatPassword"
+                                    placeholder="Repetir contraseña" value="">
+                            </div>
+
+                            <div class="d-flex align-items-end col-lg-2" >
+                                <button class="btn btn-light text-dark arreglo" type="submit">Editar</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

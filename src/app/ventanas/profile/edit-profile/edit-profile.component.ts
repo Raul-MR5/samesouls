@@ -39,17 +39,52 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.usuarioSrv.getUsuario();
-    console.log(this.user)
+    console.log("user",this.user)
 
-    this.form = this.formBuilder.group({
-      foto: [''],
-      username: [this.user.username, [Validators.required]],
-      nombre: [this.user.nombre, [Validators.required]],
-      apellidos: [this.user.apellidos],
-      email: [{ value: this.user.email, disabled: true }, [Validators.required]]
-    });
+    if (this.user == undefined) {
+      this.authSrv.authenticated().subscribe(bool => {
 
-    this.foto = this.user.foto;
+        if (bool) {
+          this.authSrv.getUsuario().subscribe(user => {
+            this.usuarioSrv.getOne(user.uid).subscribe(usuario => {
+              console.log("user", usuario)
+              this.usuarioSrv.setUsuario(usuario);
+
+              this.user = usuario;
+  
+              this.form = this.formBuilder.group({
+                foto: [this.user.foto],
+                username: [this.user.username, [Validators.required]],
+                nombre: [this.user.nombre, [Validators.required]],
+                apellidos: [this.user.apellidos],
+                email: [{ value: this.user.email, disabled: true }, [Validators.required]]
+              });
+          
+              this.foto = this.user.foto;
+  
+              if (!this.foto) {
+                this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
+              }
+            })
+          });
+        }
+      }) 
+    } else {
+      this.form = this.formBuilder.group({
+        foto: [this.user.foto],
+        username: [this.user.username, [Validators.required]],
+        nombre: [this.user.nombre, [Validators.required]],
+        apellidos: [this.user.apellidos],
+        email: [{ value: this.user.email, disabled: true }, [Validators.required]]
+      });
+  
+      this.foto = this.user.foto;
+
+      if (!this.foto) {
+        this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
+      }
+    }
+
   }
 
   ngOnDestroy(): void {
@@ -117,6 +152,16 @@ export class EditProfileComponent implements OnInit {
     } catch (e: any) {
       // alert(e.message)
     }
+  }
+
+  reset(){
+    this.form = this.formBuilder.group({
+      foto: [this.user.foto],
+      username: [this.user.username, [Validators.required]],
+      nombre: [this.user.nombre, [Validators.required]],
+      apellidos: [this.user.apellidos],
+      email: [{ value: this.user.email, disabled: true }, [Validators.required]]
+    });
   }
 
 }

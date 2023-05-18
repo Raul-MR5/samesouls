@@ -28,7 +28,7 @@
                             </div>
                         </div> -->
 
-                        <div class="card m-3" style="width: 100%;">
+                        <!-- <div class="card m-3" style="width: 100%;">
                             <div class="row g-0">
                               <div class="col-md-4">
                                 <img src="{{foto}}" class="img-fluid rounded-start" alt="Foto del artista" width="200px">
@@ -37,55 +37,112 @@
                                 <div class="card-body">
                                   <h5 class="card-title">Card title</h5>
                                   <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+                                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
                                 </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
 
-                        <div class="mt-2 row col-lg-12">
-                            <!-- <div class="row"> -->
-                            <!-- <th><strong class="text-dark">Titulo</strong></th>
-                            <tr><strong class="text-dark">Subir archivo</strong></tr> -->
-                            <div class="col-lg-6">
-                                <label for="nombre" class="form-label text-dark title-new-song"><b>Nombre</b></label>
-                                <input formControlName="nombre" type="text" class="form-control" id="nombre"
-                                    placeholder="Nombre" value="">
-
-                                <!-- <p class="invalid-error"
-                                    *ngIf="form.get('nombre').invalid && (form.get('nombre').dirty || form.get('nombre').touched)">
-                                    Introduzca un nombre
-                                </p> -->
+                        <div class="card text-bg-dark w-100">
+                            <img src="../../../../assets/img/banner-gayete.png" style="height: 30vh;" class="card-img"
+                                alt="...">
+                            <div class="card-img-overlay d-flex align-content-end flex-wrap row card-artista">
+                                <h1 class="card-title mb-3" style="font-size: 100px;">Gayete</h1>
+                                <p class="card-text">Sergio Gayete Suarez, aka Gayete es un artista que utiliza la
+                                    música para escaparse un poco de la realidad y expresar lo que siente en cada
+                                    canción. Lazos Rotos. Same Souls ©</p>
+                                <!-- <p class="card-text"><small>Last updated 3 mins ago</small></p> -->
                             </div>
-                            <div class="col-lg-6">
-                                <label for="apellidos" class="form-label text-dark title-new-song"><b>Apellidos</b></label>
-                                <input formControlName="apellidos" type="text" class="form-control" id="apellidos"
-                                    placeholder="Apellidos" value="">
-                            </div>
-
-                            <div class="mt-2 col-lg-6">
-                                <label for="username" class="form-label text-dark title-new-song"><b>Nombre de usuario</b></label>
-                                <input formControlName="username" type="text" class="form-control" id="username"
-                                    placeholder="Nombre de usuario" value="">
-                            </div>
-                            
-                            <div class="mt-2 col-lg-6">
-                                <label for="email" class="form-label text-dark title-new-song"><b>Email</b></label>
-                                <input formControlName="email" type="text" class="form-control text-muted" id="email"
-                                    placeholder="Correo electrónico" value="">
-
-                                <!-- <p class="invalid-error"
-                                    *ngIf="form.get('nombre').invalid && (form.get('nombre').dirty || form.get('nombre').touched)">
-                                    Introduzca un nombre
-                                </p> -->
-                            </div>
-                            <!-- </div> -->
-                            <!-- <div class="col">
-                            
                         </div>
-                        <div class="col">
-                            
-                        </div> -->
+
+                        <div class="mt-3 row col-lg-12">
+                            <div class="p-3">
+                                <h3 class="fs-4 text-pink">Música</h3>
+                                <hr class="text-pink" />
+                                <table class="text-pink table table-dark table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Álbum</th>
+                                            <th scope="col">Tiempo</th>
+                                            <th scope="col">Reproducir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>No te tengo que llamar</td>
+                                            <td>No te tengo que llamar</td>
+                                            <td>02:33</td>
+                                            <td>PLAY</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Endiablao</td>
+                                            <td>Lazos Rotos</td>
+                                            <td>02:33</td>
+                                            <td>PLAY</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td>A tu lado</td>
+                                            <td>Lazos Rotos</td>
+                                            <td>02:33</td>
+                                            <td>PLAY</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 row col-lg-12">
+                            <div class="p-3">
+                                <h3 class="fs-4 text-pink">Tienda</h3>
+                                <hr class="text-pink" />
+                                <div class="row row-cols-md-6">
+                                    <div class="col">
+                                        <div class="card card-artista text-pink">
+                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            <div class="card-body bg-dark">
+                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-artista text-pink">
+                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            <div class="card-body bg-dark">
+                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-artista text-pink">
+                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            <div class="card-body bg-dark">
+                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-artista text-pink">
+                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            <div class="card-body bg-dark">
+                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                          </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card card-artista text-pink">
+                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            <div class="card-body bg-dark">
+                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            </div>
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -96,12 +153,12 @@
                             placeholder="Introduzca la letra de su canción" id="textarea"></textarea>
                     </div> -->
 
-                    <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
+                    <!-- <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-8">
                             <button class="btn btn-back text-white arreglo" type="submit">Editar</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </form>
