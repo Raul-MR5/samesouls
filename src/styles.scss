@@ -33,3 +33,7 @@
 .bg-dark {
     background-color: $primaryColor !important;
 }
+
+img {
+    object-fit: cover;
+}

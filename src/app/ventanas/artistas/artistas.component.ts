@@ -38,11 +38,6 @@ export class ArtistasComponent implements OnInit {
 
     this.usuarioSrv.getAllMatchesRol("ARTISTA").subscribe(a => {
       this.artistas = a;
-      this.artistas.push(a[0]);
-      this.artistas.push(a[0]);
-      this.artistas.push(a[0]);
-      this.artistas.push(a[0]);
-      this.artistas.push(a[0]);
       this.allArtistas = this.artistas;
     })
 

@@ -22,6 +22,10 @@ header {
     content: none;
 }
 
+.dropdown-divider {
+    border-top: 1px solid rgb(246 234 234 / 18%)
+}
+
 @media screen and (max-width: 767px) {
     .ocultar {
         display: none;

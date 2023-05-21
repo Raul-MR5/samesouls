@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BannerPhotos } from 'src/app/shared/models/banner_photos.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { BannerPhotosService } from 'src/app/shared/services/banner_photos.service';
 // import { CancionService } from 'src/app/shared/services/cancion.service';
 import { ProfilesService } from 'src/app/shared/services/profiles.service';
 
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit {
 
   // canciones: Cancion[];
   artistas: Usuario[];
+  banner: BannerPhotos[];
 
   busqueda: boolean = false;
 
@@ -32,6 +35,7 @@ export class HomeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
+    private bannerSrv: BannerPhotosService,
     // private cancionSrv: CancionService,
     private router: Router,
   ) { }
@@ -39,6 +43,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     // document.getElementById("sidebarhome").className += " active"
 
+    this.bannerSrv.getByType('BANNER_HOME').subscribe(banner => {
+      this.banner = banner;
+    })
 
     this.form = this.formBuilder.group({
       search: ['']

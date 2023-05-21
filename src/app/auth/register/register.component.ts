@@ -41,6 +41,9 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
+    this.rolSrv.getByCode("USUARIO").subscribe(r => {
+      this.rol = r
+    });
     // this.user = this.usuarioSrv.getUsuario()
     // this.name = this.user.nombre;
 
@@ -112,11 +115,11 @@ export class RegisterComponent implements OnInit {
 
           this.storageSrv.uploadImg("avatar", this.form.value.email, this.avatar).then(async urlImagen => {
 
+            console.log("urlImagen", urlImagen)
+
             if (!urlImagen) {
               urlImagen = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
             }
-
-            // this.rolSrv.getByCode("USUARIO").subscribe(r => this.rol = r);
 
             let usuario: Usuario = {
               id: user.user.uid,
@@ -125,14 +128,15 @@ export class RegisterComponent implements OnInit {
               apellidos: this.form.value.apellidos,
               email: this.form.value.email,
               foto: urlImagen,
-              // rol: this.rol[0],
-              rol: {
-                id: 'V44oN0bG1LFiXdkKoE64',
-                code: 'USUARIO'
-              },
+              rol: this.rol[0],
+              // rol: {
+              //   id: 'V44oN0bG1LFiXdkKoE64',
+              //   code: 'USUARIO'
+              // },
               enabled: 1,
               created_at: Date.now()
             }
+            console.log("usuario", usuario)
 
             await this.usuarioSrv.create(usuario);
 
@@ -157,6 +161,7 @@ export class RegisterComponent implements OnInit {
                 this.router.navigate(['/login']);
               }
             })
+
 
             // setTimeout(function () {
             //   this.router.navigate(['/login']);

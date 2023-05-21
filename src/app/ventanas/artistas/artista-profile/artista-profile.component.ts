@@ -43,13 +43,15 @@ export class ArtistaProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id']; console.log(this.id, "hola"); /* let p = this.prueba(); console.log(p) */ });
+    const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id'];});
 
     this.suscriptions.push(paramsSubscription);
 
     console.log(this.suscriptions)
     
-    this.user = this.usuarioSrv.getUsuario();
+    this.usuarioSrv.getOne(this.id).subscribe(user => {
+      this.user = user;
+    });
     console.log(this.user)
 
     this.form = this.formBuilder.group({

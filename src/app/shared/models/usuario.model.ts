@@ -8,6 +8,7 @@ export interface Usuario {
     nombre: string;
     apellidos?: string;
     email: string;
+    description?: string;
     foto?: any;
     rol?: Rol;
     genre?: Genre;
