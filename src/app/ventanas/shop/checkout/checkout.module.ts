@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChartComponent } from './chart.component';
+import { CheckoutComponent } from './checkout.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../../../auth/auth.guard';
 // import { CancionComponent } from '../../canciones/cancion.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgxPayPalModule } from 'ngx-paypal';
 
 const routes: Routes = [
   {
     path: '',
-    component: ChartComponent,
+    component: CheckoutComponent,
     // canActivate: [AuthGuard],
     children: [
-      // { path: '', loadChildren: () => import('src/app/ventanas/canciones/cancion.module').then(m => m.CancionModule), canActivate: [AuthGuard]},
+      // { path: '', loadChildren: () => import('src/app/ventanas/shop/checkout/checkout.module').then(m => m.CheckoutModule), canActivate: [AuthGuard]},
       // { path: ':id', component: CancionComponent, canActivate: [AuthGuard]},
       // { path: 'artistas',  loadChildren: () => import('src/app/ventanas/artistas/artistas.module').then(m => m.ArtistasModule), canActivate: [AuthGuard]}
     ]
@@ -23,7 +24,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ChartComponent,
+    CheckoutComponent,
     // CancionComponent
   ],
   imports: [
@@ -32,8 +33,10 @@ const routes: Routes = [
     FormsModule, 
     ReactiveFormsModule,
 
+    NgxPayPalModule,
+
     RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
 })
-export class ChartModule { }
+export class CheckoutModule { }

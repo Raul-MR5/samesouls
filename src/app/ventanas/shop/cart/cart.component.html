@@ -1,0 +1,133 @@
+<div class="bg-light" style="height: 67vh;">
+    <!-- <div class="col-1 ms-4">
+    </div> -->
+    <!-- <div class="return-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#0d0d0d"
+            class="bi bi-arrow-left-circle-fill song-selector" (click)="back()" viewBox="0 0 16 16">
+            <path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+        </svg>
+    </div> -->
+    <div class="col-lg-6 mx-auto py-md-4">
+        <div class="display-flex row py-4">
+
+            <div class="col-6">
+                <div class="display-flex row row-cols-1" style="max-height: 58vh; overflow-y: scroll;">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
+                                    alt="product">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
+                                    <p class="card-text">21,37€</p>
+                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
+                                    alt="product">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
+                                    <p class="card-text">21,37€</p>
+                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
+                                    alt="product">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
+                                    <p class="card-text">21,37€</p>
+                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
+                                    alt="product">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
+                                    <p class="card-text">21,37€</p>
+                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
+                                    alt="product">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
+                                    <p class="card-text">21,37€</p>
+                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                        lead-in to additional content. This content is a little bit longer.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-back" *ngIf="type == 'clothing'">
+                    <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+                        <div>
+                            <div class="col-lg-11 mx-auto p-2">
+                                <div class="test d-flex align-items-center">
+
+                                    <div class="card w-100 p-2">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><strong>Resumen</strong></h5>
+                                            <div class="mt-4 d-flex justify-content-between">
+                                                <p class="card-text fs-6">Subtotal artículos</p>
+                                                <p class="card-text fs-6"><strong class="text-end">106.88€</strong></p>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="card-text fs-4">Total artículos</p>
+                                                <p class="card-text fs-4"><strong class="text-end">106.88€</strong></p>
+                                            </div>
+                                            <div
+                                                class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
+                                                <div class="col-lg-12">
+                                                    <button class="btn btn-back text-white arreglo" (click)="goTo('/checkout')">Realizar pedido</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,192 @@
+<div *ngIf="step == 'address'">
+    <div class="progressbar-wrapper">
+        <div class="progessbar">
+            <ul>
+                <li class="active">
+                    <div>
+                        <p>1</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>2</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>3</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <form class="row col-lg-10 mx-auto g-3 text-white" (submit)="submit()">
+        <div class="col-md-4">
+            <label for="validationDefault01" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="validationDefault01" value="" required>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefault02" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefaultUsername" class="form-label">DNI/CIF/NIF</label>
+            <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+                required>
+        </div>
+        <div class="col-md-8">
+            <label for="validationDefault02" class="form-label">Correo electrónico</label>
+            <input type="text" class="form-control" id="validationDefault02" value="" required>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefaultUsername" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+                required>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefault04" class="form-label">País</label>
+            <select class="form-select" id="validationDefault04" required>
+                <option selected disabled value="">Choose...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefault04" class="form-label">Provincia</label>
+            <select class="form-select" id="validationDefault04" required>
+                <option selected disabled value="">Choose...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefault04" class="form-label">Ciudad</label>
+            <select class="form-select" id="validationDefault04" required>
+                <option selected disabled value="">Choose...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="col-md-8">
+            <label for="validationDefault05" class="form-label">Dirección y número</label>
+            <input type="text" class="form-control" id="validationDefault05" required>
+        </div>
+        <div class="col-md-4">
+            <label for="validationDefault05" class="form-label">Zip</label>
+            <input type="text" class="form-control" id="validationDefault05" required>
+        </div>
+        <!-- <div class="col-12">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                <label class="form-check-label" for="invalidCheck2">
+                    Agree to terms and conditions
+                </label>
+            </div>
+        </div> -->
+        <div class="col-12 d-flex justify-content-end mt-5">
+            <button class="btn btn-outline-light me-3" (click)="reset()">Cancelar</button>
+            <button class="btn btn-light" type="submit">Continuar</button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="step == 'purchase'">
+    <div class="progressbar-wrapper">
+        <div class="progessbar">
+            <ul>
+                <li class="active">
+                    <div>
+                        <p (click)="volver()" style="cursor: pointer;">1</p>
+                    </div>
+                </li>
+                <li class="active">
+                    <div>
+                        <p>2</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p>3</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-4 mx-auto py-md-4">
+        <ngx-paypal id="paypal-div" [config]="payPalConfig"></ngx-paypal>
+    </div>
+    <div class="col-12 d-flex justify-content-end mt-5">
+        <button class="btn btn-outline-light me-3" (click)="volver()">Volver</button>
+    </div>
+</div>
+
+<div *ngIf="step == 'resume'">
+    <div class="progressbar-wrapper">
+        <div class="progessbar">
+            <ul>
+                <li class="active">
+                    <div>
+                        <p style="cursor: pointer;">1</p>
+                    </div>
+                </li>
+                <li class="active">
+                    <div>
+                        <p>2</p>
+                    </div>
+                </li>
+                <li class="active">
+                    <div>
+                        <p>3</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row col-lg-12">
+        <div class="row col-lg-4"></div>
+        <div class="row col-lg-4 d-flex align-content-center justify-content-center ms-5 g-3 text-white"
+            style="border: 1px solid white; border-radius: 20px;">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-6">
+                <h3><strong>Dirección de envío</strong></h3>
+                <p>C/ Santa Gemma 4-8</p>
+                <p>Paterna, Valencia 46980</p>
+                <p>España</p>
+                <p>Teléfono: 665342892</p>
+            </div>
+            <div class="col-lg-5">
+                <h3><strong>Resumen del pedido</strong></h3>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text">Productos:</p>
+                    <p class="card-text text-end">106.88€</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text">Envío:</p>
+                    <p class="card-text text-end">0.00€</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text">Subtotal:</p>
+                    <p class="card-text text-end">106.88€</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text"><strong>Total (IVA incluido):</strong></p>
+                    <p class="card-text text-end"><strong>300.00€</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-lg-12">
+        <div class="row col-lg-4"></div>
+        <div class="row col-lg-4 ms-5 g-3">
+            <div class="col-12 d-flex justify-content-end ms-2">
+                <button class="btn btn-outline-light me-3" (click)="volver()">Volver</button>
+                <button class="btn btn-light d-flex align-content-center" type="submit">
+                    <span class="material-symbols-outlined">print</span>
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+                    <span class="ms-1">Imprimir</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-12 d-flex justify-content-end mt-5">
+        <button class="btn btn-outline-light me-3" (click)="volver()">Volver</button>
+    </div> -->
+</div>

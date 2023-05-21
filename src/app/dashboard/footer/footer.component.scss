@@ -137,6 +137,7 @@ progress::-moz-progress-bar {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding-left: 0px;
 }
 
 .footer-social li {
@@ -167,7 +168,7 @@ progress::-moz-progress-bar {
 }
 
 .footer-social li a .cl-icon:hover {
-    fill: #8e2424;
+    fill: rgba($primaryLightColor, 0.5);
     // fill: var(--color3);
 }
 

@@ -14,6 +14,7 @@ export const environment = {
     measurementId: 'G-KQQEK8QH2F',
   },
   production: false,
+  clientId: 'ARu-WzovK2xn7HnTWan2p9sM1bM6VqPnkOcPgAeM85pNdRyOXbU9QlnGD0x3__9uhBlg-lR4DFmppvPQ'
   // backUrl: "http://localhost:8080/base",
   // apiUrl: "http://localhost:8080/base/api/v1"
 };

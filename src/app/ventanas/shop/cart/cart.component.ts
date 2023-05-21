@@ -11,11 +11,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.scss']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
 })
-export class ChartComponent implements OnInit {
+export class CartComponent implements OnInit {
 
   id: string;
   form: FormGroup;

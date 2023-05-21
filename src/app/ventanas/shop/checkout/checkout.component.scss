@@ -1,0 +1,184 @@
+@import "../../../../assets/sass/variables";
+
+.name {
+    font-size: 450%;
+    color: $primaryLightColor;
+    margin-left: 5%;
+}
+
+.title-new-song {
+    font-size: 125%;
+}
+
+.test {
+    max-width: 100%;
+}
+
+.arreglo {
+    margin-top: 30px;
+    width: 100%;
+}
+
+.btn-back {
+    background-color: $primaryLightColor;    
+    border-radius: 20px;
+}
+
+.btn-outline-back {
+    background-color: $primaryLightColor;    
+    border-radius: 20px;
+}
+
+.info {
+    // font-size: 115%; // CASA
+    // padding: 120px; // CASA
+    padding: 30px; // odec
+}
+
+.color-link {
+    color: $primaryLightColor;
+}
+
+.div-pointer {
+    text-align: center;
+    width: 50%;
+    cursor: pointer
+}
+
+.bg-profile {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/backOG3.png?alt=media&token=07ca8e3a-0ce0-49a8-95d6-4a8c2add230d');
+    background-size: cover;
+}
+
+#inputFile {
+    display: none;
+}
+
+.labelInputFile {
+    width: 200px;
+    height: 200px;
+    // border-radius: 100%;
+    // background-color: lightblue;
+    // position: absolute;
+    padding: 1rem;
+    box-shadow: 0 0 10px -1px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.labelInputFile img {
+    width: 200px;
+    height: 200px;
+    // border-radius: 100%;
+}
+
+.labelInputFile:active {
+    transform: scale(0.9);
+}
+
+@media screen and (max-width: 767px) {
+    .ocultar {
+        display: none;
+    }
+}
+
+
+
+
+.merchan-photo {
+    height: 78vh;
+}
+
+.return-btn {
+    position: fixed;
+    top: 12vh;
+    left: 0.4vw;
+}
+
+#paypal-div div {
+	display: flex !important;
+    justify-content: center !important;
+}
+
+.progressbar-wrapper{
+	// width: 750px;
+	max-width: 100%;
+	// background: #fff;
+	margin: 100px auto 0;
+	padding: 50px;
+	border-radius: 5px;
+}
+
+.progressbar-wrapper .progessbar{
+	margin-bottom: 35px;
+	display: flex;
+	justify-content: center;
+}
+
+.progressbar-wrapper .progessbar ul{
+	list-style: none;
+	display: flex;
+}
+
+.progressbar-wrapper .progessbar ul li{
+	margin-right: 20vh;
+	position: relative;
+}
+
+.progressbar-wrapper .progessbar ul li:last-child{
+	margin-right: 0;
+}
+
+.progressbar-wrapper .progessbar ul li:before{
+	content: "";
+	position: absolute;
+	top: 40%;
+	transform: translateY(-50%);
+	left: 55px;
+	width: 27vh;
+	height: 2px;
+	background: $primaryLightColor;
+}
+
+.progressbar-wrapper .progessbar ul li:last-child:before{
+	// display: none;
+	content: "";
+	position: absolute;
+	top: 40%;
+	transform: translateY(-50%);
+	left: 55px;
+	width: 27vh;
+	height: 2px;
+	background: $primaryColor;
+}
+
+.progressbar-wrapper .progessbar ul li div{
+	padding: 5px;
+	border-radius: 50%;
+}
+
+.progressbar-wrapper .progessbar ul li p{
+	width: 50px;
+	height: 50px;
+	background: $primaryLightColor;
+	color: $primaryColor;
+	text-align: center;
+	line-height: 50px;
+	border-radius: 50%;
+}
+
+.progressbar-wrapper .progessbar ul li.active:before{
+	background: $accentColor;
+}
+
+.progressbar-wrapper .progessbar ul li.active:last-child:before{
+	background: $primaryColor;
+}
+
+.progressbar-wrapper .progessbar ul li.active p{
+	background: $accentColor;
+    color: $primaryLightColor;
+}

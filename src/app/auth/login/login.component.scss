@@ -47,6 +47,11 @@
     // background-color: #ab6c6c;
 }
 
+.btn-back:hover {
+    background-color: $primaryColor;
+    border: 1px solid $primaryLightColor;
+}
+
 .btn-circle {
     width: 30px;
     height: 30px;

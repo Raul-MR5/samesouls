@@ -29,3 +29,7 @@
     // background-color: rgb(45, 50, 54);
     background-color: $primaryLightColor;
 }
+
+.bg-dark {
+    background-color: $primaryColor !important;
+}
