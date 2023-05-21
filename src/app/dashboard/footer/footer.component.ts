@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Cancion } from 'src/app/shared/models/cancion.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 // import { CancionService } from 'src/app/shared/services/cancion.service';
 
@@ -13,7 +12,7 @@ export class FooterComponent implements OnInit {
   user;
   name;
   photo;
-  song: Cancion | null;
+  // song: Cancion | null;
   audio: HTMLAudioElement;
 
   time;

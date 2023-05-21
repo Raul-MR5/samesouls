@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Cancion } from 'src/app/shared/models/cancion.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 // import { CancionService } from 'src/app/shared/services/cancion.service';
@@ -27,7 +26,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   nombre: string;
   foto: string;
 
-  music: Cancion[];
+  // music: Cancion[];
   totalMusic: number;
 
   bool: boolean = false;
@@ -167,7 +166,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.opt = op;
   }
 
-  play(song: Cancion) {
+  play(song) {
     // this.cancionSrv.setSong(song);
   }
 }

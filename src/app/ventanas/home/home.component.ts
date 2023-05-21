@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Cancion } from 'src/app/shared/models/cancion.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 // import { CancionService } from 'src/app/shared/services/cancion.service';
@@ -21,10 +20,10 @@ export class HomeComponent implements OnInit {
   photo;
   title: string = 'SameSouls';
 
-  friendSongs: Cancion[] = [];
-  newSongs: Cancion[] = [];
+  // friendSongs: Cancion[] = [];
+  // newSongs: Cancion[] = [];
 
-  canciones: Cancion[];
+  // canciones: Cancion[];
   artistas: Usuario[];
 
   busqueda: boolean = false;
