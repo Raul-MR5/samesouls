@@ -11,7 +11,7 @@ import { Genre } from '../models/genre.model';
 })
 export class GenresService {
 
-    rol: Genre;
+    genre: Genre;
 
     constructor(private firestore: AngularFirestore) {
 
@@ -35,11 +35,11 @@ export class GenresService {
     }
 
     setGenre(payload: Genre) {
-        this.rol = payload;
+        this.genre = payload;
     }
 
     getGenre(): Genre {
-        return this.rol;
+        return this.genre;
     }
 
     async create(payload: Genre): Promise<any> {
@@ -51,9 +51,9 @@ export class GenresService {
         }
     }
 
-    async update(rol: Genre) {
+    async update(genre: Genre) {
         try {
-            const res = await this.firestore.collection('genres').doc(rol.id).update({ ...rol });
+            const res = await this.firestore.collection('genres').doc(genre.id).update({ ...genre });
 
             return res;
         } catch (err) {
