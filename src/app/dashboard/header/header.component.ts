@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
             this.name = usuario.username;
 
             if (!this.photo) {
-              this.photo = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
+              this.photo = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/user-photo.png?alt=media&token=04f07362-f1be-4501-a038-fdd7cec3bb2a"
             }
           })
         });

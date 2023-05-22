@@ -11,11 +11,11 @@ import { RolesService } from 'src/app/shared/services/roles.service';
 import { Rol } from 'src/app/shared/models/rol.model';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-nuevo-artista',
+  templateUrl: './nuevo-artista.component.html',
+  styleUrls: ['./nuevo-artista.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class NuevoArtistaComponent implements OnInit {
 
   form: FormGroup;
   user: Usuario;
@@ -41,11 +41,9 @@ export class RegisterComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
-    this.rolSrv.getByCode("USUARIO").subscribe(r => {
+    this.rolSrv.getByCode("ARTISTA").subscribe(r => {
       this.rol = r
     });
-    // this.user = this.usuarioSrv.getUsuario()
-    // this.name = this.user.nombre;
 
     this.avatar = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/user-photo.png?alt=media&token=04f07362-f1be-4501-a038-fdd7cec3bb2a";
 
@@ -59,37 +57,6 @@ export class RegisterComponent implements OnInit {
       repeat_password: ['', Validators.required]
     });
   }
-
-  // submit(): void {
-  //   var nUser: any = {
-  //     id: this.form.value.id,
-  //     username: this.form.value.username,
-  //     password: this.form.value.password,
-  //     email: this.form.value.email,
-  //     nombre: this.form.value.nombre,
-  //     apellidos: this.form.value.apellidos,
-  //     fecAlta: new Date,
-  //     fecBaja: null,
-  //     activo: true,
-  //     rol: {
-  //       id: 2
-  //     }
-  //   }
-
-  //   this.usuarioSrv.create(nUser)
-  //     .subscribe(
-  //       () => {
-  //         this.router.navigate(['/login']);
-  //       }
-  //     );
-
-  //   // this.accountSrv.login(this.form.value.user, this.form.value.password)
-  //   //   .subscribe(
-  //   //     () => {
-  //   //       this.router.navigate(['/login']);
-  //   //     }
-  //   //   );
-  // }
 
   onUploadImg(event) {
 
@@ -107,7 +74,6 @@ export class RegisterComponent implements OnInit {
 
     try {
       await this.authSrv.register(this.form.value.email, this.form.value.password).then(async user => {
-        console.log(user)
         if (user) {
           user.user.updateProfile({
             displayName: this.form.value.username
@@ -129,10 +95,6 @@ export class RegisterComponent implements OnInit {
               email: this.form.value.email,
               foto: urlImagen,
               rol: this.rol[0],
-              // rol: {
-              //   id: 'V44oN0bG1LFiXdkKoE64',
-              //   code: 'USUARIO'
-              // },
               enabled: 1,
               created_at: Date.now()
             }
@@ -140,32 +102,7 @@ export class RegisterComponent implements OnInit {
 
             await this.usuarioSrv.create(usuario);
 
-            this.authSrv.emailVerified();
-            this.authSrv.logout();
-
-            let timerInterval
-            Swal.fire({
-              title: 'Verifique su correo',
-              html: 'Compruebe su bandeja de entrada o bandeja de spam y verifique el correo.',
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: () => {
-                Swal.showLoading()
-              },
-              willClose: () => {
-                clearInterval(timerInterval)
-              }
-            }).then((result) => {
-              /* Read more about handling dismissals below */
-              if (result.dismiss === Swal.DismissReason.timer) {
-                this.router.navigate(['/login']);
-              }
-            })
-
-
-            // setTimeout(function () {
-            //   this.router.navigate(['/login']);
-            // }, 5000);
+            this.router.navigate(['']);
           });
         }
       })

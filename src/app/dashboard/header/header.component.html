@@ -48,6 +48,16 @@
             </li>
           </div>
 
+          <div *ngIf="user.rol.code == 'ADMIN'">
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" (click)="goTo('/new-artist')">Nuevo artista</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+          </div>
+
           <li><a class="dropdown-item" (click)="logout()">Cerrar sesión</a></li>
         </ul>
       </div>

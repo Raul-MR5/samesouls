@@ -38,7 +38,8 @@ const routes: Routes = [
       { path: 'shop/:id',  loadChildren: () => import('src/app/ventanas/shop/merchandising/merchandising.module').then(m => m.MerchandisingModule)/* , canActivate: [AuthGuard]*/}, 
       { path: 'checkout', loadChildren: () => import('src/app/ventanas/shop/checkout/checkout.module').then(m => m.CheckoutModule), /* canActivate: [AuthGuard] */},
       { path: 'new-song', loadChildren: () => import('src/app/ventanas/artistas/nueva-cancion/nueva-cancion.module').then(m => m.NuevaCancionModule)/* , canActivate: [AuthGuard] */ },
-      { path: 'new-merchandising', loadChildren: () => import('src/app/ventanas/shop/merchandising/nuevo-merchan/nuevo-merchan.module').then(m => m.NuevoMerchanModule)/* , canActivate: [AuthGuard] */ } 
+      { path: 'new-merchandising', loadChildren: () => import('src/app/ventanas/shop/merchandising/nuevo-merchan/nuevo-merchan.module').then(m => m.NuevoMerchanModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'new-artist', loadChildren: () => import('src/app/ventanas/artistas/nuevo-artista/nuevo-artista.module').then(m => m.NuevoArtistaModule)/* , canActivate: [AuthGuard] */ },
     ]
   },
   { path: 'login', component: LoginComponent },

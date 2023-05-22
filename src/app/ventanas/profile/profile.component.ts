@@ -51,6 +51,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // this.suscriptions.push(paramsSubscription);
 
     this.userLogged = this.usuarioSrv.getUsuario();
+    console.log("asf",this.userLogged)
 
     this.usuarioSrv.getOne(this.userLogged.id).subscribe(usuario => {
       this.user = usuario;

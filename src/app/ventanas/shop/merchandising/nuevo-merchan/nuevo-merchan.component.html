@@ -1,67 +1,95 @@
-<div class="form-back bg-profile">
-    <main>
-        <!-- IMPORTAR MODULOS -->
-        <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
-            <div>
-                <div class="col-lg-10 mx-auto p-3 py-md-5">
-                    <!-- <h3 class="text-pink"><b>Subir canción</b></h3> -->
+<form class="form-signin needs-validation">
+    <div *ngIf="view == 'release'" class="form-back bg-size">
+        <main>
+            <div class="row mx-auto">
+                <div class="col-lg-10 mx-auto py-md-5">
                     <div class="test mt-3 d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
 
-                        <div class="col-lg-4">
-                            <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
+                        <div class="col-lg-2">
+                            <input name="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
                                 id="inputFile">
 
                             <label for="inputFile" class="labelInputFile">
-                                <img src="{{foto}}" alt="upload file">
+                                <img src="{{foto}}" alt="upload file" style="object-fit: cover;">
                             </label>
                         </div>
 
-                        <div class="col-lg-8">
-                            <!-- <div class="row"> -->
-                            <!-- <th><strong class="text-pink">Titulo</strong></th>
-                            <tr><strong class="text-pink">Subir archivo</strong></tr> -->
-                            <div>
-
-                                <label for="firstName" class="form-label text-pink title-new-song"><b>Título</b></label>
-                                <input formControlName="titulo" type="text" class="form-control" id="firstName"
-                                    placeholder="" value="">
-
-                                <!-- <p class="invalid-error"
-                                    *ngIf="form.get('nombre').invalid && (form.get('nombre').dirty || form.get('nombre').touched)">
-                                    Introduzca un nombre
-                                </p> -->
-                            </div>
-                            <div class="mt-2">
-                                <label for="inputSong"
-                                    class="form-label text-pink title-new-song"><b>Archivo</b></label>
-                                <input formControlName="cancion" type="file" accept=".mp3, .wav" class="form-control" id="inputSong"
-                                    (change)="onUploadMusic($event)">
-                            </div>
-                            <!-- </div> -->
-                            <!-- <div class="col">
-                            
+                        <div class="col-lg-10">
+                            <label for="releaseTitle" class="form-label text-pink title-new-song"><b>Título</b></label>
+                            <input [(ngModel)]="releaseTitle" name="releaseTitle" type="text" class="form-control" id="releaseTitle"
+                                placeholder="" value="">
                         </div>
-                        <div class="col">
-                            
-                        </div> -->
-                        </div>
-
                     </div>
 
-                    <div class="mx-auto mt-4">
-                        <label for="textarea" class="text-pink mb-2 title-new-song"><b>Lyrics</b></label>
-                        <textarea formControlName="lyrics" class="form-control" rows="6" placeholder="Introduzca la letra de su canción"
-                            id="textarea"></textarea>
-                    </div>
+                </div>
+            </div>
+            <div class="row-custom mx-auto">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10 mx-auto">
+                    <hr class="text-pink">
+                    <div class="col mt-music-panel mb-2" *ngFor="let c of canciones, let i = index">
+                        <div class="shadow-sm">
+                            <div class="card-body card-back padding-btw-col border-music-panel">
+                                <div class="row row-cols-1 row-cols-sm-4 row-cols-md-4 g-3 song-selector">
+                                    <div class="col-lg-1">
+                                        <strong class="text-pink no-salir">#{{i+1}}</strong>
+                                    </div>
 
-                    <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
-                            <button class="btn btn-back text-white arreglo" (click)="follow()">Publicar</button>
+                                    <div class="col-lg-4 d-flex align-items-center">
+                                        <strong class="text-pink no-salir">{{c.title}}</strong>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="mt-5 mb-5 d-flex justify-content-center align-items-center">
+                        <button class="btn btn-light" (click)="newSong()">
+                            Añadir Canción
+                        </button>
                     </div>
                 </div>
             </div>
-        </form>
-    </main>
-</div>
+
+            <div class="col-10 mx-auto d-flex justify-content-end mt-5">
+                <button class="btn btn-outline-light me-3" (click)="goTo('')">Cancelar</button>
+                <button class="btn btn-light me-4" (click)="submit()">Realizar lanzamiento</button>
+            </div>
+
+        </main>
+    </div>
+
+    <div *ngIf="view == 'song'">
+        <div class="form-back bg-dark">
+            <main>
+                <div>
+                    <div class="col-lg-10 mx-auto p-3 py-md-5">
+                        <div class="test mt-3 d-flex align-items-center justify-content-center row g-1">
+                            <div class="row row-cols-2 col-lg-12">
+                                <div class="col-6">
+
+                                    <label for="songTitle"
+                                        class="form-label text-pink title-new-song"><b>Título</b></label>
+                                    <input [(ngModel)]="songTitle" name="songTitle" type="text" class="form-control" id="songTitle"
+                                        placeholder="" value="">
+
+                                </div>
+                                <div class="col-6">
+                                    <label for="inputSong"
+                                        class="form-label text-pink title-new-song"><b>Archivo</b></label>
+                                    <input [(ngModel)]="songAudio" name="cancion" type="file" accept=".mp3, .wav"
+                                        class="form-control" id="inputSong" (change)="onUploadMusic($event)">
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end mt-5">
+                                <button class="btn btn-outline-light me-3" (click)="cancel()">Cancelar</button>
+                                <button class="btn btn-light me-4" (click)="addSong()">Subir canción</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</form>

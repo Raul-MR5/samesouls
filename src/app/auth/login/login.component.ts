@@ -50,11 +50,14 @@ export class LoginComponent implements OnInit {
       await this.authSrv.login(this.form.value.user, this.form.value.password).then(user => {
         if (user) {
           this.authSrv.getUsuario().subscribe(user => {
-            if (user.emailVerified) {
-              this.router.navigate(['/']);
-            } else {
-              this.authSrv.logout();
-            }
+            this.usuarioSrv.getOne(user.uid).subscribe(usuario => {
+              if (user.emailVerified || usuario.rol.code != 'USUARIO') {
+                this.usuarioSrv.setUsuario(usuario);
+                this.router.navigate(['/']);
+              } else {
+                this.authSrv.logout();
+              }
+            })
           })
         }
       })

@@ -24,9 +24,9 @@ export class StorageService {
 
   }
 
-  async uploadMusic(user: string, nombre: string, file: any) {
+  async uploadMusic(path: string, nombre: string, file: any) {
     try {
-      let respuesta = await this.storareRef.child("canciones/" + user + "/" + nombre + ".mp3").put(file);
+      let respuesta = await this.storareRef.child("canciones/" + path + "/" + nombre + ".mp3").put(file);
       return await respuesta.ref.getDownloadURL();
     } catch (err) {
       return null;

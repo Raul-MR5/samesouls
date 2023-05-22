@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Usuario } from 'src/app/shared/models/usuario.model';
@@ -8,6 +8,8 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
+import { Song } from 'src/app/shared/models/song.model';
+import { SongsService } from 'src/app/shared/services/songs.service';
 
 @Component({
   selector: 'app-artista-profile',
@@ -17,7 +19,6 @@ import { Subscription } from 'rxjs';
 export class ArtistaProfileComponent implements OnInit {
 
   id: string;
-  form: FormGroup;
   user: Usuario;
   
   name;
@@ -26,19 +27,21 @@ export class ArtistaProfileComponent implements OnInit {
 
   music;
 
-  prueba = []
+  canciones = [];
+
+  playB: string = '';
 
   disabled = true;
 
   suscriptions: Subscription[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
-    // private cancionSrv: CancionService,
+    private songSrv: SongsService,
     private storageSrv: StorageService,
     private router: Router,
+    private ngZone: NgZone,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -51,21 +54,28 @@ export class ArtistaProfileComponent implements OnInit {
     
     this.usuarioSrv.getOne(this.id).subscribe(user => {
       this.user = user;
+      this.foto = this.user.foto;
+      this.songSrv.getByArtist(this.user.username).subscribe(song => {
+        this.canciones = [];
+        song.forEach(element => {
+          let audio = new Audio(element.audio);
+          let time = this.parseTime(Math.random() * (240 - 120) + 120);
+          
+          this.canciones.push({
+            ...element,
+            raw: audio,
+            time: time
+          })
+        })
+      })
     });
     console.log(this.user)
 
-    this.form = this.formBuilder.group({
-      foto: [''],
-      username: [this.user.username, [Validators.required]],
-      nombre: [this.user.nombre, [Validators.required]],
-      apellidos: [this.user.apellidos],
-      email: [{ value: this.user.email, disabled: true }, [Validators.required]]
-    });
-
-    this.foto = this.user.foto;
   }
 
   ngOnDestroy(): void {
+    this.playB = '';
+    this.pause();
   }
 
 
@@ -85,6 +95,34 @@ export class ArtistaProfileComponent implements OnInit {
 
   }
 
+  parseTime(time){
+    if (time){
+      var minute = Math.floor((time / 60) % 60);
+      var second = Math.floor(time % 60);
+      
+      if (second < 10) {
+        return (minute + ':0' + second);
+      } else {
+        return (minute + ':' + second);
+      }
+      
+    }else{
+      return '0:00'
+    }
+  }
+
+  play(cancion) {
+    this.playB = cancion.title;
+
+    this.songSrv.playSong(cancion.raw);
+  }
+
+  pause() {
+    this.playB = '';
+
+    this.songSrv.pauseSong();
+  }
+
   onUploadImg(event) {
 
     let cover = event.target.files[0];
@@ -93,42 +131,6 @@ export class ArtistaProfileComponent implements OnInit {
     reader.readAsDataURL(cover);
     reader.onloadend = () => {
       this.foto = reader.result;
-    }
-  }
-
-  async submit() {
-    try {
-      this.storageSrv.uploadImg("avatar/", this.user.email, this.foto).then(async urlImagen => {
-
-        let usuario: Usuario;
-        if (urlImagen) {
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: urlImagen,
-            username: this.form.value.username
-          }
-        } else{
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: this.foto,
-            username: this.form.value.username
-          }
-        }
-
-
-        await this.usuarioSrv.update(usuario);
-
-        this.router.navigate(['/profile']);
-      });
-
-    } catch (e: any) {
-      // alert(e.message)
     }
   }
 

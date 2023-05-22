@@ -1,0 +1,86 @@
+@import "../../../../assets/sass/variables";
+
+.form-back {
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: $primaryLightColor;
+}
+
+.container {
+    max-width: 960px;
+  }
+
+.form-img {
+    display: flex;
+    justify-content: center;
+}
+
+.form-signin {
+    width: 100%;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.btn-back {
+    background-color: $primaryLightColor;
+    color: $primaryColor;
+}
+
+.text-pink {
+    color: $primaryLightColor;
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.invalid-error {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: .875em;
+    color: #dc3545;
+}
+
+.link-pointer {
+    cursor: pointer
+}
+
+#inputFile {
+    display: none;
+}
+
+.labelInputFile {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    // background-color: lightblue;
+    // position: absolute;
+    padding: 1rem;
+    box-shadow: 0 0 10px -1px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.labelInputFile img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+}
+
+.labelInputFile:active {
+    transform: scale(0.9);
+}
+
+.ml-na {
+    margin-left: 8px;
+}

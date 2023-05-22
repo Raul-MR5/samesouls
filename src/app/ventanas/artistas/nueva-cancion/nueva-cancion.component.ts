@@ -9,6 +9,10 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Release } from 'src/app/shared/models/release.model';
+import { ReleasesService } from 'src/app/shared/services/releases.service';
+import { ReleaseTypesService } from 'src/app/shared/services/release_types.service';
+import { ReleaseType } from 'src/app/shared/models/release_type.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-nueva-cancion',
@@ -17,6 +21,7 @@ import { Release } from 'src/app/shared/models/release.model';
 })
 export class NuevaCancionComponent implements OnInit {
 
+  myuuid;
   view = 'release';
 
   form: FormGroup;
@@ -33,6 +38,10 @@ export class NuevaCancionComponent implements OnInit {
   nSong;
   songTitle;
   songAudio;
+  releaseTitle;
+
+  releaseType: ReleaseType
+  releaseTypes: ReleaseType[]
 
   prueba = []
 
@@ -41,19 +50,16 @@ export class NuevaCancionComponent implements OnInit {
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     private cancionSrv: SongsService,
+    private releaseSrv: ReleasesService,
+    private releaseTypeSrv: ReleaseTypesService,
     private storageSrv: StorageService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      foto: [''],
-      titulo: ['', [Validators.required]],
-      cancion: ['', [Validators.required]],
-      lyrics: ['']
-    });
-
     this.foto = "https://firebasestorage.googleapis.com/v0/b/boomclub-tfg.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=39a74894-86e2-4413-81f0-b8584a500b36";
+
+    this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
   }
 
   ngOnDestroy(): void {
@@ -99,11 +105,11 @@ export class NuevaCancionComponent implements OnInit {
 
     let reader = new FileReader();
     reader.readAsDataURL(this.music);
-      reader.onloadend = () => {
-        // console.log(reader.result);
-        this.foto = reader.result;
-        // console.log(this.foto);
-      }
+    reader.onloadend = () => {
+      // console.log(reader.result);
+      // this.foto = reader.result;
+      // console.log(this.foto);
+    }
 
 
     // this.storageSrv.uploadMusic(this.name, this.name, music).then(url => {
@@ -116,40 +122,62 @@ export class NuevaCancionComponent implements OnInit {
 
       let user: Usuario = this.usuarioSrv.getUsuario();
 
-      this.storageSrv.uploadImg("portadas/cancion/" + user.email, this.form.value.titulo, this.foto).then(async urlImagen => {
+      this.storageSrv.uploadImg("portadas/release/" + user.email, this.releaseTitle, this.foto).then(async urlImagen => {
 
-        this.storageSrv.uploadMusic(user.email, this.form.value.titulo, this.music).then(async url => {
+        if (this.canciones.length == 1) {
+          this.releaseType = this.releaseTypes.filter(type => type.type == 'SINGLE')[0];
+        } else if (this.canciones.length > 1 && this.canciones.length < 8) {
+          this.releaseType = this.releaseTypes.filter(type => type.type == 'EP')[0];
+        } else if (this.canciones.length > 8) {
+          this.releaseType = this.releaseTypes.filter(type => type.type == 'ALBUM')[0];
+        } else {
+          this.releaseType = null;
+        }
 
-          let myuuid = uuidv4();
+        this.myuuid = uuidv4();
 
-          let cancion: Song;
-          // if (urlImagen) {
-          //   cancion = {
-          //     id: myuuid,
-          //     usuario: user,
-          //     titulo: this.form.value.titulo,
-          //     lyrics: this.form.value.lyrics,
-          //     cancion: url,
-          //     foto: urlImagen,
-          //     fecha: new Date()
-          //   }
-          // } else{
-          //   cancion = {
-          //     id: myuuid,
-          //     usuario: user,
-          //     titulo: this.form.value.titulo,
-          //     lyrics: this.form.value.lyrics,
-          //     cancion: url,
-          //     foto: this.foto,
-          //     fecha: new Date()
-          //   }
-          // }
-          
+        if (this.releaseType) {
+          let nRelease: Release = {
+            id: this.myuuid,
+            photo: urlImagen ? urlImagen : this.foto,
+            title: this.releaseTitle,
+            release_type: this.releaseType,
+            artist: user,
+            created_at: new Date().getTime()
+          }
 
-          await this.cancionSrv.create(cancion);
+          await this.releaseSrv.create(nRelease);
 
-          this.router.navigate(['/profile/' + user.id]);
-        });
+          this.canciones.forEach(async element => {
+            this.storageSrv.uploadMusic(user.email + '/' + this.releaseTitle, element.title, element.audio).then(async url => {
+
+              console.log("url", url)
+
+              console.log("element", element)
+              this.myuuid = uuidv4();
+              console.log("myuuid", this.myuuid)
+
+              let cancion: Song;
+              cancion = {
+                id: this.myuuid,
+                title: element.title,
+                release: nRelease,
+                audio: url,
+                created_at: new Date().getTime()
+              }
+              console.log("cancion", cancion)
+
+              await this.cancionSrv.create(cancion);
+
+            });
+          })
+          this.router.navigate(['/artistas/' + user.id]);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'No se ha añadido ninguna canción'
+          })
+        }
 
       });
 
@@ -159,17 +187,16 @@ export class NuevaCancionComponent implements OnInit {
   }
 
 
-  newSong(){
+  newSong() {
+
     this.view = 'song';
   }
 
-  addSong(){
+  addSong() {
     this.nSong = {
       title: this.songTitle,
       audio: this.music
     }
-
-    console.log("this.nSong", this.nSong)
 
     this.canciones.push(this.nSong);
 
@@ -178,7 +205,7 @@ export class NuevaCancionComponent implements OnInit {
     this.view = 'release';
   }
 
-  cancel(){
+  cancel() {
     this.songTitle = '';
     this.songAudio = '';
     this.view = 'release';

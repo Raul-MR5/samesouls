@@ -31,9 +31,9 @@ export class SongsService {
         return this.firestore.collection<Song>('songs').doc(id).valueChanges({ idField: 'id' });
     }
 
-    // getByArtist(type: string): Observable<Song[]> {
-    //     return this.firestore.collection<Song>('songs', ref => ref.where('type', '==', type)).valueChanges({ idField: 'id' });
-    // }
+    getByArtist(artist: string): Observable<Song[]> {
+        return this.firestore.collection<Song>('songs', ref => ref.where('release.artist.username', '==', artist).limit(5)).valueChanges({ idField: 'id' });
+    }
 
     setSong(payload: Song) {
         this.song = payload;
@@ -45,6 +45,7 @@ export class SongsService {
 
     playSong(audio: HTMLAudioElement) {
         this.audio = audio;
+        this.audio.currentTime = 0;
         this.audio.play();
     }
 
@@ -58,9 +59,12 @@ export class SongsService {
 
     async create(payload: Song): Promise<any> {
         try {
+            console.log("payload", payload)
             const res = await this.firestore.collection('songs').doc(payload.id).set(payload);
+            console.log("res", res)
             return res;
         } catch (err) {
+            console.log("err", err)
             return err;
         }
     }

@@ -52,7 +52,7 @@ export class EditProfileComponent implements OnInit {
               this.user = usuario;
   
               this.form = this.formBuilder.group({
-                foto: [this.user.foto],
+                foto: '',
                 username: [this.user.username, [Validators.required]],
                 nombre: [this.user.nombre, [Validators.required]],
                 apellidos: [this.user.apellidos],
@@ -62,7 +62,7 @@ export class EditProfileComponent implements OnInit {
               this.foto = this.user.foto;
   
               if (!this.foto) {
-                this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
+                this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/user-photo.png?alt=media&token=04f07362-f1be-4501-a038-fdd7cec3bb2a"
               }
             })
           });
@@ -70,7 +70,7 @@ export class EditProfileComponent implements OnInit {
       }) 
     } else {
       this.form = this.formBuilder.group({
-        foto: [this.user.foto],
+        foto: '',
         username: [this.user.username, [Validators.required]],
         nombre: [this.user.nombre, [Validators.required]],
         apellidos: [this.user.apellidos],
@@ -80,7 +80,7 @@ export class EditProfileComponent implements OnInit {
       this.foto = this.user.foto;
 
       if (!this.foto) {
-        this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-tfg.appspot.com/o/user-photo.png?alt=media&token=c9588aa9-1450-4932-86cd-d480853474d1"
+        this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/user-photo.png?alt=media&token=04f07362-f1be-4501-a038-fdd7cec3bb2a"
       }
     }
 

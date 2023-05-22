@@ -6,6 +6,6 @@ export interface Release {
     photo: string;
     title: string;
     release_type: ReleaseType;
-    usuario: Usuario;
+    artist: Usuario;
     created_at?: number;
 }

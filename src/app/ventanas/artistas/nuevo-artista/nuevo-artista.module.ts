@@ -1,0 +1,45 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { Routes, RouterModule } from '@angular/router';
+
+import { AuthGuard } from '../../../auth/auth.guard';
+
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NuevoArtistaComponent } from './nuevo-artista.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: NuevoArtistaComponent,
+    // canActivate: [AuthGuard],
+    children: [
+      // { path: '', loadChildren: () => import('src/app/ventanas/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard], pathMatch: "full"},
+      // { path: ':id',  loadChildren: () => import('src/app/ventanas/artistas/artista-profile/artista-profile.module').then(m => m.ArtistaProfileModule)/* , canActivate: [AuthGuard]*/} 
+    ]
+  }
+];
+
+@NgModule({
+  declarations: [
+    NuevoArtistaComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+
+    FormsModule,
+    ReactiveFormsModule,
+
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+
+    HttpClientModule
+  ],
+  exports: [RouterModule]
+})
+export class NuevoArtistaModule { }

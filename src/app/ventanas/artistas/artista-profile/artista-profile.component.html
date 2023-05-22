@@ -1,182 +1,114 @@
 <div class="form-back bg-profile">
     <main>
-        <!-- IMPORTAR MODULOS -->
-        <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
-            <div class="card text-bg-dark w-100">
-                <img src="{{user.foto}}" style="height: 45vh; object-fit: cover;" class="card-img"
-                    alt="...">
-                <div class="card-img-overlay d-flex align-content-end flex-wrap row card-artista">
-                    <h1 class="card-title mb-3" style="font-size: 100px;">{{user.username}}</h1>
-                    <p class="card-text">{{user.description}}</p>
-                </div>
+        <div class="card text-bg-dark w-100">
+            <img src="{{user.foto}}" style="height: 45vh; object-fit: cover;" class="card-img" alt="...">
+            <div class="card-img-overlay d-flex align-content-end flex-wrap row card-artista">
+                <h1 class="card-title mb-3" style="font-size: 100px;">{{user.username}}</h1>
+                <p class="card-text">{{user.description}}</p>
             </div>
-            <!-- <h1><strong>Editar perfil</strong></h1> -->
-            <div>
-                <div class="col-lg-10 mx-auto p-3 py-md-5">
-                    <!-- <h3 class="text-dark"><b>Subir canción</b></h3> -->
-                    <div class="test mt-3 d-flex align-items-center row row-cols-1 g-1">
+        </div>
+        <div>
+            <div class="col-lg-10 mx-auto p-3 py-md-5">
+                <div class="test mt-3 d-flex align-items-center row row-cols-1 g-1">
 
-                        <!-- <div class="col-lg-12 d-flex align-items-center pe-4">
-                            <div class="col-lg-4">
-                                <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple
-                                    (change)="onUploadImg($event)" id="inputFile">
-    
-                                <label for="inputFile" class="labelInputFile">
-                                    <img src="{{foto}}" alt="upload file">
-                                </label>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">NOMBRE</h5>
-                                    <p class="card-text">Descripción larga de un artista</p>
-                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                  </div>
-                                <h1><strong>NOMBRE</strong></h1>
-                                <p>Descripción larga de un artista</p>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="card m-3" style="width: 100%;">
-                            <div class="row g-0">
-                              <div class="col-md-4">
-                                <img src="{{foto}}" class="img-fluid rounded-start" alt="Foto del artista" width="200px">
-                              </div>
-                              <div class="col-md-8">
-                                <div class="card-body">
-                                  <h5 class="card-title">Card title</h5>
-                                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                  <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                </div>
-                              </div>
-                            </div>
-                          </div> -->
-
-                        <!-- <div class="card text-bg-dark w-100">
-                            <img src="../../../../assets/img/banner-gayete.png" style="height: 30vh;" class="card-img"
-                                alt="...">
-                            <div class="card-img-overlay d-flex align-content-end flex-wrap row card-artista">
-                                <h1 class="card-title mb-3" style="font-size: 100px;">Gayete</h1>
-                                <p class="card-text">Sergio Gayete Suarez, aka Gayete es un artista que utiliza la
-                                    música para escaparse un poco de la realidad y expresar lo que siente en cada
-                                    canción. Lazos Rotos. Same Souls ©</p>
-                            </div>
-                        </div> -->
-
-                        <div class="mt-3 row col-lg-12">
-                            <div class="p-3">
-                                <h3 class="fs-4 text-pink">Música</h3>
-                                <hr class="text-pink" />
-                                <table class="text-pink table table-dark table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Nombre</th>
-                                            <th scope="col">Álbum</th>
-                                            <th scope="col">Tiempo</th>
-                                            <th scope="col">Reproducir</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>No te tengo que llamar</td>
-                                            <td>No te tengo que llamar</td>
-                                            <td>02:33</td>
-                                            <td>
-                                                <span class="material-symbols-outlined ms-4">play_arrow</span>
-                                                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Endiablao</td>
-                                            <td>Lazos Rotos</td>
-                                            <td>02:33</td>
-                                            <td>
-                                                <span class="material-symbols-outlined ms-4">play_arrow</span>
-                                                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>A tu lado</td>
-                                            <td>Lazos Rotos</td>
-                                            <td>02:33</td>
-                                            <td>
-                                                <span class="material-symbols-outlined ms-4">play_arrow</span>
-                                                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="mt-3 row col-lg-12">
+                        <div class="p-3">
+                            <h3 class="fs-4 text-pink">Música</h3>
+                            <hr class="text-pink" />
+                            <table class="text-pink table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Álbum</th>
+                                        <th scope="col">Tiempo</th>
+                                        <th scope="col">Reproducir</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let c of canciones, let i = index">
+                                        <th scope="row">{{i + 1}}</th>
+                                        <td>{{c.title}}</td>
+                                        <td>{{c.release.title}}</td>
+                                        <td>{{c.time}}</td>
+                                        <td *ngIf="playB != c.title">
+                                            <span class="material-symbols-outlined ms-4"
+                                                (click)="play(c)">play_arrow</span>
+                                            <link rel="stylesheet"
+                                                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+                                        </td>
+                                        <td *ngIf="playB == c.title">
+                                            <span class="material-symbols-outlined ms-4" (click)="pause()">pause</span>
+                                            <link rel="stylesheet"
+                                                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-
-                        <div class="mt-3 row col-lg-12">
-                            <div class="p-3">
-                                <h3 class="fs-4 text-pink">Tienda</h3>
-                                <hr class="text-pink" />
-                                <div class="row row-cols-md-6">
-                                    <div class="col">
-                                        <div class="card card-artista text-pink">
-                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                            <div class="card-body bg-dark">
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-artista text-pink">
-                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                            <div class="card-body bg-dark">
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-artista text-pink">
-                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                            <div class="card-body bg-dark">
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-artista text-pink">
-                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                            <div class="card-body bg-dark">
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="card card-artista text-pink">
-                                            <img src="../../../../assets/img/animated-capibara-with-a-crown.png" class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                            <div class="card-body bg-dark">
-                                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                            </div>
-                                          </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <!-- <div class="mx-auto mt-4">
-                        <label for="textarea" class="text-dark mb-2 title-new-song"><b>Lyrics</b></label>
-                        <textarea formControlName="lyrics" class="form-control" rows="6"
-                            placeholder="Introduzca la letra de su canción" id="textarea"></textarea>
-                    </div> -->
-
-                    <!-- <div class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
-                            <button class="btn btn-back text-white arreglo" type="submit">Editar</button>
+                    <div class="mt-3 row col-lg-12">
+                        <div class="p-3">
+                            <h3 class="fs-4 text-pink">Tienda</h3>
+                            <hr class="text-pink" />
+                            <div class="row row-cols-md-6">
+                                <div class="col">
+                                    <div class="card card-artista text-pink">
+                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
+                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-artista text-pink">
+                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
+                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-artista text-pink">
+                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
+                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-artista text-pink">
+                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
+                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-artista text-pink">
+                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
+                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div> -->
+                    </div>
+
                 </div>
             </div>
-        </form>
+        </div>
     </main>
 </div>

@@ -1,0 +1,95 @@
+<main class="form-back bg-dark">
+    <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+        <div class="row col-10 mx-auto mt-4 g-2">
+            <h1 class="h3 mb-3 fw-normal">NUEVO ARTISTA</h1>
+            <hr class="text-pink" />
+
+            <div class="ms-1 col-lg-2 d-flex align-items-center justify-content-center">
+                <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple
+                    (change)="onUploadImg($event)" id="inputFile">
+
+                <label for="inputFile" class="labelInputFile">
+                    <img src="{{avatar}}" alt="">
+                </label>
+            </div>
+
+            <div class="ml-na row col-lg-10 d-flex align-items-center justify-content-center">
+                <div class="col-lg-6">
+                    <label for="firstName" class="form-label">Nombre</label>
+                    <input formControlName="nombre" type="text" class="form-control" id="firstName" placeholder=""
+                        value="">
+
+                    <p class="invalid-error"
+                        *ngIf="form.get('nombre').invalid && (form.get('nombre').dirty || form.get('nombre').touched)">
+                        Introduzca un nombre
+                    </p>
+                </div>
+
+                <div class="col-lg-6">
+                    <label for="lastName" class="form-label">Apellido (Opcional)</label>
+                    <input formControlName="apellidos" type="text" class="form-control" id="lastName" placeholder=""
+                        value="">
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="username" class="form-label">Nombre de usuario</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">@</span>
+                        <input formControlName="username" type="text" class="form-control" id="username"
+                            placeholder="Username">
+                    </div>
+                    <p class="invalid-error"
+                        *ngIf="form.get('username').invalid && (form.get('username').dirty || form.get('username').touched)">
+                        Introduzca un nombre de usuario
+                    </p>
+                </div>
+
+                <div class="col-6 mt-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input formControlName="email" type="email" class="form-control" id="email"
+                        placeholder="you@example.com">
+
+                    <p class="invalid-error"
+                        *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
+                        Introduzca un email
+                    </p>
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input formControlName="password" type="password" class="form-control" id="address">
+
+                    <p class="invalid-error"
+                        *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)">
+                        Introduzca una contraseña mínimo 6 carácteres
+                    </p>
+                </div>
+
+                <div class="col-sm-6 mt-3">
+                    <label for="address" class="form-label">Repita la contraseña</label>
+                    <input formControlName="repeat_password" type="password" class="form-control" id="address">
+
+                    <p class="invalid-error"
+                        *ngIf="(form.get('repeat_password').value != form.get('password').value) && (form.get('repeat_password').dirty || form.get('repeat_password').touched)">
+                        La contraseña no coincide
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-12 d-flex justify-content-end mt-5">
+                <button class="btn btn-outline-light me-3" (click)="goTo('')"
+                    [disabled]="(form.invalid || (form.get('repeat_password').value != form.get('password').value))">Cancelar</button>
+                <button class="btn btn-light me-3" type="submit">Añadir artista</button>
+            </div>
+
+
+
+
+            <!-- <button class="mt-4 w-100 btn btn-lg btn-back" type="submit"
+                [disabled]="(form.invalid || (form.get('repeat_password').value != form.get('password').value))">Registrarse</button>
+            <div>
+                <p (click)="goTo('login')" class="text-pink link-pointer">Volver</p>
+            </div> -->
+        </div>
+    </form>
+</main>
