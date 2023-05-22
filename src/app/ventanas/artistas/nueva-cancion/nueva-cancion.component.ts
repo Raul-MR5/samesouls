@@ -28,7 +28,11 @@ export class NuevaCancionComponent implements OnInit {
   music;
 
   release: Release;
-  canciones: Song[];
+  canciones: any[] = [];
+
+  nSong;
+  songTitle;
+  songAudio;
 
   prueba = []
 
@@ -93,13 +97,13 @@ export class NuevaCancionComponent implements OnInit {
 
     this.music = event.target.files[0];
 
-    // let reader = new FileReader();
-    // reader.readAsDataURL(music);
-    //   reader.onloadend = () => {
-    //     console.log(reader.result);
-    //     this.foto = reader.result;
-    //     console.log(this.foto);
-    //   }
+    let reader = new FileReader();
+    reader.readAsDataURL(this.music);
+      reader.onloadend = () => {
+        // console.log(reader.result);
+        this.foto = reader.result;
+        // console.log(this.foto);
+      }
 
 
     // this.storageSrv.uploadMusic(this.name, this.name, music).then(url => {
@@ -160,10 +164,23 @@ export class NuevaCancionComponent implements OnInit {
   }
 
   addSong(){
+    this.nSong = {
+      title: this.songTitle,
+      audio: this.music
+    }
+
+    console.log("this.nSong", this.nSong)
+
+    this.canciones.push(this.nSong);
+
+    this.songTitle = '';
+    this.songAudio = '';
     this.view = 'release';
   }
 
   cancel(){
+    this.songTitle = '';
+    this.songAudio = '';
     this.view = 'release';
   }
 }

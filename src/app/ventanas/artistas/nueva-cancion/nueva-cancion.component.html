@@ -80,14 +80,14 @@
 
                                     <label for="firstName"
                                         class="form-label text-pink title-new-song"><b>Título</b></label>
-                                    <input formControlName="titulo" type="text" class="form-control" id="firstName"
+                                    <input [(ngModel)]="songTitle" formControlName="titulo" type="text" class="form-control" id="firstName"
                                         placeholder="" value="">
 
                                 </div>
                                 <div class="col-6">
                                     <label for="inputSong"
                                         class="form-label text-pink title-new-song"><b>Archivo</b></label>
-                                    <input formControlName="cancion" type="file" accept=".mp3, .wav"
+                                    <input [(ngModel)]="songAudio" formControlName="cancion" type="file" accept=".mp3, .wav"
                                         class="form-control" id="inputSong" (change)="onUploadMusic($event)">
                                 </div>
                             </div>
