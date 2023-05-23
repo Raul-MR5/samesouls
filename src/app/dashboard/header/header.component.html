@@ -33,11 +33,14 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li>
+          <li *ngIf="user.rol.code != 'ARTISTA'">
             <a class="dropdown-item" (click)="goTo('/profile')">Perfil</a>
           </li>
 
           <div *ngIf="user.rol.code == 'ARTISTA'">
+            <li>
+              <a class="dropdown-item" (click)="goTo('/artist-profile')">Perfil</a>
+            </li>
             <li>
               <hr class="dropdown-divider">
             </li>

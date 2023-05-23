@@ -1,0 +1,72 @@
+<div class="form-back bg-dark">
+    <main>
+        <!-- IMPORTAR MODULOS -->
+        <form class="row col-10 mx-auto form-signin needs-validation text-pink mt-3" [formGroup]="form">
+            <div>
+                <!-- <div  class="col-lg-10 mx-auto ps-3">
+                    <h1><strong>Editar perfil</strong></h1>
+                </div> -->
+                <div class=" mx-auto ">
+                    <!-- <h3 class="text-dark"><b>Subir canción</b></h3> -->
+                    <h3 class="fs-4 text-pink">Perfil</h3>
+                    <hr class="text-pink" />
+                    <div class="test mt-3 d-flex justify-content-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+
+                        <div class="col-lg-2 d-flex align-items-center justify-content-start pe-4">
+                            <input formControlName="foto" type="file" accept=".png, .jpg,.jpeg" multiple
+                                (change)="onUploadImg($event)" id="inputFile">
+
+                            <label for="inputFile" class="labelInputFile">
+                                <img src="{{foto}}" alt="upload file" style="object-fit: cover;">
+                            </label>
+                        </div>
+
+                        <div class="mt-2 row col-lg-10 text-pink">
+                            <div class="col-lg-6">
+                                <label for="nombre" class="form-label title-new-song"><b>Nombre</b></label>
+                                <input formControlName="nombre" type="text" class="form-control" id="nombre"
+                                    placeholder="Nombre" value="">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="apellidos" class="form-label title-new-song"><b>Apellidos</b></label>
+                                <input formControlName="apellidos" type="text" class="form-control" id="apellidos"
+                                    placeholder="Apellidos" value="">
+                            </div>
+
+                            <div class="mt-2 col-lg-4">
+                                <label for="username" class="form-label title-new-song"><b>Nombre de usuario</b></label>
+                                <input formControlName="username" type="text" class="form-control" id="username"
+                                    placeholder="Nombre de usuario" value="">
+                            </div>
+                            
+                            <div class="mt-2 col-lg-4">
+                                <label for="genre" class="form-label title-new-song">Género musical</label>
+                                <select formControlName="genre" aria-label="Default select example" class="form-select" id="genre">
+                                    <option *ngFor="let g of genre" [ngValue]="g.id">{{ g.code }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mt-2 col-lg-4">
+                                <label for="email" class="form-label title-new-song"><b>Email</b></label>
+                                <input formControlName="email" type="text" class="form-control text-muted" id="email"
+                                    placeholder="Correo electrónico" value="">
+                            </div>
+                        </div>
+
+                        <div class="mt-4 row col-lg-12 text-pink">
+                            <label for="description" class="form-label title-new-song"><b>Descripción</b></label>
+                            <textarea formControlName="description" class="form-control" placeholder="Indica una pequeña descripción sobre ti" rows="3"
+                                id="description"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end mt-5 pe-4">
+                        <button class="btn btn-outline-light me-3" (click)="reset()">Cancelar</button>
+                        <button class="btn btn-light" (click)="submit()">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>

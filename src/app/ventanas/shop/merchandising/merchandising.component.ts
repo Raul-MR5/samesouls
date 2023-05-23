@@ -8,6 +8,8 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
+import { SizesService } from 'src/app/shared/services/sizes.service';
+import { Size } from 'src/app/shared/models/size.model';
 
 @Component({
   selector: 'app-merchandising',
@@ -32,8 +34,9 @@ export class MerchandisingComponent implements OnInit {
 
   suscriptions: Subscription[] = [];
 
+  sizes: Size[];
 
-  type = 'clothing'
+  type = 'music'
   photo1 = 'front'
   photo2 = 'back'
   photo3 = 'model_front'
@@ -44,6 +47,7 @@ export class MerchandisingComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
+    private sizesSrv: SizesService,
     // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router,
@@ -55,6 +59,7 @@ export class MerchandisingComponent implements OnInit {
 
     this.suscriptions.push(paramsSubscription);
 
+    this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
     console.log(this.suscriptions)
     
     // this.user = this.usuarioSrv.getUsuario();

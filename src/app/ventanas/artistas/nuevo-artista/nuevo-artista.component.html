@@ -31,49 +31,69 @@
                         value="">
                 </div>
 
-                <div class="col-sm-6 mt-3">
-                    <label for="username" class="form-label">Nombre de usuario</label>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text">@</span>
-                        <input formControlName="username" type="text" class="form-control" id="username"
-                            placeholder="Username">
-                    </div>
-                    <p class="invalid-error"
-                        *ngIf="form.get('username').invalid && (form.get('username').dirty || form.get('username').touched)">
-                        Introduzca un nombre de usuario
-                    </p>
+                <div class="col-lg-12">
+                    <label for="description">Descripción</label>
+                    <textarea formControlName="description" class="form-control" placeholder="" rows="3"
+                        id="description"></textarea>
                 </div>
 
-                <div class="col-6 mt-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input formControlName="email" type="email" class="form-control" id="email"
-                        placeholder="you@example.com">
-
-                    <p class="invalid-error"
-                        *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
-                        Introduzca un email
-                    </p>
+            </div>
+            <div class="col-sm-4 mt-3">
+                <label for="username" class="form-label">Nombre de usuario</label>
+                <div class="input-group has-validation">
+                    <span class="input-group-text">@</span>
+                    <input formControlName="username" type="text" class="form-control" id="username"
+                        placeholder="Username">
                 </div>
+                <p class="invalid-error"
+                    *ngIf="form.get('username').invalid && (form.get('username').dirty || form.get('username').touched)">
+                    Introduzca un nombre de usuario
+                </p>
+            </div>
 
-                <div class="col-sm-6 mt-3">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input formControlName="password" type="password" class="form-control" id="address">
+            <div class="col-4 mt-3">
+                <label for="genre" class="form-label">Género musical</label>
+                <select formControlName="genre" aria-label="Default select example" class="form-select" id="genre">
+                    <option *ngFor="let g of genre" [ngValue]="g">{{ g.code }}</option>
+                </select>
+                <!-- <input formControlName="genre" type="genre" class="form-control" id="genre"
+                                placeholder="you@example.com"> -->
 
-                    <p class="invalid-error"
-                        *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)">
-                        Introduzca una contraseña mínimo 6 carácteres
-                    </p>
-                </div>
+                <!-- <p class="invalid-error"
+                                *ngIf="form.get('genre').invalid && (form.get('genre').dirty || form.get('genre').touched)">
+                                Introduzca un género musical
+                            </p> -->
+            </div>
 
-                <div class="col-sm-6 mt-3">
-                    <label for="address" class="form-label">Repita la contraseña</label>
-                    <input formControlName="repeat_password" type="password" class="form-control" id="address">
+            <div class="col-4 mt-3">
+                <label for="email" class="form-label">Email</label>
+                <input formControlName="email" type="email" class="form-control" id="email"
+                    placeholder="you@example.com">
 
-                    <p class="invalid-error"
-                        *ngIf="(form.get('repeat_password').value != form.get('password').value) && (form.get('repeat_password').dirty || form.get('repeat_password').touched)">
-                        La contraseña no coincide
-                    </p>
-                </div>
+                <p class="invalid-error"
+                    *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
+                    Introduzca un email
+                </p>
+            </div>
+
+            <div class="col-sm-6 mt-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input formControlName="password" type="password" class="form-control" id="address">
+
+                <p class="invalid-error"
+                    *ngIf="form.get('password').invalid && (form.get('password').dirty || form.get('password').touched)">
+                    Introduzca una contraseña mínimo 6 carácteres
+                </p>
+            </div>
+
+            <div class="col-sm-6 mt-3">
+                <label for="address" class="form-label">Repita la contraseña</label>
+                <input formControlName="repeat_password" type="password" class="form-control" id="address">
+
+                <p class="invalid-error"
+                    *ngIf="(form.get('repeat_password').value != form.get('password').value) && (form.get('repeat_password').dirty || form.get('repeat_password').touched)">
+                    La contraseña no coincide
+                </p>
             </div>
 
             <div class="col-12 d-flex justify-content-end mt-5">

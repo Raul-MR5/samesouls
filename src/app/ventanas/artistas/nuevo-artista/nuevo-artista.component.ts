@@ -9,6 +9,8 @@ import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import Swal from 'sweetalert2';
 import { RolesService } from 'src/app/shared/services/roles.service';
 import { Rol } from 'src/app/shared/models/rol.model';
+import { GenresService } from 'src/app/shared/services/genres.service';
+import { Genre } from 'src/app/shared/models/genre.model';
 
 @Component({
   selector: 'app-nuevo-artista',
@@ -25,6 +27,7 @@ export class NuevoArtistaComponent implements OnInit {
   avatar: any;
   
   rol: Rol[];
+  genre: Genre[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +35,7 @@ export class NuevoArtistaComponent implements OnInit {
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     private rolSrv: RolesService,
+    private genreSrv: GenresService,
     private storageSrv: StorageService,
     private router: Router
   ) { }
@@ -45,6 +49,10 @@ export class NuevoArtistaComponent implements OnInit {
       this.rol = r
     });
 
+    this.genreSrv.getAll().subscribe(g => {
+      this.genre = g;
+    });
+
     this.avatar = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/user-photo.png?alt=media&token=04f07362-f1be-4501-a038-fdd7cec3bb2a";
 
     this.form = this.formBuilder.group({
@@ -54,6 +62,8 @@ export class NuevoArtistaComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       apellidos: ['', [Validators.minLength(3), Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      description: [''],
+      genre: ['', [Validators.required]],
       repeat_password: ['', Validators.required]
     });
   }
@@ -92,6 +102,8 @@ export class NuevoArtistaComponent implements OnInit {
               username: this.form.value.username,
               nombre: this.form.value.nombre,
               apellidos: this.form.value.apellidos,
+              description: this.form.value.description,
+              genre: this.form.value.genre,
               email: this.form.value.email,
               foto: urlImagen,
               rol: this.rol[0],

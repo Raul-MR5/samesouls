@@ -114,7 +114,7 @@
         <ngx-paypal id="paypal-div" [config]="payPalConfig"></ngx-paypal>
     </div>
     <div class="col-12 d-flex justify-content-end mt-5">
-        <button class="btn btn-outline-light me-3" (click)="volver()">Volver</button>
+        <button class="btn btn-outline-light me-3" (click)="step = 'resume'">Next</button>
     </div>
 </div>
 
@@ -177,7 +177,7 @@
         <div class="row col-lg-4"></div>
         <div class="row col-lg-4 ms-5 g-3">
             <div class="col-12 d-flex justify-content-end ms-2">
-                <button class="btn btn-outline-light me-3" (click)="volver()">Volver</button>
+                <button class="btn btn-outline-light me-3" (click)="goTo('/shop')">Volver</button>
                 <button class="btn btn-light d-flex align-content-center" type="submit">
                     <span class="material-symbols-outlined">print</span>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />

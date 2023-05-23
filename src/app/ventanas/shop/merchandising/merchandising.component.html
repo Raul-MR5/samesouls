@@ -33,7 +33,7 @@
             </div>
             <div class="col-4">
                 <div class="form-back" *ngIf="type == 'clothing'">
-                    <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+                    <form class="form-signin needs-validation" (submit)="submit()">
                         <div>
                             <div class="col-lg-11 mx-auto p-2 ps-5">
                                 <div
@@ -43,12 +43,13 @@
                                     <h3 class="w-100"><strong>--,--€</strong></h3>
 
                                     <div class="w-100 pt-3">
+                                        <!-- <select class="form-select col-12" aria-label="Default select example">
+                                            <option hidden selected>TALLAS</option>
+                                            <option *ngFor="let s of sizes" value="{{s.code}}">{{s.code}}</option>
+                                        </select> -->
                                         <select class="form-select col-12" aria-label="Default select example">
                                             <option hidden selected>TALLAS</option>
-                                            <option value="S">S</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
+                                            <option *ngFor="let s of sizes" disabled value="{{s.code}}">{{s.code}} - Out of stock</option>
                                         </select>
 
                                         <p class="pt-4" style="text-align: justify;text-justify: inter-word;">Lorem
@@ -60,6 +61,10 @@
                                             desconocido usó una galería de textos y los mezcló de tal manera que logró
                                             hacer
                                             un libro de textos especimen. </p>
+
+                                        <div class="d-flex justify-content-center">
+                                            <span class="fs-5 text-danger" style="text-align: justify;text-justify: inter-word;">Out of stock. </span>
+                                        </div>
                                     </div>
                                 </div>
 

@@ -8,16 +8,21 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { Genre } from 'src/app/shared/models/genre.model';
+import { GenresService } from 'src/app/shared/services/genres.service';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  selector: 'app-edit-artista',
+  templateUrl: './edit-artista.component.html',
+  styleUrls: ['./edit-artista.component.scss']
 })
-export class EditProfileComponent implements OnInit {
+export class EditArtistaComponent implements OnInit {
 
   form: FormGroup;
   user: Usuario;
+
+  genre: Genre[];
+
   name;
   photo;
   foto;
@@ -32,6 +37,7 @@ export class EditProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
+    private genreSrv: GenresService,
     // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router
@@ -40,6 +46,10 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.usuarioSrv.getUsuario();
     console.log("user",this.user)
+
+    this.genreSrv.getAll().subscribe(g => {
+      this.genre = g;
+    });
 
     if (this.user == undefined) {
       this.authSrv.authenticated().subscribe(bool => {
@@ -57,7 +67,9 @@ export class EditProfileComponent implements OnInit {
                 username: [this.user.username, [Validators.required]],
                 nombre: [this.user.nombre, [Validators.required]],
                 apellidos: [this.user.apellidos],
-                email: [{ value: this.user.email, disabled: true }, [Validators.required]]
+                email: [{ value: this.user.email, disabled: true }, [Validators.required]],
+                description: [this.user.description],
+                genre: [this.user.genre.id, [Validators.required]],
               });
           
               this.foto = this.user.foto;
@@ -75,7 +87,9 @@ export class EditProfileComponent implements OnInit {
         username: [this.user.username, [Validators.required]],
         nombre: [this.user.nombre, [Validators.required]],
         apellidos: [this.user.apellidos],
-        email: [{ value: this.user.email, disabled: true }, [Validators.required]]
+        email: [{ value: this.user.email, disabled: true }, [Validators.required]],
+        description: [this.user.description],
+        genre: [this.user.genre.id, [Validators.required]],
       });
   
       this.foto = this.user.foto;
@@ -122,36 +136,43 @@ export class EditProfileComponent implements OnInit {
     try {
       this.storageSrv.uploadImg("avatar/", this.user.email, this.foto).then(async urlImagen => {
 
-        let usuario: Usuario;
-        if (urlImagen) {
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: urlImagen,
-            username: this.form.value.username
+        this.genreSrv.getOne(this.form.value.genre).subscribe(async g => {
+          let usuario: Usuario;
+          if (urlImagen) {
+            usuario = {
+              id: this.user.id,
+              nombre: this.form.value.nombre,
+              apellidos: this.form.value.apellidos,
+              email: this.user.email,
+              description: this.form.value.description,
+              genre: g,
+              foto: urlImagen,
+              username: this.form.value.username
+            }
+          } else{
+            usuario = {
+              id: this.user.id,
+              nombre: this.form.value.nombre,
+              apellidos: this.form.value.apellidos,
+              email: this.user.email,
+              description: this.form.value.description,
+              genre: g,
+              foto: this.foto,
+              username: this.form.value.username
+            }
           }
-        } else{
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: this.foto,
-            username: this.form.value.username
-          }
-        }
-
-
-        await this.usuarioSrv.update(usuario);
-
-        Swal.fire({
-          icon: 'success',
-          title: 'Se ha actualizado el perfil'
+  
+  
+          await this.usuarioSrv.update(usuario);
+  
+          Swal.fire({
+            icon: 'success',
+            title: 'Se ha actualizado el perfil'
+          })
+  
+          this.router.navigate(['/artist-profile']);
         })
 
-        this.router.navigate(['/profile']);
       });
 
     } catch (e: any) {
@@ -165,7 +186,9 @@ export class EditProfileComponent implements OnInit {
       username: [this.user.username, [Validators.required]],
       nombre: [this.user.nombre, [Validators.required]],
       apellidos: [this.user.apellidos],
-      email: [{ value: this.user.email, disabled: true }, [Validators.required]]
+      email: [{ value: this.user.email, disabled: true }, [Validators.required]],
+      description: [this.user.description],
+      genre: [this.user.genre.id, [Validators.required]],
     });
   }
 

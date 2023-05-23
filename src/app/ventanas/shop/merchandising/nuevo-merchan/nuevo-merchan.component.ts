@@ -13,6 +13,8 @@ import { ReleaseType } from 'src/app/shared/models/release_type.model';
 import { ReleasesService } from 'src/app/shared/services/releases.service';
 import { ReleaseTypesService } from 'src/app/shared/services/release_types.service';
 import Swal from 'sweetalert2';
+import { SizesService } from 'src/app/shared/services/sizes.service';
+import { Size } from 'src/app/shared/models/size.model';
 
 @Component({
   selector: 'app-nuevo-merchan',
@@ -35,6 +37,8 @@ export class NuevoMerchanComponent implements OnInit {
   release: Release;
   canciones: any[] = [];
 
+  sizes: Size[];
+
   nSong;
   songTitle;
   songAudio;
@@ -50,6 +54,7 @@ export class NuevoMerchanComponent implements OnInit {
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     private cancionSrv: SongsService,
+    private sizesSrv: SizesService,
     private releaseSrv: ReleasesService,
     private releaseTypeSrv: ReleaseTypesService,
     private storageSrv: StorageService,
@@ -60,6 +65,7 @@ export class NuevoMerchanComponent implements OnInit {
     this.foto = "https://firebasestorage.googleapis.com/v0/b/boomclub-tfg.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=39a74894-86e2-4413-81f0-b8584a500b36";
 
     this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
+    this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
   }
 
   ngOnDestroy(): void {

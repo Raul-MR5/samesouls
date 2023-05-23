@@ -40,6 +40,7 @@ const routes: Routes = [
       { path: 'new-song', loadChildren: () => import('src/app/ventanas/artistas/nueva-cancion/nueva-cancion.module').then(m => m.NuevaCancionModule)/* , canActivate: [AuthGuard] */ },
       { path: 'new-merchandising', loadChildren: () => import('src/app/ventanas/shop/merchandising/nuevo-merchan/nuevo-merchan.module').then(m => m.NuevoMerchanModule)/* , canActivate: [AuthGuard] */ },
       { path: 'new-artist', loadChildren: () => import('src/app/ventanas/artistas/nuevo-artista/nuevo-artista.module').then(m => m.NuevoArtistaModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'artist-profile', loadChildren: () => import('src/app/ventanas/artistas/edit-artista/edit-artista.module').then(m => m.EditArtistaModule)/* , canActivate: [AuthGuard] */ },
     ]
   },
   { path: 'login', component: LoginComponent },
