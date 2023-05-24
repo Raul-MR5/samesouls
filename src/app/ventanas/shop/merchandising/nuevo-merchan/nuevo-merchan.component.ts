@@ -15,6 +15,12 @@ import { ReleaseTypesService } from 'src/app/shared/services/release_types.servi
 import Swal from 'sweetalert2';
 import { SizesService } from 'src/app/shared/services/sizes.service';
 import { Size } from 'src/app/shared/models/size.model';
+import { ProductsService } from 'src/app/shared/services/product.service';
+import { ProductPhotosService } from 'src/app/shared/services/product_photos.service';
+import { ProductTypesService } from 'src/app/shared/services/product_types.service';
+import { ProductType } from 'src/app/shared/models/product_type.model';
+import { PhotoTypesService } from 'src/app/shared/services/photo_types.service';
+import { PhotoType } from 'src/app/shared/models/photo_type.model';
 
 @Component({
   selector: 'app-nuevo-merchan',
@@ -38,6 +44,9 @@ export class NuevoMerchanComponent implements OnInit {
   canciones: any[] = [];
 
   sizes: Size[];
+  productType: string;
+  productTypes: ProductType[];
+  photoType: PhotoType[];
 
   nSong;
   songTitle;
@@ -55,6 +64,10 @@ export class NuevoMerchanComponent implements OnInit {
     private usuarioSrv: ProfilesService,
     private cancionSrv: SongsService,
     private sizesSrv: SizesService,
+    private productSrv: ProductsService,
+    private productTypeSrv: ProductTypesService,
+    private productPhotoSrv: ProductPhotosService,
+    private photoTypeSrv: PhotoTypesService,
     private releaseSrv: ReleasesService,
     private releaseTypeSrv: ReleaseTypesService,
     private storageSrv: StorageService,
@@ -64,8 +77,10 @@ export class NuevoMerchanComponent implements OnInit {
   ngOnInit(): void {
     this.foto = "https://firebasestorage.googleapis.com/v0/b/boomclub-tfg.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=39a74894-86e2-4413-81f0-b8584a500b36";
 
-    this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
     this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
+    this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
+    this.productTypeSrv.getAll().subscribe(type => {this.productTypes = type; this.productType = type[1].code});
+    this.photoTypeSrv.getAll().subscribe(type => this.photoType = type);
   }
 
   ngOnDestroy(): void {
