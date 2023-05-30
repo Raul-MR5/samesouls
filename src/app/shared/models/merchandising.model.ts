@@ -3,6 +3,7 @@ import { Size } from "./size.model";
 
 export interface Merchandising {
     id?: string;
+    code: string;
     product: Product;
     prize: number;
     stock: number;

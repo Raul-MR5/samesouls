@@ -9,5 +9,6 @@ export const environment = {
     messagingSenderId: '1070620659890',
     measurementId: 'G-KQQEK8QH2F',
   },
-  production: true
+  production: true,
+  clientId: 'ARu-WzovK2xn7HnTWan2p9sM1bM6VqPnkOcPgAeM85pNdRyOXbU9QlnGD0x3__9uhBlg-lR4DFmppvPQ'
 };

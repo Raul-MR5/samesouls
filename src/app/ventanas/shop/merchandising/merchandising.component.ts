@@ -36,7 +36,7 @@ export class MerchandisingComponent implements OnInit {
 
   sizes: Size[];
 
-  type = 'music'
+  type = 'clothing'
   photo1 = 'front'
   photo2 = 'back'
   photo3 = 'model_front'

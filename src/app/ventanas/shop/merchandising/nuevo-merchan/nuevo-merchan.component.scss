@@ -67,6 +67,23 @@
     height: 200px;
 }
 
+.labelInputFileDisk {
+    width: 350px;
+    height: 350px;
+    padding: 1rem;
+    // box-shadow: 0 0 10px -1px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.labelInputFileDisk img {
+    width: 350px;
+    height: 350px;
+}
+
 .labelInputFile:active {
     transform: scale(0.9);
 }

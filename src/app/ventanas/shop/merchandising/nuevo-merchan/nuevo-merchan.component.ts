@@ -15,6 +15,16 @@ import { ReleaseTypesService } from 'src/app/shared/services/release_types.servi
 import Swal from 'sweetalert2';
 import { SizesService } from 'src/app/shared/services/sizes.service';
 import { Size } from 'src/app/shared/models/size.model';
+import { ProductsService } from 'src/app/shared/services/product.service';
+import { ProductPhotosService } from 'src/app/shared/services/product_photos.service';
+import { ProductTypesService } from 'src/app/shared/services/product_types.service';
+import { ProductType } from 'src/app/shared/models/product_type.model';
+import { PhotoTypesService } from 'src/app/shared/services/photo_types.service';
+import { PhotoType } from 'src/app/shared/models/photo_type.model';
+import { Product } from 'src/app/shared/models/product.model';
+import { ProductPhotos } from 'src/app/shared/models/product_photos.model';
+import { MerchandisingService } from 'src/app/shared/services/merchandising.service';
+import { Merchandising } from 'src/app/shared/models/merchandising.model';
 
 @Component({
   selector: 'app-nuevo-merchan',
@@ -38,6 +48,9 @@ export class NuevoMerchanComponent implements OnInit {
   canciones: any[] = [];
 
   sizes: Size[];
+  productType: string;
+  productTypes: ProductType[];
+  photoType: PhotoType[];
 
   nSong;
   songTitle;
@@ -55,6 +68,11 @@ export class NuevoMerchanComponent implements OnInit {
     private usuarioSrv: ProfilesService,
     private cancionSrv: SongsService,
     private sizesSrv: SizesService,
+    private productSrv: ProductsService,
+    private productTypeSrv: ProductTypesService,
+    private productPhotoSrv: ProductPhotosService,
+    private photoTypeSrv: PhotoTypesService,
+    private merchandisingSrv: MerchandisingService,
     private releaseSrv: ReleasesService,
     private releaseTypeSrv: ReleaseTypesService,
     private storageSrv: StorageService,
@@ -64,8 +82,10 @@ export class NuevoMerchanComponent implements OnInit {
   ngOnInit(): void {
     this.foto = "https://firebasestorage.googleapis.com/v0/b/boomclub-tfg.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=39a74894-86e2-4413-81f0-b8584a500b36";
 
-    this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
     this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
+    this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
+    this.productTypeSrv.getAll().subscribe(type => { this.productTypes = type; this.productType = type[1].code });
+    this.photoTypeSrv.getAll().subscribe(type => this.photoType = type);
   }
 
   ngOnDestroy(): void {
@@ -128,62 +148,54 @@ export class NuevoMerchanComponent implements OnInit {
 
       let user: Usuario = this.usuarioSrv.getUsuario();
 
-      this.storageSrv.uploadImg("portadas/release/" + user.email, this.releaseTitle, this.foto).then(async urlImagen => {
-
-        if (this.canciones.length == 1) {
-          this.releaseType = this.releaseTypes.filter(type => type.type == 'SINGLE')[0];
-        } else if (this.canciones.length > 1 && this.canciones.length < 8) {
-          this.releaseType = this.releaseTypes.filter(type => type.type == 'EP')[0];
-        } else if (this.canciones.length > 8) {
-          this.releaseType = this.releaseTypes.filter(type => type.type == 'ALBUM')[0];
-        } else {
-          this.releaseType = null;
-        }
+      this.storageSrv.uploadImg("merchan/" + user.email, this.releaseTitle, this.foto).then(async urlImagen => {
 
         this.myuuid = uuidv4();
 
-        if (this.releaseType) {
-          let nRelease: Release = {
+        let nProduct: Product = {
+          id: this.myuuid,
+          name: 'name',
+          description: 'description',
+          product_type: this.productTypes.filter(product => this.productType == product.code)[0]
+        }
+
+        await this.productSrv.create(nProduct);
+
+        this.myuuid = uuidv4();
+
+        let nProductPhoto: ProductPhotos = {
+          id: this.myuuid,
+          photo: urlImagen,
+          photo_type: this.photoType.filter(type => type.name == 'DISK')[0],
+          product: nProduct
+        }
+
+        await this.productPhotoSrv.create(nProductPhoto);
+
+        let merchanCode = uuidv4();
+
+        this.sizes.forEach(async element => {
+
+          console.log("element", element)
+          this.myuuid = uuidv4();
+          console.log("myuuid", this.myuuid)
+
+          let merchandising: Merchandising;
+          merchandising = {
             id: this.myuuid,
-            photo: urlImagen ? urlImagen : this.foto,
-            title: this.releaseTitle,
-            release_type: this.releaseType,
-            artist: user,
+            code: merchanCode,
+            product: nProduct,
+            prize: 9.99,
+            stock: 100,
+            size: element,
             created_at: new Date().getTime()
           }
+          console.log("merchandising", merchandising)
 
-          await this.releaseSrv.create(nRelease);
+          await this.merchandisingSrv.create(merchandising);
 
-          this.canciones.forEach(async element => {
-            this.storageSrv.uploadMusic(user.email + '/' + this.releaseTitle, element.title, element.audio).then(async url => {
-
-              console.log("url", url)
-
-              console.log("element", element)
-              this.myuuid = uuidv4();
-              console.log("myuuid", this.myuuid)
-
-              let cancion: Song;
-              cancion = {
-                id: this.myuuid,
-                title: element.title,
-                release: nRelease,
-                audio: url,
-                created_at: new Date().getTime()
-              }
-              console.log("cancion", cancion)
-
-              await this.cancionSrv.create(cancion);
-
-            });
-          })
-          this.router.navigate(['/artistas/' + user.id]);
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'No se ha añadido ninguna canción'
-          })
-        }
+        })
+        this.router.navigate(['/shop']);
 
       });
 
