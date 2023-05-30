@@ -26,6 +26,10 @@ export class MerchandisingService {
         return this.firestore.collection<Merchandising>('merchandising', ref => ref.startAt(match).endAt(match + "\uf8ff")).valueChanges({ idField: 'id' });
     }
 
+    getAllOrdered(): Observable<Merchandising[]> {
+        return this.firestore.collection<Merchandising>('merchandising', ref => ref.orderBy('product.name')).valueChanges({ idField: 'id' });
+    }
+
     getOne(id: string): Observable<Merchandising> {
         return this.firestore.collection<Merchandising>('merchandising').doc(id).valueChanges({ idField: 'id' });
     }
