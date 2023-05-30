@@ -32,20 +32,8 @@ export class ProductPhotosService {
         return this.firestore.collection<ProductPhotos>('product_photos').doc(id).valueChanges({ idField: 'id' });
     }
 
-    getByProduct(id: string): Observable<ProductPhotos[]> {
-        // let app = initializeApp(environment.firebase);
-        // let db = getFirestore(app);
-        // const q = query(collection(db, "product_photos"), and(
-        //     where('product.id', '==', id),
-        //     or(
-        //         where('photo_type.name', '==', 'DISK'),
-        //         where('photo_type.name', '==', 'FRONT')
-        //     )
-        // ));
-
-        // console.log("q", q);
-
-        return this.firestore.collection<ProductPhotos>('product_photos', ref => ref.where('product.id', '==', id)).valueChanges({ idField: 'id' });
+    getOrderedTypeName(): Observable<ProductPhotos[]> {
+        return this.firestore.collection<ProductPhotos>('product_photos', ref => ref.orderBy('photo_type.name')).valueChanges({ idField: 'id' });
     }
 
     setProductPhotos(payload: ProductPhotos) {

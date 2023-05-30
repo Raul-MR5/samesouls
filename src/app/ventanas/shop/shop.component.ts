@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BannerPhotos } from 'src/app/shared/models/banner_photos.model';
 import { Genre } from 'src/app/shared/models/genre.model';
 import { Merchandising } from 'src/app/shared/models/merchandising.model';
+import { ProductPhotos } from 'src/app/shared/models/product_photos.model';
 import { Usuario } from 'src/app/shared/models/usuario.model';
+import { BannerPhotosService } from 'src/app/shared/services/banner_photos.service';
 import { GenresService } from 'src/app/shared/services/genres.service';
 import { MerchandisingService } from 'src/app/shared/services/merchandising.service';
 import { ProductPhotosService } from 'src/app/shared/services/product_photos.service';
@@ -22,45 +25,68 @@ export class ShopComponent implements OnInit {
   merchan = []
   allMerchan = []
   genres: Genre[] = []
+  merchanPhotos: ProductPhotos[] = []
   form: FormGroup;
   busqueda: boolean;
+  banner: BannerPhotos[];
 
   constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private usuarioSrv: ProfilesService,
     private merchandisingSrv: MerchandisingService,
     private productPhotoSrv: ProductPhotosService,
+    private bannerSrv: BannerPhotosService,
     private genreSrv: GenresService,
   ) { }
 
   ngOnInit(): void {
     // document.getElementById("shop").className += " active"
 
+    this.bannerSrv.getByType('BANNER_SHOP').subscribe(banner => {
+      this.banner = banner;
+    })
+    
+    this.form = this.formBuilder.group({
+      search: ['']
+    });
+
     this.usuario = this.usuarioSrv.getUsuario();
 
     this.merchandisingSrv.getAllOrdered().subscribe(merchan => {
+      console.log("m", merchan)
       const unique = merchan.filter(
         (obj, index) =>
           merchan.findIndex((item) => item.code === obj.code) === index
       );
 
+      // this.productPhotoSrv.getAll().subscribe(photos => {
+      //   photos.forEach(p => {
+      //     if ((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) {
+      //       console.log(p.photo)
+      //       return p.photo
+      //     } else {
+      //       return '';
+      //     }
+      //   })
+      // })
+
       unique.forEach(u => {
-        this.productPhotoSrv.getByProduct(u.product.id).subscribe(photo => {
+        this.productPhotoSrv.getOrderedTypeName().subscribe(photo => {
           photo.forEach(p => {
             if ((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) {
               this.merchan.push({
                 ...u,
-                photo: this.getProductPhoto(u.product)
+                photo: p
               })
             }
           })
         })
-        
       })
 
-      console.log("unique", unique);
+      // console.log("unique", unique);
       console.log("merchan", this.merchan);
-      // this.merchan = unique;
+      // // this.merchan = unique;
       this.allMerchan = this.merchan;
 
       // this.artistas = a;
@@ -103,18 +129,18 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  getProductPhoto(product) {
-    this.productPhotoSrv.getByProduct(product.id).subscribe(photo => {
-      photo.forEach(p => {
-        if ((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) {
-          console.log(p.photo)
-          return p.photo
-        } else {
-          return '';
-        }
-      })
-    })
-  }
+  // getProductPhoto(product) {
+  //   this.productPhotoSrv.getByProduct(product.id).subscribe(photo => {
+  //     photo.forEach(p => {
+  //       if ((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) {
+  //         console.log(p.photo)
+  //         return p.photo
+  //       } else {
+  //         return '';
+  //       }
+  //     })
+  //   })
+  // }
 
   goTo(url: string) {
     this.router.navigate([url]);

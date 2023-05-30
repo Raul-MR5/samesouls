@@ -1,33 +1,18 @@
 <main class="bg-light">
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
+            <button *ngFor="let b of banner, let i = index" type="button" data-bs-target="#carouselExampleCaptions"
+                attr.data-bs-slide-to="{{i}}" class="{{ (i == 0) ? 'active' : '' }}" aria-current="true"
+                attr.aria-label="Slide {{i}}"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="../../../assets/img/slider1.jpg" class="d-block w-100" alt="" style="height: 60vh" />
+            <div *ngFor="let b of banner, let i = index" class="carousel-item {{ (i == 0) ? 'active' : '' }}">
+                <img src="{{b.photo}}" class="d-block w-100" alt=""
+                    style="height: 60vh; object-fit: cover; opacity: 0.5;" />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>Some representative placeholder content for the first slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../../../assets/img/slider2.jpg" class="d-block w-100" alt="" style="height: 60vh" />
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Second slide label</h5>
-                    <p>Some representative placeholder content for the second slide.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../../../assets/img/slider3.jpg" class="d-block w-100" alt="" style="height: 60vh" />
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Third slide label</h5>
-                    <p>Some representative placeholder content for the third slide.</p>
+                    <h5 style="color: #0d0d0d;">{{b.artist.username}}</h5>
+                    <p style="color: #0d0d0d;">{{b.description}}</p>
+                    <a class="btn btn-dark mb-3" href="{{b.url}}" target="_blank">Escuchar ahora</a>
                 </div>
             </div>
         </div>
@@ -83,7 +68,7 @@
                         <div class="shadow-sm song-selector">
                             <div class="card-body">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <img class="mt-2 music-cover rounded-circle" src="{{ a.photo }}" width="130px"
+                                    <img class="mt-2 music-cover rounded-circle" src="{{ a.photo.photo }}" width="130px"
                                         height="130px" alt="{{ a.product.name }}" />
                                 </div>
                                 <div class="mt-3 d-flex justify-content-center align-items-center">
