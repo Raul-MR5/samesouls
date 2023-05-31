@@ -74,7 +74,9 @@ export class ShopComponent implements OnInit {
       unique.forEach(u => {
         this.productPhotoSrv.getOrderedTypeName().subscribe(photo => {
           photo.forEach(p => {
-            if ((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) {
+            if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) && (p.product.id == u.product.id)) {
+              console.log("u", u)
+              console.log("p", p)
               this.merchan.push({
                 ...u,
                 photo: p
@@ -84,7 +86,7 @@ export class ShopComponent implements OnInit {
         })
       })
 
-      // console.log("unique", unique);
+      console.log("unique", unique);
       console.log("merchan", this.merchan);
       // // this.merchan = unique;
       this.allMerchan = this.merchan;

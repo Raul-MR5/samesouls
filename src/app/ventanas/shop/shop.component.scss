@@ -1,7 +1,7 @@
 @import "../../../assets/sass/variables";
 
 .color-link {
-    color: $primaryColor;
+    color: $primaryLightColor;
 }
 
 .lista-inline {
@@ -33,7 +33,7 @@
 }
 
 .is-divider {
-    background-color: $primaryColor;
+    background-color: $primaryLightColor;
     // margin-top: 0.66em;
     height: 3px;
     display: block;
@@ -57,4 +57,17 @@
 
 .genre-list > li+li {
     border-top: 1px solid rgba(13, 13, 13, 0.1);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $primaryLightColor;
+    opacity: 1; /* Firefox */
+}
+  
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $primaryLightColor;
+}
+  
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: $primaryLightColor;
 }

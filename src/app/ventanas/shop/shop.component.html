@@ -1,4 +1,4 @@
-<main class="bg-light">
+<main class="bg-dark">
     <div id="carouselExampleCaptions" class="carousel slide">
         <div class="carousel-indicators">
             <button *ngFor="let b of banner, let i = index" type="button" data-bs-target="#carouselExampleCaptions"
@@ -10,9 +10,9 @@
                 <img src="{{b.photo}}" class="d-block w-100" alt=""
                     style="height: 60vh; object-fit: cover; opacity: 0.5;" />
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 style="color: #0d0d0d;">{{b.artist.username}}</h5>
-                    <p style="color: #0d0d0d;">{{b.description}}</p>
-                    <a class="btn btn-dark mb-3" href="{{b.url}}" target="_blank">Escuchar ahora</a>
+                    <h5>{{b.artist.username}}</h5>
+                    <p>{{b.description}}</p>
+                    <a class="btn btn-light mb-3" href="{{b.url}}" target="_blank">Escuchar ahora</a>
                 </div>
             </div>
         </div>
@@ -36,17 +36,17 @@
                     <nav class="navbar">
                         <div class="w-100 ">
                             <form class="col-lg-11" [formGroup]="form" role="search">
-                                <strong class="text-dark">BÚSQUEDA</strong>
+                                <strong class="text-light">BÚSQUEDA</strong>
                                 <div class="is-divider small"></div>
                                 <input (keyup)="search()" formControlName="search"
-                                    class="form-control mt-4 me-2 bg-light text-dark rounded-pill" type="search"
+                                    class="form-control mt-4 me-2 bg-dark text-light rounded-pill" type="search"
                                     placeholder="Search" aria-label="Search" />
                             </form>
                             <div class="col-lg-1"></div>
                         </div>
                     </nav>
                 </div>
-                <div class="text-dark" style="margin-right: 11%; margin-top: 8%;">
+                <div class="text-light" style="margin-right: 11%; margin-top: 8%;">
                     <strong>GÉNEROS</strong>
                     <div class="is-divider small"></div>
                     <div>
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div style="margin-right: 11%; margin-top: 8%;">
-                    <button type="button" (click)="filter('')" class="w-100 btn btn-outline-dark">Reiniciar
+                    <button type="button" (click)="filter('')" class="w-100 btn btn-outline-light">Reiniciar
                         Filtros</button>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                                         height="130px" alt="{{ a.product.name }}" />
                                 </div>
                                 <div class="mt-3 d-flex justify-content-center align-items-center">
-                                    <h5 class="text-dark no-salir">{{ a.product.name }}</h5>
+                                    <h5 class="text-light no-salir">{{ a.product.name }}</h5>
                                 </div>
                             </div>
                         </div>
