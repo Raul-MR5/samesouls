@@ -57,7 +57,7 @@ export class NuevaCancionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.foto = "https://firebasestorage.googleapis.com/v0/b/boomclub-tfg.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=39a74894-86e2-4413-81f0-b8584a500b36";
+    this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=bcb81ed2-8616-4704-a407-cccaed8f388e&_gl=1*1illzu0*_ga*MjEyNDUxODY3Ny4xNjY2MzY4MTYz*_ga_CW55HF8NVT*MTY4NTg3MDY4NC40Mi4xLjE2ODU4NzA4MDAuMC4wLjA.";
 
     this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
   }

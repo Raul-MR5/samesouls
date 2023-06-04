@@ -75,8 +75,6 @@ export class ShopComponent implements OnInit {
         this.productPhotoSrv.getOrderedTypeName().subscribe(photo => {
           photo.forEach(p => {
             if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) && (p.product.id == u.product.id)) {
-              console.log("u", u)
-              console.log("p", p)
               this.merchan.push({
                 ...u,
                 photo: p

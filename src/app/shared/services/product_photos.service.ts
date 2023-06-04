@@ -36,6 +36,10 @@ export class ProductPhotosService {
         return this.firestore.collection<ProductPhotos>('product_photos', ref => ref.orderBy('photo_type.name')).valueChanges({ idField: 'id' });
     }
 
+    getByProduct(product: string): Observable<ProductPhotos[]> {
+        return this.firestore.collection<ProductPhotos>('product_photos', ref => ref.where('product.id', '==', product).orderBy('photo_type.name')).valueChanges({ idField: 'id' });
+    }
+
     setProductPhotos(payload: ProductPhotos) {
         this.product_photos = payload;
     }

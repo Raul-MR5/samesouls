@@ -10,6 +10,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
 import { SizesService } from 'src/app/shared/services/sizes.service';
 import { Size } from 'src/app/shared/models/size.model';
+import { MerchandisingService } from 'src/app/shared/services/merchandising.service';
+import { Merchandising } from 'src/app/shared/models/merchandising.model';
+import { ProductPhotos } from 'src/app/shared/models/product_photos.model';
+import { ProductPhotosService } from 'src/app/shared/services/product_photos.service';
+import { Purchase } from 'src/app/shared/models/purchase.model';
+import { PurchasesService } from 'src/app/shared/services/purchases.service';
+import { Cart } from 'src/app/shared/models/cart.model';
+import { CartService } from 'src/app/shared/services/cart.service';
 
 @Component({
   selector: 'app-merchandising',
@@ -21,7 +29,7 @@ export class MerchandisingComponent implements OnInit {
   id: string;
   form: FormGroup;
   user: Usuario;
-  
+
   name;
   photo;
   foto;
@@ -35,6 +43,8 @@ export class MerchandisingComponent implements OnInit {
   suscriptions: Subscription[] = [];
 
   sizes: Size[];
+  merchandising: Merchandising;
+  productPhotos: ProductPhotos[];
 
   type = 'clothing'
   photo1 = 'front'
@@ -48,6 +58,10 @@ export class MerchandisingComponent implements OnInit {
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     private sizesSrv: SizesService,
+    private merchandisingSrv: MerchandisingService,
+    private productPhotosSrv: ProductPhotosService,
+    private purchaseSrv: PurchasesService,
+    private cartSrv: CartService,
     // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router,
@@ -58,10 +72,17 @@ export class MerchandisingComponent implements OnInit {
     const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id']; console.log(this.id, "hola"); /* let p = this.prueba(); console.log(p) */ });
 
     this.suscriptions.push(paramsSubscription);
+    
+    this.user = this.usuarioSrv.getUsuario();
 
     this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
+    this.merchandisingSrv.getByCode(this.id).subscribe(merchan => {
+      this.merchandising = merchan[0]; // modificar
+      this.type = this.merchandising.product.product_type.code;
+      this.productPhotosSrv.getByProduct(this.merchandising.product.id).subscribe(productPhotos => this.productPhotos = productPhotos);
+    });
     console.log(this.suscriptions)
-    
+
     // this.user = this.usuarioSrv.getUsuario();
     // console.log(this.user)
 
@@ -108,35 +129,32 @@ export class MerchandisingComponent implements OnInit {
   }
 
   async submit() {
+    console.log("entra")
     try {
-      this.storageSrv.uploadImg("avatar/", this.user.email, this.foto).then(async urlImagen => {
+      let myuuid = uuidv4();
 
-        let usuario: Usuario;
-        if (urlImagen) {
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: urlImagen,
-            username: this.form.value.username
-          }
-        } else{
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: this.foto,
-            username: this.form.value.username
-          }
-        }
+      let purchase: Purchase;
+      purchase = {
+        id: myuuid,
+        usuario: this.user,
+        paid: false,
+        created_at: Date.now()
+      }
 
+      await this.purchaseSrv.create(purchase);
+      
+      myuuid = uuidv4();
+      let cart: Cart;
+      cart = {
+        id: myuuid,
+        purchase: purchase,
+        merchandising: this.merchandising,
+        amount: 1
+      }
 
-        await this.usuarioSrv.update(usuario);
+      await this.cartSrv.create(cart);
 
-        this.router.navigate(['/profile']);
-      });
+      this.router.navigate(['/profile']);
 
     } catch (e: any) {
       // alert(e.message)

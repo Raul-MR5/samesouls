@@ -7,40 +7,46 @@
         </svg>
     </div>
     <div class="col-lg-9 mx-auto py-md-4">
-        <div class="display-flex row py-4">
+        <div class="d-flex row py-4">
 
             <div class="col-8">
-                <div class="display-flex row row-cols-2" *ngIf="type == 'clothing'">
-                    <div *ngIf="photo1 == 'front'">
+                <div class="d-flex row row-cols-2" *ngIf="type == 'CLOTHING'">
+                    <div *ngFor="let p of productPhotos">
+                        <img class="merchan-photo mt-3" src="{{p.photo}}" alt="">
+                    </div>
+                    <!-- <div *ngIf="productPhotos == 'front'">
                         <img class="merchan-photo" src="../../../../assets/img/front.jpg" alt="">
                     </div>
-                    <div *ngIf="photo2 == 'back'">
+                    <div *ngIf="productPhotos == 'back'">
                         <img class="merchan-photo" src="../../../../assets/img/back.jpg" alt="">
                     </div>
-                    <div *ngIf="photo3 == 'model_front'">
+                    <div *ngIf="productPhotos == 'model_front'">
                         <img class="merchan-photo" src="../../../../assets/img/model_front.jpg" alt="">
                     </div>
-                    <div *ngIf="photo4 == 'model_back'">
+                    <div *ngIf="productPhotos == 'model_back'">
                         <img class="merchan-photo" src="../../../../assets/img/model_side.jpg" alt="">
                     </div>
-                    <div *ngIf="photo5 == 'model_side'">
+                    <div *ngIf="productPhotos == 'model_side'">
                         <img class="merchan-photo" src="../../../../assets/img/model_back.jpg" alt="">
-                    </div>
+                    </div> -->
                 </div>
-                <div class="display-flex align-items-center justify-content-center row" *ngIf="type == 'music'">
-                    <img style="width: 75vh;" src="../../../../assets/img/vinilo.webp" alt="">
+                <div class="d-flex align-items-center justify-content-center row" *ngIf="type == 'MUSIC'">
+                    <div class="d-flex align-items-center justify-content-center" *ngFor="let p of productPhotos">
+                        <img class="merchan-photo mt-3" src="{{p.photo}}" alt="">
+                    </div>
+                    <!-- <img style="width: 75vh;" src="../../../../assets/img/vinilo.webp" alt=""> -->
                 </div>
             </div>
             <div class="col-4">
-                <div class="form-back" *ngIf="type == 'clothing'">
+                <div class="form-back"> <!-- *ngIf="type == 'CLOTHING'" -->
                     <form class="form-signin needs-validation" (submit)="submit()">
                         <div>
                             <div class="col-lg-11 mx-auto p-2 ps-5">
                                 <div
                                     class="test d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
 
-                                    <h3 class="w-100"><strong>NOMBRE MERCHAN</strong></h3>
-                                    <h3 class="w-100"><strong>--,--€</strong></h3>
+                                    <h3 class="w-100"><strong>{{merchandising.product.name}}</strong></h3>
+                                    <h3 class="w-100"><strong>{{merchandising.prize}}€</strong></h3>
 
                                     <div class="w-100 pt-3">
                                         <!-- <select class="form-select col-12" aria-label="Default select example">
@@ -52,15 +58,7 @@
                                             <option *ngFor="let s of sizes" disabled value="{{s.code}}">{{s.code}} - Out of stock</option>
                                         </select>
 
-                                        <p class="pt-4" style="text-align: justify;text-justify: inter-word;">Lorem
-                                            Ipsum es simplemente el texto de relleno de las imprentas y archivos de
-                                            texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias
-                                            desde
-                                            el año 1500, cuando un impresor (N. del T. persona que se dedica a la
-                                            imprenta)
-                                            desconocido usó una galería de textos y los mezcló de tal manera que logró
-                                            hacer
-                                            un libro de textos especimen. </p>
+                                        <p class="pt-4" style="text-align: justify;text-justify: inter-word;">{{merchandising.product.description}}</p>
 
                                         <div class="d-flex justify-content-center">
                                             <span class="fs-5 text-danger" style="text-align: justify;text-justify: inter-word;">Out of stock. </span>
@@ -78,7 +76,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="display-flex row" *ngIf="type == 'music'">
+                <!-- <div class="display-flex row" *ngIf="type == 'MUSIC'">
                     <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
                         <div>
                             <div class="col-lg-11 mx-auto p-2 ps-5">
@@ -110,7 +108,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

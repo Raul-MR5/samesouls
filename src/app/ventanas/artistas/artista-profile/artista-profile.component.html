@@ -53,10 +53,29 @@
                             <h3 class="fs-4 text-pink">Tienda</h3>
                             <hr class="text-pink" />
                             <div class="row row-cols-md-6">
-                                <div class="col">
+                                <div *ngFor="let m of merchandising" class="col">
+                                    <div (click)="goTo('/shop/' + m.code)" class="card card-artista text-pink pointer">
+                                        <img src="{{photos[m.code].photo}}"
+                                            class="card-img-top merchan-img" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">{{m.product.name}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col">
                                     <div class="card card-artista text-pink">
                                         <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
-                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            class="card-img-top merchan-img" style="margin-left: 25%;" alt="Merchan">
+                                        <div class="card-body bg-dark">
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-artista text-pink">
+                                        <img src="../../../../assets/img/front.jpg"
+                                            class="card-img-top merchan-img" style="margin-left: 25%;" alt="Merchan">
                                         <div class="card-body bg-dark">
                                             <p class="card-text">Some quick example text to build on the card title and
                                                 make up the bulk of the card's content.</p>
@@ -66,7 +85,7 @@
                                 <div class="col">
                                     <div class="card card-artista text-pink">
                                         <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
-                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            class="card-img-top merchan-img" style="margin-left: 25%;" alt="Merchan">
                                         <div class="card-body bg-dark">
                                             <p class="card-text">Some quick example text to build on the card title and
                                                 make up the bulk of the card's content.</p>
@@ -76,33 +95,13 @@
                                 <div class="col">
                                     <div class="card card-artista text-pink">
                                         <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
-                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
+                                            class="card-img-top merchan-img" style="margin-left: 25%;" alt="Merchan">
                                         <div class="card-body bg-dark">
                                             <p class="card-text">Some quick example text to build on the card title and
                                                 make up the bulk of the card's content.</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card card-artista text-pink">
-                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
-                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                        <div class="card-body bg-dark">
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the bulk of the card's content.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card card-artista text-pink">
-                                        <img src="../../../../assets/img/animated-capibara-with-a-crown.png"
-                                            class="card-img-top w-50" style="margin-left: 25%;" alt="Merchan">
-                                        <div class="card-body bg-dark">
-                                            <p class="card-text">Some quick example text to build on the card title and
-                                                make up the bulk of the card's content.</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

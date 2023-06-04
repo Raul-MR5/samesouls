@@ -34,13 +34,18 @@ import { Merchandising } from 'src/app/shared/models/merchandising.model';
 export class NuevoMerchanComponent implements OnInit {
 
   myuuid;
-  view = 'release';
 
   form: FormGroup;
-  user;
+  usuario: Usuario;
   name;
   photo;
+
   foto;
+  front;
+  back;
+  model_front;
+  model_back;
+  model_side;
 
   music;
 
@@ -80,11 +85,25 @@ export class NuevoMerchanComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.foto = "https://firebasestorage.googleapis.com/v0/b/boomclub-tfg.appspot.com/o/portadas%2Fdefault-cover-art.png?alt=media&token=39a74894-86e2-4413-81f0-b8584a500b36";
+    this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/merchan%2Fshirt-default.png?alt=media&token=7a0a9551-4c22-435f-8c26-5c1db4d3356a&_gl=1*wyidpd*_ga*MjEyNDUxODY3Ny4xNjY2MzY4MTYz*_ga_CW55HF8NVT*MTY4NTg3MDY4NC40Mi4xLjE2ODU4NzEwMzYuMC4wLjA.";
+
+    this.front = this.foto;
+    this.back = this.foto;
+    this.model_front = this.foto;
+    this.model_back = this.foto;
+    
+    this.usuario = this.usuarioSrv.getUsuario();
+
+    this.form = this.formBuilder.group({
+      name: '',
+      stock: '',
+      prize: '',
+      description: ''
+    });
 
     this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
     this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
-    this.productTypeSrv.getAll().subscribe(type => { this.productTypes = type; this.productType = type[1].code });
+    this.productTypeSrv.getAll().subscribe(type => { this.productTypes = type; this.productType = type[0].code });
     this.photoTypeSrv.getAll().subscribe(type => this.photoType = type);
   }
 
@@ -125,6 +144,40 @@ export class NuevoMerchanComponent implements OnInit {
     // });
   }
 
+  onUploadImgCloth(event, type) {
+
+    let cover = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.readAsDataURL(cover);
+    reader.onloadend = () => {
+      console.log("type", type)
+      switch (type) {
+        case 'front':
+          this.front = reader.result;
+          break;
+        case 'back':
+          this.back = reader.result;
+          break;
+        case 'model_front':
+          this.model_front = reader.result;
+          break;
+        case 'model_back':
+          this.model_back = reader.result;
+          break;
+        // case 'model_side':
+        //   this.model_side = reader.result;
+        //   break;
+      }
+      this.foto = this.front;
+    }
+
+
+    // this.storageSrv.uploadImg(this.name, this.name, cover).then(url => {
+    //   console.log(url);
+    // });
+  }
+
   onUploadMusic(event) {
 
     this.music = event.target.files[0];
@@ -143,89 +196,161 @@ export class NuevoMerchanComponent implements OnInit {
     // });
   }
 
+  changePhoto() {
+    console.log("entar")
+    switch (this.productType) {
+      case 'CLOTHING':
+        this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/merchan%2Fshirt-default.png?alt=media&token=7a0a9551-4c22-435f-8c26-5c1db4d3356a&_gl=1*wyidpd*_ga*MjEyNDUxODY3Ny4xNjY2MzY4MTYz*_ga_CW55HF8NVT*MTY4NTg3MDY4NC40Mi4xLjE2ODU4NzEwMzYuMC4wLjA.";
+        this.front = this.foto;
+        this.back = this.foto;
+        this.model_front = this.foto;
+        this.model_back = this.foto;
+        break;
+      case 'MUSIC':
+        this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/merchan%2Fdisk-default.png?alt=media&token=2df902ef-f2a8-4968-87f8-edefc65e706b&_gl=1*y3wz8w*_ga*MjEyNDUxODY3Ny4xNjY2MzY4MTYz*_ga_CW55HF8NVT*MTY4NTg3MDY4NC40Mi4xLjE2ODU4NzEwMDguMC4wLjA.";
+        break;
+    }
+  }
+
   async submit() {
     try {
 
-      let user: Usuario = this.usuarioSrv.getUsuario();
+      let user: Usuario = this.usuario;
 
-      this.storageSrv.uploadImg("merchan/" + user.email, this.releaseTitle, this.foto).then(async urlImagen => {
 
-        this.myuuid = uuidv4();
+      this.myuuid = uuidv4();
 
-        let nProduct: Product = {
-          id: this.myuuid,
-          name: 'name',
-          description: 'description',
-          product_type: this.productTypes.filter(product => this.productType == product.code)[0]
-        }
+      let nProduct: Product = {
+        id: this.myuuid,
+        name: this.form.value.name,
+        description: this.form.value.description,
+        artist: user,
+        product_type: this.productTypes.filter(product => this.productType == product.code)[0]
+      }
 
-        await this.productSrv.create(nProduct);
+      await this.productSrv.create(nProduct);
 
-        this.myuuid = uuidv4();
-
-        let nProductPhoto: ProductPhotos = {
-          id: this.myuuid,
-          photo: urlImagen,
-          photo_type: this.photoType.filter(type => type.name == 'DISK')[0],
-          product: nProduct
-        }
-
-        await this.productPhotoSrv.create(nProductPhoto);
-
-        let merchanCode = uuidv4();
-
-        this.sizes.forEach(async element => {
-
-          console.log("element", element)
+      if (this.productType == 'CLOTHING') {
+        this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'front', this.front).then(async urlImagen => {
           this.myuuid = uuidv4();
-          console.log("myuuid", this.myuuid)
 
-          let merchandising: Merchandising;
-          merchandising = {
+          let nProductPhotoFront: ProductPhotos = {
             id: this.myuuid,
-            code: merchanCode,
-            product: nProduct,
-            prize: 9.99,
-            stock: 100,
-            size: element,
-            created_at: new Date().getTime()
+            photo: urlImagen,
+            photo_type: this.photoType.filter(type => type.name == 'FRONT')[0],
+            product: nProduct
           }
-          console.log("merchandising", merchandising)
 
-          await this.merchandisingSrv.create(merchandising);
+          await this.productPhotoSrv.create(nProductPhotoFront);
 
-        })
-        this.router.navigate(['/shop']);
+          this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'back', this.back).then(async urlImagen => {
+            this.myuuid = uuidv4();
 
-      });
+            let nProductPhotoBack: ProductPhotos = {
+              id: this.myuuid,
+              photo: urlImagen,
+              photo_type: this.photoType.filter(type => type.name == 'BACK')[0],
+              product: nProduct
+            }
+
+            await this.productPhotoSrv.create(nProductPhotoBack);
+
+            this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'model_front', this.model_front).then(async urlImagen => {
+              this.myuuid = uuidv4();
+
+              let nProductPhotoMF: ProductPhotos = {
+                id: this.myuuid,
+                photo: urlImagen,
+                photo_type: this.photoType.filter(type => type.name == 'MODEL_FRONT')[0],
+                product: nProduct
+              }
+
+              await this.productPhotoSrv.create(nProductPhotoMF);
+
+              this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'model_back', this.model_back).then(async urlImagen => {
+                this.myuuid = uuidv4();
+
+                let nProductPhotoMB: ProductPhotos = {
+                  id: this.myuuid,
+                  photo: urlImagen,
+                  photo_type: this.photoType.filter(type => type.name == 'MODEL_BACK')[0],
+                  product: nProduct
+                }
+
+                await this.productPhotoSrv.create(nProductPhotoMB);
+
+                let merchanCode = uuidv4();
+
+                this.sizes.forEach(async element => {
+
+                  console.log("element", element)
+                  this.myuuid = uuidv4();
+                  console.log("myuuid", this.myuuid)
+
+                  let merchandising: Merchandising;
+                  merchandising = {
+                    id: this.myuuid,
+                    code: merchanCode,
+                    product: nProduct,
+                    prize: 9.99,
+                    stock: 100,
+                    size: element,
+                    created_at: new Date().getTime()
+                  }
+                  console.log("merchandising", merchandising)
+
+                  await this.merchandisingSrv.create(merchandising);
+
+                })
+                this.router.navigate(['/shop']);
+              })
+            })
+          })
+        });
+      } else if (this.productType == 'MUSIC') {
+        this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType, this.form.value.name, this.foto).then(async urlImagen => {
+          this.myuuid = uuidv4();
+
+          let nProductPhoto: ProductPhotos = {
+            id: this.myuuid,
+            photo: urlImagen,
+            photo_type: this.photoType.filter(type => type.name == 'DISK')[0],
+            product: nProduct
+          }
+
+          await this.productPhotoSrv.create(nProductPhoto);
+
+          let merchanCode = uuidv4();
+
+          this.sizes.forEach(async element => {
+
+            console.log("element", element)
+            this.myuuid = uuidv4();
+            console.log("myuuid", this.myuuid)
+
+            let merchandising: Merchandising;
+            merchandising = {
+              id: this.myuuid,
+              code: merchanCode,
+              product: nProduct,
+              prize: 9.99,
+              stock: 100,
+              size: element,
+              created_at: new Date().getTime()
+            }
+            console.log("merchandising", merchandising)
+
+            await this.merchandisingSrv.create(merchandising);
+
+          })
+          this.router.navigate(['/shop']);
+
+        });
+      }
+
 
     } catch (e: any) {
       // alert(e.message)
     }
-  }
-
-
-  newSong() {
-
-    this.view = 'song';
-  }
-
-  addSong() {
-    this.nSong = {
-      title: this.songTitle,
-      audio: this.music
-    }
-
-    this.canciones.push(this.nSong);
-
-    this.songTitle = '';
-    this.songAudio = '';
-    this.view = 'release';
-  }
-
-  cancel() {
-    this.songTitle = '';
-    this.songAudio = '';
-    this.view = 'release';
   }
 }

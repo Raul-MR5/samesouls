@@ -1,66 +1,169 @@
-<form class="form-signin needs-validation">
-    <div *ngIf="view == 'release'" class="form-back bg-size">
-        <div class="row mx-auto">
-            <div class="col-lg-10 mx-auto py-md-5">
-                <!-- <div class="test mt-3 d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
-
-                        <div class="col-lg-2">
-                            <input name="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
-                                id="inputFile">
-
-                            <label for="inputFile" class="labelInputFile">
+<div class="form-back bg-size">
+    <div class="row mx-auto">
+        <div class="col-lg-10 mx-auto py-md-5">
+            <!-- <div class="test mt-3 d-flex align-items-center row row-cols-1 row-cols-sm-2 row-cols-md-3 g-1">
+                
+                <div class="col-lg-2">
+                    <input name="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
+                    id="inputFile">
+                    
+                    <label for="inputFile" class="labelInputFile">
                                 <img src="{{foto}}" alt="upload file" style="object-fit: cover;">
                             </label>
                         </div>
-
+                        
                         <div class="col-lg-10">
                             <label for="releaseTitle" class="form-label text-pink title-new-song"><b>Título</b></label>
                             <input [(ngModel)]="releaseTitle" name="releaseTitle" type="text" class="form-control" id="releaseTitle"
-                                placeholder="" value="">
+                            placeholder="" value="">
                         </div>
                     </div> -->
 
 
-                <div class="col-md-4 mx-auto">
-                    <label for="merchanType" class="form-label text-pink">Seleccione el tipo del producto</label>
-                    <select [(ngModel)]="productType" name="merchanType" class="form-select" id="merchanType" required>
-                        <option *ngFor="let p of productTypes">{{p.code}}</option>
-                    </select>
-                </div>
-                <hr class="text-pink">
+            <div class="col-md-4 mx-auto">
+                <label for="merchanType" class="form-label text-pink">Seleccione el tipo del producto</label>
+                <select [(ngModel)]="productType" name="merchanType" class="form-select" id="merchanType"
+                    (change)="changePhoto()" required>
+                    <option *ngFor="let p of productTypes">{{p.code}}</option>
+                </select>
             </div>
+            <hr class="text-pink">
         </div>
+    </div>
+    <form [formGroup]="form" class="form-signin needs-validation">
         <div class="d-flex align-items-center row col-lg-10 mx-auto text-pink">
             <div *ngIf="productType == 'CLOTHING'" class="col-lg-4 mx-auto">
-                <!-- {{productType}} -->
-                <input name="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
-                    id="inputFile">
+                <!-- Button trigger modal -->
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="labelInputFileDisk" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        <img src="{{foto}}" alt="upload file">
+                    </button>
+                </div>
 
-                <label for="inputFile" class="labelInputFileDisk">
-                    <img src="{{foto}}" alt="upload file">
-                </label>
+                <!-- <button type="button" class="labelInputFileDisk" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="{{foto}}" alt="upload file">
+            </button> -->
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-content text-dark">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid mx-auto">
+                                    <div class="row mx-auto">
+                                        <div class="col-md-3">
+                                            <div class="d-flex justify-content-center">
+                                                <input name="foto" type="file" accept=".png, .jpg,.jpeg"
+                                                    (change)="onUploadImgCloth($event, 'front')" id="inputFileFront">
+
+                                                <label for="inputFileFront" class="labelInputFile">
+                                                    <img src="{{front}}" alt="upload file">
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <p><strong>FRONT</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="d-flex justify-content-center">
+                                                <input name="foto" type="file" accept=".png, .jpg,.jpeg"
+                                                    (change)="onUploadImgCloth($event, 'back')" id="inputFileBack">
+
+                                                <label for="inputFileBack" class="labelInputFile">
+                                                    <img src="{{back}}" alt="upload file">
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <p><strong>BACK</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="d-flex justify-content-center">
+                                                <input name="foto" type="file" accept=".png, .jpg,.jpeg"
+                                                    (change)="onUploadImgCloth($event, 'model_front')"
+                                                    id="inputFileModelFront">
+
+                                                <label for="inputFileModelFront" class="labelInputFile">
+                                                    <img src="{{model_front}}" alt="upload file">
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <p><strong>MODEL_FRONT</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="d-flex justify-content-center">
+                                                <input name="foto" type="file" accept=".png, .jpg,.jpeg"
+                                                    (change)="onUploadImgCloth($event, 'model_back')"
+                                                    id="inputFileModelBack">
+
+                                                <label for="inputFileModelBack" class="labelInputFile">
+                                                    <img src="{{model_back}}" alt="upload file">
+                                                </label>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <p><strong>MODEL_BACK</strong></p>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            <input name="foto" type="file" accept=".png, .jpg,.jpeg"
+                                            (change)="onUploadImg($event)" id="inputFile">
+                                            
+                                            <label for="inputFile" class="labelInputFile">
+                                                <img src="{{foto}}" alt="upload file">
+                                            </label>
+                                            <p><strong>MODEL_SIDE</strong></p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal"
+                                    (click)="changePhoto()">Close</button>
+                                <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- {{productType}} -->
+                <!-- <input name="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
+                    id="inputFile">
+                    
+                    <label for="inputFile" class="labelInputFileDisk">
+                        <img src="{{foto}}" alt="upload file">
+                    </label> -->
             </div>
             <div *ngIf="productType == 'MUSIC'" class="row col-lg-4 mx-auto">
-                <input name="foto" type="file" accept=".png, .jpg,.jpeg" multiple (change)="onUploadImg($event)"
-                    id="inputFile">
-
-                <label for="inputFile" class="labelInputFileDisk">
-                    <img src="{{foto}}" alt="upload file">
-                </label>
+                <div class="d-flex justify-content-center">
+                    <input name="foto" type="file" accept=".png, .jpg,.jpeg" (change)="onUploadImg($event)" id="inputFile">
+    
+                    <label for="inputFile" class="labelInputFileDisk">
+                        <img src="{{foto}}" alt="upload file">
+                    </label>
+                </div>
             </div>
             <div class="row col-lg-8">
                 <div class="col-6">
                     <label for="name" class="form-label text-pink title-new-song"><b>Nombre</b></label>
-                    <input type="text" class="form-control" id="name" placeholder="" value="">
+                    <input formControlName="name" type="text" class="form-control" id="name" placeholder="" value="">
                 </div>
                 <div class="col-3">
                     <label for="stock" class="form-label text-pink title-new-song"><b>Cantidad</b></label>
-                    <input type="number" class="form-control" id="stock" placeholder="" value="">
+                    <input formControlName="stock" type="number" class="form-control" id="stock" placeholder=""
+                        value="">
                 </div>
                 <div class="col-3">
                     <label for="prize" class="form-label text-pink title-new-song"><b>Precio</b></label>
                     <div class="input-group">
-                        <input type="number" step=".01" class="form-control" id="prize" placeholder="" value="">
+                        <input formControlName="prize" type="number" step=".01" class="form-control" id="prize"
+                            placeholder="" value="">
                         <span class="input-group-text">€</span>
                     </div>
                 </div>
@@ -76,41 +179,6 @@
             <button class="btn btn-outline-light me-3" (click)="goTo('')">Cancelar</button>
             <button class="btn btn-light me-4" (click)="submit()">Subir el producto</button>
         </div>
+    </form>
 
-    </div>
-
-    <div *ngIf="view == 'song'">
-        <div class="form-back bg-dark">
-            <main>
-                <div>
-                    <div class="col-lg-10 mx-auto p-3 py-md-5">
-                        <div class="test mt-3 d-flex align-items-center justify-content-center row g-1">
-                            <div class="row row-cols-2 col-lg-12">
-                                <div class="col-6">
-
-                                    <label for="songTitle"
-                                        class="form-label text-pink title-new-song"><b>Título</b></label>
-                                    <input [(ngModel)]="songTitle" name="songTitle" type="text" class="form-control"
-                                        id="songTitle" placeholder="" value="">
-
-                                </div>
-                                <div class="col-6">
-                                    <label for="inputSong"
-                                        class="form-label text-pink title-new-song"><b>Archivo</b></label>
-                                    <input [(ngModel)]="songAudio" name="cancion" type="file" accept=".mp3, .wav"
-                                        class="form-control" id="inputSong" (change)="onUploadMusic($event)">
-                                </div>
-                            </div>
-
-                            <div class="col-12 d-flex justify-content-end mt-5">
-                                <button class="btn btn-outline-light me-3" (click)="cancel()">Cancelar</button>
-                                <button class="btn btn-light me-4" (click)="addSong()">Subir canción</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-</form>
+</div>

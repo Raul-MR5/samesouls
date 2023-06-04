@@ -34,9 +34,13 @@ export class MerchandisingService {
         return this.firestore.collection<Merchandising>('merchandising').doc(id).valueChanges({ idField: 'id' });
     }
 
-    // getByStock(stock: number): Observable<Merchandising[]> {
-    //     return this.firestore.collection<Merchandising>('merchandising', ref => ref.where('stock', '==', stock)).valueChanges({ idField: 'id' });
-    // }
+    getByCode(code: string): Observable<Merchandising[]> {
+        return this.firestore.collection<Merchandising>('merchandising', ref => ref.where('code', '==', code)).valueChanges({ idField: 'id' });
+    }
+
+    getByArtist(artist: string): Observable<Merchandising[]> {
+        return this.firestore.collection<Merchandising>('merchandising', ref => ref.where('product.artist.username', '==', artist)).valueChanges({ idField: 'id' });
+    }
 
     getStock(): Observable<Merchandising[]> {
         return this.firestore.collection<Merchandising>('merchandising', ref => ref.where('stock', '>', '0')).valueChanges({ idField: 'id' });

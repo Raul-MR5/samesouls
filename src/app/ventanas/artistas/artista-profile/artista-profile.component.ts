@@ -10,6 +10,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
 import { Song } from 'src/app/shared/models/song.model';
 import { SongsService } from 'src/app/shared/services/songs.service';
+import { MerchandisingService } from 'src/app/shared/services/merchandising.service';
+import { Merchandising } from 'src/app/shared/models/merchandising.model';
+import { ProductPhotos } from 'src/app/shared/models/product_photos.model';
+import { ProductPhotosService } from 'src/app/shared/services/product_photos.service';
 
 @Component({
   selector: 'app-artista-profile',
@@ -28,6 +32,8 @@ export class ArtistaProfileComponent implements OnInit {
   music;
 
   canciones = [];
+  merchandising = [];
+  photos = {}
 
   playB: string = '';
 
@@ -39,6 +45,8 @@ export class ArtistaProfileComponent implements OnInit {
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     private songSrv: SongsService,
+    private merchanSrv: MerchandisingService,
+    private productPhotosSrv: ProductPhotosService,
     private storageSrv: StorageService,
     private router: Router,
     private ngZone: NgZone,
@@ -65,6 +73,22 @@ export class ArtistaProfileComponent implements OnInit {
             ...element,
             raw: audio,
             time: time
+          })
+        })
+      })
+      this.merchanSrv.getByArtist(this.user.username).subscribe(merchan =>{
+        const unique = merchan.filter(
+          (obj, index) =>
+            merchan.findIndex((item) => item.code === obj.code) === index
+        );
+        this.merchandising = unique.slice(0,5);
+        this.merchandising.forEach(u => {
+          this.productPhotosSrv.getByProduct(u.product.id).subscribe(photo => {
+            photo.forEach(p => {
+              if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT'))) {
+                this.photos[u.code] = p;
+              }
+            })
           })
         })
       })
