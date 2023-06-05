@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { Cart } from 'src/app/shared/models/cart.model';
+import { ProductPhotosService } from 'src/app/shared/services/product_photos.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,7 @@ export class CartComponent implements OnInit {
   id: string;
   form: FormGroup;
   user: Usuario;
-  
+
   name;
   photo;
   foto;
@@ -30,6 +31,7 @@ export class CartComponent implements OnInit {
 
   prueba = []
   cart: Cart[]
+  photos = []
 
   disabled = true;
 
@@ -48,6 +50,7 @@ export class CartComponent implements OnInit {
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     private cartSrv: CartService,
+    private productPhotoSrv: ProductPhotosService,
     // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router,
@@ -58,14 +61,26 @@ export class CartComponent implements OnInit {
     const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id']; console.log(this.id, "hola"); /* let p = this.prueba(); console.log(p) */ });
 
     this.suscriptions.push(paramsSubscription);
-    
+
     this.user = this.usuarioSrv.getUsuario();
-    
-    this.cartSrv.getByUser(this.user.username).subscribe(cart => this.cart = cart)
-    console.log("cart", this.cart)
+    console.log(this.user.username)
+
+    this.cartSrv.getByUser(this.user.username).subscribe(cart => { 
+      this.cart = cart; 
+      console.log("cart", this.cart)
+      this.cart.forEach(u => {
+        this.productPhotoSrv.getByProduct(u.merchandising.product.id).subscribe(photo => {
+          photo.forEach(p => {
+            if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT'))) {
+              this.photos[u.merchandising.code] = p;
+            }
+          })
+        })
+      })
+    })
 
     console.log(this.suscriptions)
-    
+
     // this.user = this.usuarioSrv.getUsuario();
     // console.log(this.user)
 
@@ -125,7 +140,7 @@ export class CartComponent implements OnInit {
             foto: urlImagen,
             username: this.form.value.username
           }
-        } else{
+        } else {
           usuario = {
             id: this.user.id,
             nombre: this.form.value.nombre,

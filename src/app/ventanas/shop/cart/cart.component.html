@@ -13,7 +13,24 @@
 
             <div class="col-6">
                 <div class="display-flex row row-cols-1" style="max-height: 58vh; overflow-y: scroll;">
-                    <div class="card mb-3">
+                    <div *ngFor="let c of cart" class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ photos[c.merchandising.code].photo }}" class="img-fluid rounded-start"
+                                    alt="product" style="height: 8rem;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ c.merchandising.product.name }}</h5>
+                                    <p class="card-text">{{ c.merchandising.prize }}€</p>
+                                    <p class="card-text"
+                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{
+                                        c.merchandising.product.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
@@ -23,7 +40,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Vinilo Cruz Cafuné</h5>
                                     <p class="card-text">21,37€</p>
-                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                    <p class="card-text"
+                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
+                                        a wider card with supporting text below as a natural
                                         lead-in to additional content. This content is a little bit longer.</p>
                                 </div>
                             </div>
@@ -39,7 +58,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Vinilo Cruz Cafuné</h5>
                                     <p class="card-text">21,37€</p>
-                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                    <p class="card-text"
+                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
+                                        a wider card with supporting text below as a natural
                                         lead-in to additional content. This content is a little bit longer.</p>
                                 </div>
                             </div>
@@ -55,7 +76,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Vinilo Cruz Cafuné</h5>
                                     <p class="card-text">21,37€</p>
-                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                    <p class="card-text"
+                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
+                                        a wider card with supporting text below as a natural
                                         lead-in to additional content. This content is a little bit longer.</p>
                                 </div>
                             </div>
@@ -71,28 +94,14 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Vinilo Cruz Cafuné</h5>
                                     <p class="card-text">21,37€</p>
-                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
+                                    <p class="card-text"
+                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
+                                        a wider card with supporting text below as a natural
                                         lead-in to additional content. This content is a little bit longer.</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
-                                    alt="product">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
-                                    <p class="card-text">21,37€</p>
-                                    <p class="card-text" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-6">
@@ -117,7 +126,8 @@
                                             <div
                                                 class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">
                                                 <div class="col-lg-12">
-                                                    <button class="btn btn-back text-white arreglo" (click)="goTo('/checkout')">Realizar pedido</button>
+                                                    <button class="btn btn-back text-white arreglo"
+                                                        (click)="goTo('/checkout')">Realizar pedido</button>
                                                 </div>
                                             </div>
                                         </div>
