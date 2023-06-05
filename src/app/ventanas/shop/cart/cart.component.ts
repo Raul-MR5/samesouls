@@ -8,6 +8,8 @@ import { StorageService } from 'src/app/shared/services/storage.service';
 import { ProfilesService } from 'src/app/shared/services/profiles.service';
 import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
+import { CartService } from 'src/app/shared/services/cart.service';
+import { Cart } from 'src/app/shared/models/cart.model';
 
 @Component({
   selector: 'app-cart',
@@ -27,6 +29,7 @@ export class CartComponent implements OnInit {
   music;
 
   prueba = []
+  cart: Cart[]
 
   disabled = true;
 
@@ -44,6 +47,7 @@ export class CartComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
+    private cartSrv: CartService,
     // private cancionSrv: CancionService,
     private storageSrv: StorageService,
     private router: Router,
@@ -54,6 +58,11 @@ export class CartComponent implements OnInit {
     const paramsSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => { this.id = params['id']; console.log(this.id, "hola"); /* let p = this.prueba(); console.log(p) */ });
 
     this.suscriptions.push(paramsSubscription);
+    
+    this.user = this.usuarioSrv.getUsuario();
+    
+    this.cartSrv.getByUser(this.user.username).subscribe(cart => this.cart = cart)
+    console.log("cart", this.cart)
 
     console.log(this.suscriptions)
     

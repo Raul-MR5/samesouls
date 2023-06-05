@@ -30,9 +30,9 @@ export class CartService {
         return this.firestore.collection<Cart>('cart').doc(id).valueChanges({ idField: 'id' });
     }
 
-    // getByType(type: string): Observable<Cart[]> {
-    //     return this.firestore.collection<Cart>('cart', ref => ref.where('type.name', '==', type)).valueChanges({ idField: 'id' });
-    // }
+    getByUser(user: string): Observable<Cart[]> {
+        return this.firestore.collection<Cart>('cart', ref => ref.where('purchase.usuario.username', '==', user)).valueChanges({ idField: 'id' });
+    }
 
     setCart(payload: Cart) {
         this.cart = payload;

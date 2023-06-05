@@ -22,6 +22,7 @@ export class ShopComponent implements OnInit {
   usuario: Usuario;
   artistas: Usuario[] = []
   allArtistas: Usuario[] = []
+  photos = []
   merchan = []
   allMerchan = []
   genres: Genre[] = []
@@ -60,6 +61,8 @@ export class ShopComponent implements OnInit {
           merchan.findIndex((item) => item.code === obj.code) === index
       );
 
+      this.merchan = unique;
+
       // this.productPhotoSrv.getAll().subscribe(photos => {
       //   photos.forEach(p => {
       //     if ((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) {
@@ -70,19 +73,28 @@ export class ShopComponent implements OnInit {
       //     }
       //   })
       // })
-
-      unique.forEach(u => {
-        this.productPhotoSrv.getOrderedTypeName().subscribe(photo => {
+      this.merchan.forEach(u => {
+        this.productPhotoSrv.getByProduct(u.product.id).subscribe(photo => {
           photo.forEach(p => {
-            if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) && (p.product.id == u.product.id)) {
-              this.merchan.push({
-                ...u,
-                photo: p
-              })
+            if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT'))) {
+              this.photos[u.code] = p;
             }
           })
         })
       })
+
+      // unique.forEach(u => {
+      //   this.productPhotoSrv.getOrderedTypeName().subscribe(photo => {
+      //     photo.forEach(p => {
+      //       if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT')) && (p.product.id == u.product.id)) {
+      //         this.merchan.push({
+      //           ...u,
+      //           photo: p
+      //         })
+      //       }
+      //     })
+      //   })
+      // })
 
       console.log("unique", unique);
       console.log("merchan", this.merchan);
