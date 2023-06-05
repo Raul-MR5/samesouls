@@ -12,101 +12,38 @@
         <div class="display-flex row py-4">
 
             <div class="col-6">
-                <div class="display-flex row row-cols-1" style="max-height: 58vh; overflow-y: scroll;">
-                    <div *ngFor="let c of cart" class="card mb-3">
+                <div class="display-flex row row-cols-1 p-2" style="max-height: 58vh; overflow-y: scroll;">
+                    <div *ngFor="let c of cart; let i = index" class="card mb-3" style="padding: 0;">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="{{ photos[c.merchandising.code].photo }}" class="img-fluid rounded-start"
-                                    alt="product" style="height: 8rem;">
+                                    alt="product" style="height: 9rem; width: 100%;">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ c.merchandising.product.name }}</h5>
                                     <p class="card-text">{{ c.merchandising.prize }}€</p>
-                                    <p class="card-text"
-                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">{{
-                                        c.merchandising.product.description }}</p>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-text"
+                                            style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                            {{ c.merchandising.product.description }}
+    
+                                        </p>
+                                        <div class="input-group">
+                                            <button class="btn btn-outline-secondary" (click)="subtractAmount(i)" type="button">-</button>
+                                            <input class="form-control" type="text" (change)="setAmount($event, i)" [value]=" c.amount ">
+                                            <button class="btn btn-outline-secondary" (click)="addAmount(i)" type="button">+</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
-                                    alt="product">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
-                                    <p class="card-text">21,37€</p>
-                                    <p class="card-text"
-                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
-                                        a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
-                                    alt="product">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
-                                    <p class="card-text">21,37€</p>
-                                    <p class="card-text"
-                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
-                                        a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
-                                    alt="product">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
-                                    <p class="card-text">21,37€</p>
-                                    <p class="card-text"
-                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
-                                        a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="../../../../assets/img/vinilo.webp" class="img-fluid rounded-start"
-                                    alt="product">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Vinilo Cruz Cafuné</h5>
-                                    <p class="card-text">21,37€</p>
-                                    <p class="card-text"
-                                        style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">This is
-                                        a wider card with supporting text below as a natural
-                                        lead-in to additional content. This content is a little bit longer.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="col-6">
-                <div class="form-back" *ngIf="type == 'clothing'">
-                    <form class="form-signin needs-validation" [formGroup]="form" (submit)="submit()">
+                <div class="form-back">
+                    <form class="form-signin needs-validation" (submit)="submit()">
                         <div>
                             <div class="col-lg-11 mx-auto p-2">
                                 <div class="test d-flex align-items-center">
@@ -116,12 +53,14 @@
                                             <h5 class="card-title"><strong>Resumen</strong></h5>
                                             <div class="mt-4 d-flex justify-content-between">
                                                 <p class="card-text fs-6">Subtotal artículos</p>
-                                                <p class="card-text fs-6"><strong class="text-end">106.88€</strong></p>
+                                                <p class="card-text fs-6"><strong class="text-end">{{resume.toFixed(2)}}€</strong>
+                                                </p>
                                             </div>
                                             <hr>
                                             <div class="d-flex justify-content-between">
                                                 <p class="card-text fs-4">Total artículos</p>
-                                                <p class="card-text fs-4"><strong class="text-end">106.88€</strong></p>
+                                                <p class="card-text fs-4"><strong class="text-end">{{resume.toFixed(2)}}€</strong>
+                                                </p>
                                             </div>
                                             <div
                                                 class="d-flex align-items-center row row-cols-1 row-cols-sm-1 row-cols-md-4 g-3">

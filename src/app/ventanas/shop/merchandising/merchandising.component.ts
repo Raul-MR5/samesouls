@@ -154,7 +154,7 @@ export class MerchandisingComponent implements OnInit {
 
       await this.cartSrv.create(cart);
 
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/shop']);
 
     } catch (e: any) {
       // alert(e.message)

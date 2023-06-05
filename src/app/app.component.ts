@@ -18,9 +18,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // this.authSrv.authenticated().subscribe(bool => {
+
     //   if (bool) {
     //     this.authSrv.getUsuario().subscribe(user => {
     //       this.usuarioSrv.getOne(user.uid).subscribe(usuario => {
+    //         console.log("user", usuario)
     //         this.usuarioSrv.setUsuario(usuario);
     //       })
     //     });

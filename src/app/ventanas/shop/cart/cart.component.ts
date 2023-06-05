@@ -33,6 +33,8 @@ export class CartComponent implements OnInit {
   cart: Cart[]
   photos = []
 
+  resume = 0;
+
   disabled = true;
 
   suscriptions: Subscription[] = [];
@@ -63,12 +65,13 @@ export class CartComponent implements OnInit {
     this.suscriptions.push(paramsSubscription);
 
     this.user = this.usuarioSrv.getUsuario();
-    console.log(this.user.username)
 
     this.cartSrv.getByUser(this.user.username).subscribe(cart => { 
       this.cart = cart; 
+      this.resume = 0;
       console.log("cart", this.cart)
       this.cart.forEach(u => {
+        this.resume += (u.merchandising.prize * u.amount);
         this.productPhotoSrv.getByProduct(u.merchandising.product.id).subscribe(photo => {
           photo.forEach(p => {
             if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT'))) {
@@ -98,6 +101,25 @@ export class CartComponent implements OnInit {
   ngOnDestroy(): void {
   }
 
+  setAmount(event, index){
+    this.cart[index].amount = event.target.value;
+    this.cartSrv.update(this.cart[index]);
+    console.log("merchan", this.cart[index])
+  }
+
+  addAmount(index){
+    this.cart[index].amount++;
+    // this.resume += this.cart[index].merchandising.prize;
+    this.cartSrv.update(this.cart[index]);
+    console.log("merchan", this.cart[index])
+  }
+
+  subtractAmount(index){
+    this.cart[index].amount--;
+    // this.resume -= this.cart[index].merchandising.prize;
+    this.cart[index].amount < 1 ? this.cartSrv.delete(this.cart[index].id) : this.cartSrv.update(this.cart[index]);
+    console.log("merchan", this.cart[index])
+  }
 
   goTo(url: string) {
     this.router.navigate([url]);
