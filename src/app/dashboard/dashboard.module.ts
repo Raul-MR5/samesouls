@@ -30,6 +30,7 @@ const routes: Routes = [
     /* canActivate: [AuthGuard], */
     children: [
       { path: '', loadChildren: () => import('src/app/ventanas/home/home.module').then(m => m.HomeModule), /* canActivate: [AuthGuard], */ pathMatch: "full" },
+      { path: 'backoffice', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule), /* canActivate: [AuthGuard], */ pathMatch: "full" },
       { path: 'artistas', loadChildren: () => import('src/app/ventanas/artistas/artistas.module').then(m => m.ArtistasModule)/* , canActivate: [AuthGuard] */ },
       { path: 'shop', loadChildren: () => import('src/app/ventanas/shop/shop.module').then(m => m.ShopModule)/* , canActivate: [AuthGuard] */ },
       { path: 'profile', loadChildren: () => import('src/app/ventanas/profile/profile.module').then(m => m.ProfileModule)/* , canActivate: [AuthGuard] */ },
