@@ -148,41 +148,41 @@ export class CartComponent implements OnInit {
     }
   }
 
-  async submit() {
-    try {
-      this.storageSrv.uploadImg("avatar/", this.user.email, this.foto).then(async urlImagen => {
+  // async submit() {
+  //   try {
+  //     this.storageSrv.uploadImg("avatar/", this.user.email, this.foto).then(async urlImagen => {
 
-        let usuario: Usuario;
-        if (urlImagen) {
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: urlImagen,
-            username: this.form.value.username
-          }
-        } else {
-          usuario = {
-            id: this.user.id,
-            nombre: this.form.value.nombre,
-            apellidos: this.form.value.apellidos,
-            email: this.user.email,
-            foto: this.foto,
-            username: this.form.value.username
-          }
-        }
+  //       let usuario: Usuario;
+  //       if (urlImagen) {
+  //         usuario = {
+  //           id: this.user.id,
+  //           nombre: this.form.value.nombre,
+  //           apellidos: this.form.value.apellidos,
+  //           email: this.user.email,
+  //           foto: urlImagen,
+  //           username: this.form.value.username
+  //         }
+  //       } else {
+  //         usuario = {
+  //           id: this.user.id,
+  //           nombre: this.form.value.nombre,
+  //           apellidos: this.form.value.apellidos,
+  //           email: this.user.email,
+  //           foto: this.foto,
+  //           username: this.form.value.username
+  //         }
+  //       }
 
 
-        await this.usuarioSrv.update(usuario);
+  //       await this.usuarioSrv.update(usuario);
 
-        this.router.navigate(['/profile']);
-      });
+  //       this.router.navigate(['/profile']);
+  //     });
 
-    } catch (e: any) {
-      // alert(e.message)
-    }
-  }
+  //   } catch (e: any) {
+  //     // alert(e.message)
+  //   }
+  // }
 
   back() {
     history.back();

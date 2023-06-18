@@ -25,6 +25,9 @@
     transition: height 1s cubic-bezier(.2,.84,.5,1);
 }
 
+img {
+    opacity: 0.5;
+}
 
 // @media screen and (min-width: 1280px) {
 //     .container {

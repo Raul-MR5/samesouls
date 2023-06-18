@@ -170,7 +170,7 @@ export class EditArtistaComponent implements OnInit {
             title: 'Se ha actualizado el perfil'
           })
   
-          this.router.navigate(['/artist-profile']);
+          // this.router.navigate(['/artist-profile']);
         })
 
       });

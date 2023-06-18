@@ -57,9 +57,6 @@ export class ArtistasComponent implements OnInit {
       this.usuarioSrv.getAllMatchesArtista(this.form.value.search).subscribe(artistas => {
         this.artistas = artistas;
       });
-      // this.usuarioSrv.getAllMatches(this.form.value.search).subscribe(artistas => {
-      //   this.artistas = artistas;
-      // });
 
     } else {
       this.artistas = this.allArtistas

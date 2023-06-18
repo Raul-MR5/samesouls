@@ -48,15 +48,17 @@
                                     <h3 class="w-100"><strong>{{merchandising.product.name}}</strong></h3>
                                     <h3 class="w-100"><strong>{{merchandising.prize}}€</strong></h3>
 
-                                    <div class="w-100 pt-3">
+                                    <div class="w-100">
                                         <!-- <select class="form-select col-12" aria-label="Default select example">
                                             <option hidden selected>TALLAS</option>
                                             <option *ngFor="let s of sizes" value="{{s.code}}">{{s.code}}</option>
                                         </select> -->
-                                        <select class="form-select col-12" aria-label="Default select example">
-                                            <option hidden selected>TALLAS</option>
-                                            <option *ngFor="let s of sizes" disabled value="{{s.code}}">{{s.code}} - Out of stock</option>
-                                        </select>
+                                        <div *ngIf="type == 'CLOTHING'" class="pt-3">
+                                            <select class="form-select col-12" aria-label="Default select example">
+                                                <option hidden selected>TALLAS</option>
+                                                <option *ngFor="let s of sizes" disabled value="{{s.code}}">{{s.code}} - Out of stock</option>
+                                            </select>
+                                        </div>
 
                                         <p class="pt-4" style="text-align: justify;text-justify: inter-word;">{{merchandising.product.description}}</p>
 
