@@ -44,6 +44,9 @@ export class SongsService {
     }
 
     playSong(audio: HTMLAudioElement) {
+        if (this.audio) {
+            this.audio.pause();
+        }
         this.audio = audio;
         this.audio.currentTime = 0;
         this.audio.play();
@@ -51,8 +54,6 @@ export class SongsService {
 
     pauseSong() {
         if (this.audio) {
-            console.log(this.audio);
-
             this.audio.pause();
         }
     }

@@ -102,23 +102,22 @@ export class CartComponent implements OnInit {
   }
 
   setAmount(event, index){
-    this.cart[index].amount = event.target.value;
-    this.cartSrv.update(this.cart[index]);
-    console.log("merchan", this.cart[index])
+    if (event.target.value < 1) {
+      this.cartSrv.delete(this.cart[index].id)
+    } else {
+      this.cart[index].amount = event.target.value;
+      this.cartSrv.update(this.cart[index]);
+    }
   }
 
   addAmount(index){
     this.cart[index].amount++;
-    // this.resume += this.cart[index].merchandising.prize;
     this.cartSrv.update(this.cart[index]);
-    console.log("merchan", this.cart[index])
   }
 
   subtractAmount(index){
     this.cart[index].amount--;
-    // this.resume -= this.cart[index].merchandising.prize;
     this.cart[index].amount < 1 ? this.cartSrv.delete(this.cart[index].id) : this.cartSrv.update(this.cart[index]);
-    console.log("merchan", this.cart[index])
   }
 
   goTo(url: string) {

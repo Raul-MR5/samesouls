@@ -137,13 +137,11 @@ export class ArtistaProfileComponent implements OnInit {
 
   play(cancion) {
     this.playB = cancion.title;
-
     this.songSrv.playSong(cancion.raw);
   }
 
   pause() {
     this.playB = '';
-
     this.songSrv.pauseSong();
   }
 
