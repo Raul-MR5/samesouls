@@ -10,6 +10,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { Subscription } from 'rxjs';
 import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 import { environment } from 'src/environments/environment';
+import { CountryService } from 'src/app/shared/services/country.service';
+import { CartService } from 'src/app/shared/services/cart.service';
+import { Cart } from 'src/app/shared/models/cart.model';
+import { PurchasesService } from 'src/app/shared/services/purchases.service';
 
 @Component({
   selector: 'app-checkout',
@@ -46,20 +50,50 @@ export class CheckoutComponent implements OnInit {
   photo4 = 'model_back'
   photo5 = 'model_side'
 
+  countries = []
+  states = []
+  cities = []
+
+  usuario: Usuario;
+  cart: Cart[];
+  total = 0
+
   constructor(
     private formBuilder: FormBuilder,
     private authSrv: AuthService,
     private usuarioSrv: ProfilesService,
     // private cancionSrv: CancionService,
     private storageSrv: StorageService,
+    private countrySrv: CountryService,
+    private cartSrv: CartService,
+    private purchaseSrv: PurchasesService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.countries = this.countrySrv.getAllCountries()
+
+    this.usuario = this.usuarioSrv.getUsuario();
+    this.cartSrv.getByUser(this.usuario.username).subscribe(c => {
+      this.cart = c;
+      console.log("cart", this.cart)
+      c.forEach(cart => {
+        this.total += (cart.merchandising.prize * cart.amount)
+      })
+    })
+
     this.form = this.formBuilder.group({
-      user: '',
-      password: ''
+      name: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      dni: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.pattern("^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$")]],
+      phone: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      cp: ['', [Validators.required]]
     });
 
     this.initConfig();
@@ -79,11 +113,11 @@ export class CheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'EUR',
-            value: '9.99',
+            value: this.total.toString(),
             breakdown: {
               item_total: {
                 currency_code: 'EUR',
-                value: '9.99'
+                value: this.total.toString()
               }
             }
           },
@@ -93,7 +127,7 @@ export class CheckoutComponent implements OnInit {
             category: 'DIGITAL_GOODS',
             unit_amount: {
               currency_code: 'EUR',
-              value: '9.99',
+              value: this.total.toString(),
             },
           }]
         }]
@@ -114,6 +148,16 @@ export class CheckoutComponent implements OnInit {
       },
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+
+        this.cart.forEach(c => {
+          this.purchaseSrv.getOne(c.purchase.id).subscribe(p => {
+            p.paid = true;
+            this.purchaseSrv.update(p)
+            c.purchase = p;
+            this.cartSrv.update(c);
+          })
+        })
+
         this.step = 'resume';
       },
       onCancel: (data, actions) => {
@@ -209,6 +253,14 @@ export class CheckoutComponent implements OnInit {
 
   volver(){
     this.step = 'resume';
+  }
+
+  selectState(){
+    this.states = this.countrySrv.getAllStates()
+  }
+
+  selectCity(){
+    this.cities = this.countrySrv.getAllCities()
   }
 
 }

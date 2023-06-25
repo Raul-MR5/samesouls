@@ -62,7 +62,7 @@
 
                                         <p class="pt-4" style="text-align: justify;text-justify: inter-word;">{{merchandising.product.description}}</p>
 
-                                        <div class="d-flex justify-content-center">
+                                        <div *ngIf="merchandising.stock < 1" class="d-flex justify-content-center">
                                             <span class="fs-5 text-danger" style="text-align: justify;text-justify: inter-word;">Out of stock. </span>
                                         </div>
                                     </div>

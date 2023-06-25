@@ -42,6 +42,15 @@ const routes: Routes = [
       { path: 'new-merchandising', loadChildren: () => import('src/app/ventanas/shop/merchandising/nuevo-merchan/nuevo-merchan.module').then(m => m.NuevoMerchanModule)/* , canActivate: [AuthGuard] */ },
       { path: 'new-artist', loadChildren: () => import('src/app/ventanas/artistas/nuevo-artista/nuevo-artista.module').then(m => m.NuevoArtistaModule)/* , canActivate: [AuthGuard] */ },
       { path: 'artist-profile', loadChildren: () => import('src/app/ventanas/artistas/edit-artista/edit-artista.module').then(m => m.EditArtistaModule)/* , canActivate: [AuthGuard] */ },
+      
+      { path: 'backoffice/banners', loadChildren: () => import('src/app/ventanas/backoffice/banners/banners.module').then(m => m.BannersModule), /* canActivate: [AuthGuard], */},
+      { path: 'backoffice/genres', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'backoffice/photo_types', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'backoffice/product_types', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'backoffice/profiles', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'backoffice/release_types',  loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard]*/}, 
+      { path: 'backoffice/roles',  loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard]*/}, 
+      { path: 'backoffice/sizes', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule), /* canActivate: [AuthGuard] */},
     ]
   },
   { path: 'login', component: LoginComponent },

@@ -1,27 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BackofficeComponent } from './backoffice.component';
+import { BannersComponent } from './banners.component';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '../../auth/auth.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AuthGuard } from '../../../auth/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: BackofficeComponent, canActivate: [AuthGuard]}
+  { path: '', component: BannersComponent, canActivate: [AuthGuard], pathMatch: "full" }
 ];
 
 @NgModule({
   declarations: [
-    BackofficeComponent
+    BannersComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
 
-    FormsModule,
+    FormsModule, 
     ReactiveFormsModule,
+
+    RouterModule.forChild(routes)
+
   ],
   exports: [RouterModule]
 })
-export class BackofficeModule { }
+export class BannersModule { }

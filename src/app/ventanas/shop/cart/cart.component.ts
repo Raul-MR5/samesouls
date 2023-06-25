@@ -67,7 +67,7 @@ export class CartComponent implements OnInit {
     this.user = this.usuarioSrv.getUsuario();
 
     this.cartSrv.getByUser(this.user.username).subscribe(cart => { 
-      this.cart = cart; 
+      this.cart = cart.filter(c => !c.purchase.paid); 
       this.resume = 0;
       console.log("cart", this.cart)
       this.cart.forEach(u => {

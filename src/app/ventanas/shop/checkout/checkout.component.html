@@ -21,57 +21,57 @@
         </div>
     </div>
 
-    <form class="row col-lg-10 mx-auto g-3 text-white" (submit)="submit()">
+    <form [formGroup]="form" class="row col-lg-10 mx-auto g-3 text-white" (submit)="submit()">
         <div class="col-md-4">
             <label for="validationDefault01" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="validationDefault01" value="" required>
+            <input formControlName="name" type="text" class="form-control" id="validationDefault01" value="" required>
         </div>
         <div class="col-md-4">
             <label for="validationDefault02" class="form-label">Apellidos</label>
-            <input type="text" class="form-control" id="validationDefault02" value="" required>
+            <input formControlName="lastname" type="text" class="form-control" id="validationDefault02" value="" required>
         </div>
         <div class="col-md-4">
             <label for="validationDefaultUsername" class="form-label">DNI/CIF/NIF</label>
-            <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+            <input formControlName="dni" type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
                 required>
         </div>
         <div class="col-md-8">
             <label for="validationDefault02" class="form-label">Correo electrónico</label>
-            <input type="text" class="form-control" id="validationDefault02" value="" required>
+            <input formControlName="email" type="text" class="form-control" id="validationDefault02" value="" required>
         </div>
         <div class="col-md-4">
             <label for="validationDefaultUsername" class="form-label">Teléfono</label>
-            <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
+            <input formControlName="phone" type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2"
                 required>
         </div>
         <div class="col-md-4">
             <label for="validationDefault04" class="form-label">País</label>
-            <select class="form-select" id="validationDefault04" required>
-                <option selected disabled value="">Choose...</option>
-                <option>...</option>
+            <select formControlName="country" class="form-select" id="validationDefault04" (change)="selectState()" required>
+                <option selected value=""></option>
+                <option *ngFor="let c of countries">{{c.viewValue}}</option>
             </select>
         </div>
         <div class="col-md-4">
             <label for="validationDefault04" class="form-label">Provincia</label>
-            <select class="form-select" id="validationDefault04" required>
-                <option selected disabled value="">Choose...</option>
-                <option>...</option>
+            <select formControlName="state" class="form-select" id="validationDefault04" (change)="selectCity()" required>
+                <option selected value=""></option>
+                <option *ngFor="let s of states">{{s.viewValue}}</option>
             </select>
         </div>
         <div class="col-md-4">
             <label for="validationDefault04" class="form-label">Ciudad</label>
-            <select class="form-select" id="validationDefault04" required>
-                <option selected disabled value="">Choose...</option>
-                <option>...</option>
+            <select formControlName="city" class="form-select" id="validationDefault04" required>
+                <option selected value=""></option>
+                <option *ngFor="let c of cities">{{c.viewValue}}</option>
             </select>
         </div>
         <div class="col-md-8">
             <label for="validationDefault05" class="form-label">Dirección y número</label>
-            <input type="text" class="form-control" id="validationDefault05" required>
+            <input formControlName="address" type="text" class="form-control" id="validationDefault05" required>
         </div>
         <div class="col-md-4">
-            <label for="validationDefault05" class="form-label">Zip</label>
-            <input type="text" class="form-control" id="validationDefault05" required>
+            <label for="validationDefault05" class="form-label">Código Postal</label>
+            <input formControlName="cp" type="text" class="form-control" id="validationDefault05" required>
         </div>
         <!-- <div class="col-12">
             <div class="form-check">
@@ -82,7 +82,7 @@
             </div>
         </div> -->
         <div class="col-12 d-flex justify-content-end mt-5">
-            <button class="btn btn-outline-light me-3" (click)="reset()">Cancelar</button>
+            <button class="btn btn-outline-light me-3" (click)="goTo('cart')">Cancelar</button>
             <button class="btn btn-light" type="submit">Continuar</button>
         </div>
     </form>
@@ -94,7 +94,8 @@
             <ul>
                 <li class="active">
                     <div>
-                        <p (click)="volver()" style="cursor: pointer;">1</p>
+                        <!-- <p (click)="volver()" style="cursor: pointer;">1</p> -->
+                        <p>1</p>
                     </div>
                 </li>
                 <li class="active">
@@ -147,16 +148,16 @@
             <div class="col-lg-1"></div>
             <div class="col-lg-6">
                 <h3><strong>Dirección de envío</strong></h3>
-                <p>C/ Santa Gemma 4-8</p>
-                <p>Paterna, Valencia 46980</p>
-                <p>España</p>
-                <p>Teléfono: 665342892</p>
+                <p>{{form.value.address}}</p>
+                <p>{{form.value.city+", "+form.value.state+" "+form.value.cp}}</p>
+                <p>{{form.value.country}}</p>
+                <p>Teléfono: {{form.value.phone}}</p>
             </div>
             <div class="col-lg-5">
                 <h3><strong>Resumen del pedido</strong></h3>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Productos:</p>
-                    <p class="card-text text-end">106.88€</p>
+                    <p class="card-text text-end">{{total}}€</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Envío:</p>
@@ -164,11 +165,11 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Subtotal:</p>
-                    <p class="card-text text-end">106.88€</p>
+                    <p class="card-text text-end">{{total}}€</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-text"><strong>Total (IVA incluido):</strong></p>
-                    <p class="card-text text-end"><strong>300.00€</strong></p>
+                    <p class="card-text text-end"><strong>{{total}}€</strong></p>
                 </div>
             </div>
         </div>

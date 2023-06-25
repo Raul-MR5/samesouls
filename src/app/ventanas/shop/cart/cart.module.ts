@@ -12,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: CartComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       // { path: 'checkout', loadChildren: () => import('src/app/ventanas/shop/checkout/checkout.module').then(m => m.CheckoutModule), canActivate: [AuthGuard]},
       // { path: ':id', component: CancionComponent, canActivate: [AuthGuard]},

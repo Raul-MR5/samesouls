@@ -1,68 +1,75 @@
 <div class="container text-center">
   <div class="row">
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/banners')">
       <div class="card text-bg-dark">
+        <img src="../../../assets/img/C-Tangana-banner.jpg" height="250rem" class="card-img-top" alt="banners">
+        <div class="card-body">
+          <h5 class="card-title w-100">Banners</h5>
+        </div>
+      </div>
+      <!-- <div class="card text-bg-dark">
         <img src="../../../assets/img/C-Tangana-banner.jpg" height="250rem" class="card-img" alt="banners">
         <div class="card-img-overlay d-flex align-items-end">
           <h5 class="card-title w-100">Banners</h5>
         </div>
-      </div>
+      </div> -->
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/genres')">
       <div class="card text-bg-dark">
-        <img src="../../../assets/img/genres.jpg" height="250rem" class="card-img" alt="genres">
-        <div class="card-img-overlay d-flex align-items-end">
+        <img src="../../../assets/img/genres.jpg" height="250rem" class="card-img-top" alt="genres">
+        <div class="card-body">
           <h5 class="card-title w-100">Géneros</h5>
         </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/photo_types')">
       <div class="card text-bg-dark">
-        <img src="../../../assets/img/camera.jpg" height="250rem" class="card-img" alt="photo_types">
-        <div class="card-img-overlay d-flex align-items-end">
+        <img src="../../../assets/img/camera.jpg" height="250rem" class="card-img-top" alt="photo_types">
+        <div class="card-body">
           <h5 class="card-title w-100">Tipos de fotos</h5>
         </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/product_types')">
       <div class="card text-bg-dark">
         <img src="../../../assets/img/products.jpg" height="250rem" class="card-img" alt="product_types">
-        <div class="card-img-overlay d-flex align-items-end">
+        <div class="card-body">
           <h5 class="card-title w-100">Tipos de productos</h5>
         </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/profiles')">
       <div class="card text-bg-dark">
         <img src="../../../assets/img/user.jpg" height="250rem" class="card-img" alt="profiles">
-        <div class="card-img-overlay d-flex align-items-end">
+        <div class="card-body">
           <h5 class="card-title w-100">Usuarios</h5>
         </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/release_types')">
       <div class="card text-bg-dark">
         <img src="../../../assets/img/descarga.jfif" height="250rem" class="card-img" alt="release_types">
-        <div class="card-img-overlay d-flex align-items-end">
+        <div class="card-body">
           <h5 class="card-title w-100">Tipos de lanzamiento</h5>
         </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/roles')">
       <div class="card text-bg-dark">
         <img src="../../../assets/img/roles.svg" height="250rem" class="card-img" alt="roles">
-        <div class="card-img-overlay d-flex align-items-end">
+        <div class="card-body">
           <h5 class="card-title w-100">Roles</h5>
         </div>
       </div>
     </div>
-    <div class="col-3 mt-5">
+    <div class="col-3 mt-5 pointer" (click)="goTo('/backoffice/sizes')">
       <div class="card text-bg-dark">
         <img src="../../../assets/img/Fitting_2.jpg" height="250rem" class="card-img" alt="sizes">
-        <div class="card-img-overlay d-flex align-items-end">
+        <div class="card-body">
           <h5 class="card-title w-100">Tallas</h5>
         </div>
       </div>
     </div>
   </div>
 </div>
+<router-outlet></router-outlet>
