@@ -157,7 +157,7 @@
                 <h3><strong>Resumen del pedido</strong></h3>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Productos:</p>
-                    <p class="card-text text-end">{{total}}€</p>
+                    <p class="card-text text-end">{{total.toFixed(2)}}€</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Envío:</p>
@@ -165,11 +165,11 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Subtotal:</p>
-                    <p class="card-text text-end">{{total}}€</p>
+                    <p class="card-text text-end">{{total.toFixed(2)}}€</p>
                 </div>
                 <div class="d-flex justify-content-between">
                     <p class="card-text"><strong>Total (IVA incluido):</strong></p>
-                    <p class="card-text text-end"><strong>{{total}}€</strong></p>
+                    <p class="card-text text-end"><strong>{{total.toFixed(2)}}€</strong></p>
                 </div>
             </div>
         </div>

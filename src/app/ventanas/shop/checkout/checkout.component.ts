@@ -76,6 +76,7 @@ export class CheckoutComponent implements OnInit {
 
     this.usuario = this.usuarioSrv.getUsuario();
     this.cartSrv.getByUser(this.usuario.username).subscribe(c => {
+      c = c.filter(cf => !cf.purchase.paid)
       this.cart = c;
       console.log("cart", this.cart)
       c.forEach(cart => {
@@ -113,11 +114,11 @@ export class CheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'EUR',
-            value: this.total.toString(),
+            value: this.total.toFixed(2),
             breakdown: {
               item_total: {
                 currency_code: 'EUR',
-                value: this.total.toString()
+                value: this.total.toFixed(2)
               }
             }
           },
@@ -127,7 +128,7 @@ export class CheckoutComponent implements OnInit {
             category: 'DIGITAL_GOODS',
             unit_amount: {
               currency_code: 'EUR',
-              value: this.total.toString(),
+              value: this.total.toFixed(2),
             },
           }]
         }]
