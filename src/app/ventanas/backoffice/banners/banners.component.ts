@@ -25,6 +25,8 @@ import { Product } from 'src/app/shared/models/product.model';
 import { ProductPhotos } from 'src/app/shared/models/product_photos.model';
 import { MerchandisingService } from 'src/app/shared/services/merchandising.service';
 import { Merchandising } from 'src/app/shared/models/merchandising.model';
+import { BannerPhotos } from 'src/app/shared/models/banner_photos.model';
+import { BannerPhotosService } from 'src/app/shared/services/banner_photos.service';
 
 @Component({
   selector: 'app-banners',
@@ -65,11 +67,16 @@ export class BannersComponent implements OnInit {
   releaseType: ReleaseType
   releaseTypes: ReleaseType[]
 
-  profile: Usuario
+  profile: string
   profiles: Usuario[]
 
-  bannerType: PhotoType
+  bannerType: string
   bannerTypes: PhotoType[]
+
+  artista;
+  banner_type;
+  url;
+  description;
 
   prueba = []
 
@@ -88,6 +95,7 @@ export class BannersComponent implements OnInit {
     private releaseTypeSrv: ReleaseTypesService,
     private storageSrv: StorageService,
     private profileSrv: ProfilesService,
+    private bannerPhotosSrv: BannerPhotosService,
     private router: Router
   ) { }
 
@@ -101,12 +109,12 @@ export class BannersComponent implements OnInit {
     
     this.usuario = this.usuarioSrv.getUsuario();
 
-    this.form = this.formBuilder.group({
-      name: '',
-      stock: '',
-      prize: '',
-      description: ''
-    });
+    // this.form = this.formBuilder.group({
+    //   artista: '',
+    //   banner_type: '',
+    //   url: '',
+    //   description: ''
+    // });
 
     this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
     this.releaseTypeSrv.getAll().subscribe(type => this.releaseTypes = type);
@@ -114,6 +122,7 @@ export class BannersComponent implements OnInit {
     this.photoTypeSrv.getAll().subscribe(type => this.photoType = type);
     
     this.profileSrv.getAllMatchesRol('ARTISTA').subscribe(type => this.profiles = type);
+    this.photoTypeSrv.getAll().subscribe(type => {this.bannerTypes = type.filter(t => t.name == "BANNER_HOME" || t.name == "BANNER_SHOP"); console.log("this.bannerTypes", this.bannerTypes)});
     this.photoTypeSrv.getAll().subscribe(type => {this.bannerTypes = type.filter(t => t.name == "BANNER_HOME" || t.name == "BANNER_SHOP"); console.log("this.bannerTypes", this.bannerTypes)});
 
   }
@@ -226,139 +235,26 @@ export class BannersComponent implements OnInit {
   async submit() {
     try {
 
-      let user: Usuario = this.usuario;
+      let user: Usuario = this.profiles.filter(p => p.username == this.profile)[0];
+      let type: PhotoType = this.bannerTypes.filter(b => b.name == this.bannerType)[0];
 
+      console.log("entra")
 
       this.myuuid = uuidv4();
 
-      let nProduct: Product = {
+      let nBannerPhotos: BannerPhotos = {
         id: this.myuuid,
-        name: this.form.value.name,
-        description: this.form.value.description,
         artist: user,
-        product_type: this.productTypes.filter(product => this.productType == product.code)[0]
+        type: type,
+        url: this.url,
+        description: this.description,
+        photo: user.foto
       }
 
-      await this.productSrv.create(nProduct);
+      console.log("nBannerPhotos", nBannerPhotos)
+      await this.bannerPhotosSrv.create(nBannerPhotos);
 
-      if (this.productType == 'CLOTHING') {
-        this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'front', this.front).then(async urlImagen => {
-          this.myuuid = uuidv4();
-
-          let nProductPhotoFront: ProductPhotos = {
-            id: this.myuuid,
-            photo: urlImagen,
-            photo_type: this.photoType.filter(type => type.name == 'FRONT')[0],
-            product: nProduct
-          }
-
-          await this.productPhotoSrv.create(nProductPhotoFront);
-
-          this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'back', this.back).then(async urlImagen => {
-            this.myuuid = uuidv4();
-
-            let nProductPhotoBack: ProductPhotos = {
-              id: this.myuuid,
-              photo: urlImagen,
-              photo_type: this.photoType.filter(type => type.name == 'BACK')[0],
-              product: nProduct
-            }
-
-            await this.productPhotoSrv.create(nProductPhotoBack);
-
-            this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'model_front', this.model_front).then(async urlImagen => {
-              this.myuuid = uuidv4();
-
-              let nProductPhotoMF: ProductPhotos = {
-                id: this.myuuid,
-                photo: urlImagen,
-                photo_type: this.photoType.filter(type => type.name == 'MODEL_FRONT')[0],
-                product: nProduct
-              }
-
-              await this.productPhotoSrv.create(nProductPhotoMF);
-
-              this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType + "/" + this.form.value.name, 'model_back', this.model_back).then(async urlImagen => {
-                this.myuuid = uuidv4();
-
-                let nProductPhotoMB: ProductPhotos = {
-                  id: this.myuuid,
-                  photo: urlImagen,
-                  photo_type: this.photoType.filter(type => type.name == 'MODEL_BACK')[0],
-                  product: nProduct
-                }
-
-                await this.productPhotoSrv.create(nProductPhotoMB);
-
-                let merchanCode = uuidv4();
-
-                this.sizes.forEach(async element => {
-
-                  console.log("element", element)
-                  this.myuuid = uuidv4();
-                  console.log("myuuid", this.myuuid)
-
-                  let merchandising: Merchandising;
-                  merchandising = {
-                    id: this.myuuid,
-                    code: merchanCode,
-                    product: nProduct,
-                    prize: 9.99,
-                    stock: 100,
-                    size: element,
-                    created_at: new Date().getTime()
-                  }
-                  console.log("merchandising", merchandising)
-
-                  await this.merchandisingSrv.create(merchandising);
-
-                })
-                this.router.navigate(['/shop']);
-              })
-            })
-          })
-        });
-      } else if (this.productType == 'MUSIC') {
-        this.storageSrv.uploadImg("merchan/" + user.email + "/" + this.productType, this.form.value.name, this.foto).then(async urlImagen => {
-          this.myuuid = uuidv4();
-
-          let nProductPhoto: ProductPhotos = {
-            id: this.myuuid,
-            photo: urlImagen,
-            photo_type: this.photoType.filter(type => type.name == 'DISK')[0],
-            product: nProduct
-          }
-
-          await this.productPhotoSrv.create(nProductPhoto);
-
-          let merchanCode = uuidv4();
-
-          this.sizes.forEach(async element => {
-
-            console.log("element", element)
-            this.myuuid = uuidv4();
-            console.log("myuuid", this.myuuid)
-
-            let merchandising: Merchandising;
-            merchandising = {
-              id: this.myuuid,
-              code: merchanCode,
-              product: nProduct,
-              prize: 9.99,
-              stock: 100,
-              size: element,
-              created_at: new Date().getTime()
-            }
-            console.log("merchandising", merchandising)
-
-            await this.merchandisingSrv.create(merchandising);
-
-          })
-          this.router.navigate(['/shop']);
-
-        });
-      }
-
+      console.log("hola")
 
     } catch (e: any) {
       // alert(e.message)
