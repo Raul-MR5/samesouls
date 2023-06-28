@@ -44,7 +44,7 @@ const routes: Routes = [
       { path: 'artist-profile', loadChildren: () => import('src/app/ventanas/artistas/edit-artista/edit-artista.module').then(m => m.EditArtistaModule)/* , canActivate: [AuthGuard] */ },
       
       { path: 'backoffice/banners', loadChildren: () => import('src/app/ventanas/backoffice/banners/banners.module').then(m => m.BannersModule), /* canActivate: [AuthGuard], */},
-      { path: 'backoffice/genres', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
+      { path: 'backoffice/genres', loadChildren: () => import('src/app/ventanas/backoffice/genres/genres.module').then(m => m.GenresModule)/* , canActivate: [AuthGuard] */ },
       { path: 'backoffice/photo_types', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
       { path: 'backoffice/product_types', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
       { path: 'backoffice/profiles', loadChildren: () => import('src/app/ventanas/backoffice/backoffice.module').then(m => m.BackofficeModule)/* , canActivate: [AuthGuard] */ },
