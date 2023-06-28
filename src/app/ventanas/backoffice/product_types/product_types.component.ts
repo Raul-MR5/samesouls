@@ -31,11 +31,11 @@ import { Genre } from 'src/app/shared/models/genre.model';
 import { GenresService } from 'src/app/shared/services/genres.service';
 
 @Component({
-  selector: 'app-genres',
-  templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.scss']
+  selector: 'app-product_types',
+  templateUrl: './product_types.component.html',
+  styleUrls: ['./product_types.component.scss']
 })
-export class GenresComponent implements OnInit {
+export class ProductTypesComponent implements OnInit {
 
   myuuid;
 
@@ -125,17 +125,17 @@ export class GenresComponent implements OnInit {
 
       this.myuuid = uuidv4();
 
-      let nGenres: Genre = {
+      let nProductType: ProductType = {
         id: this.myuuid,
         code: this.code
       }
 
-      await this.genresSrv.create(nGenres);
+      await this.productTypeSrv.create(nProductType);
       
       let timerInterval
       Swal.fire({
-        title: 'Se han actualizado los géneros',
-        html: 'Se ha añadido un nuevo género.',
+        title: 'Se han actualizado los tipos de producto',
+        html: 'Se ha añadido un nuevo tipo de producto.',
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {

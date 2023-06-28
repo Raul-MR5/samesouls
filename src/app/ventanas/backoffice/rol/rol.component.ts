@@ -29,13 +29,15 @@ import { BannerPhotos } from 'src/app/shared/models/banner_photos.model';
 import { BannerPhotosService } from 'src/app/shared/services/banner_photos.service';
 import { Genre } from 'src/app/shared/models/genre.model';
 import { GenresService } from 'src/app/shared/services/genres.service';
+import { RolesService } from 'src/app/shared/services/roles.service';
+import { Rol } from 'src/app/shared/models/rol.model';
 
 @Component({
-  selector: 'app-genres',
-  templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.scss']
+  selector: 'app-rol',
+  templateUrl: './rol.component.html',
+  styleUrls: ['./rol.component.scss']
 })
-export class GenresComponent implements OnInit {
+export class RolComponent implements OnInit {
 
   myuuid;
 
@@ -96,6 +98,7 @@ export class GenresComponent implements OnInit {
     private profileSrv: ProfilesService,
     private bannerPhotosSrv: BannerPhotosService,
     private genresSrv: GenresService,
+    private rolesSrv: RolesService,
     private router: Router
   ) { }
 
@@ -125,17 +128,17 @@ export class GenresComponent implements OnInit {
 
       this.myuuid = uuidv4();
 
-      let nGenres: Genre = {
+      let nRoles: Rol = {
         id: this.myuuid,
         code: this.code
       }
 
-      await this.genresSrv.create(nGenres);
+      await this.rolesSrv.create(nRoles);
       
       let timerInterval
       Swal.fire({
-        title: 'Se han actualizado los géneros',
-        html: 'Se ha añadido un nuevo género.',
+        title: 'Se han actualizado los roles',
+        html: 'Se ha añadido un nuevo rol.',
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {

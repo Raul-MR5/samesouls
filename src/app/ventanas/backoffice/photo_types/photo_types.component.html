@@ -1,7 +1,7 @@
 <div class="form-back bg-size">
     <div class="row mx-auto">
         <div class="col-lg-10 mx-auto py-md-5">
-            <h3 class="fs-4 text-pink">Géneros</h3>
+            <h3 class="fs-4 text-pink">Tipos de fotos</h3>
             <hr class="text-pink" />
         </div>
     </div>
@@ -9,8 +9,8 @@
         <div class="d-flex align-items-center row col-lg-10 mx-auto text-pink">
             <div class="row col-lg-12">
                 <div class="col-12">
-                    <label for="code" class="form-label text-pink title-new-song"><b>Code</b></label>
-                    <input [(ngModel)]="code" name="code_genre" type="text" class="form-control" id="code" placeholder=""
+                    <label for="name" class="form-label text-pink title-new-song"><b>Nombre</b></label>
+                    <input [(ngModel)]="name" name="name_type" type="text" class="form-control" id="name" placeholder=""
                         value="">
                 </div>
             </div>
@@ -18,7 +18,7 @@
 
         <div class="col-10 mx-auto d-flex justify-content-end mt-5">
             <button class="btn btn-outline-light me-3" (click)="goTo('backoffice')">Cancelar</button>
-            <button class="btn btn-light me-4" (click)="submit()">Añadir género</button>
+            <button class="btn btn-light me-4" (click)="submit()">Añadir tipo de foto</button>
         </div>
     </form>
 

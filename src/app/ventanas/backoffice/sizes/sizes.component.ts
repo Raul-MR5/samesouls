@@ -29,13 +29,15 @@ import { BannerPhotos } from 'src/app/shared/models/banner_photos.model';
 import { BannerPhotosService } from 'src/app/shared/services/banner_photos.service';
 import { Genre } from 'src/app/shared/models/genre.model';
 import { GenresService } from 'src/app/shared/services/genres.service';
+import { RolesService } from 'src/app/shared/services/roles.service';
+import { Rol } from 'src/app/shared/models/rol.model';
 
 @Component({
-  selector: 'app-genres',
-  templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.scss']
+  selector: 'app-sizes',
+  templateUrl: './sizes.component.html',
+  styleUrls: ['./sizes.component.scss']
 })
-export class GenresComponent implements OnInit {
+export class SizesComponent implements OnInit {
 
   myuuid;
 
@@ -96,11 +98,13 @@ export class GenresComponent implements OnInit {
     private profileSrv: ProfilesService,
     private bannerPhotosSrv: BannerPhotosService,
     private genresSrv: GenresService,
+    private rolesSrv: RolesService,
     private router: Router
   ) { }
 
   ngOnInit(): void {    
     this.usuario = this.usuarioSrv.getUsuario();
+    this.sizesSrv.getAll().subscribe(sizes => this.sizes = sizes);
   }
 
   ngOnDestroy(): void {
@@ -125,17 +129,17 @@ export class GenresComponent implements OnInit {
 
       this.myuuid = uuidv4();
 
-      let nGenres: Genre = {
-        id: this.myuuid,
+      let nSizes: Size = {
+        id: this.sizes.length,
         code: this.code
       }
 
-      await this.genresSrv.create(nGenres);
+      await this.sizesSrv.create(nSizes);
       
       let timerInterval
       Swal.fire({
-        title: 'Se han actualizado los géneros',
-        html: 'Se ha añadido un nuevo género.',
+        title: 'Se han actualizado las tallas',
+        html: 'Se ha añadido una nueva talla.',
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {

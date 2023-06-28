@@ -217,7 +217,6 @@ export class BannersComponent implements OnInit {
   }
 
   changePhoto() {
-    console.log("entar")
     switch (this.productType) {
       case 'CLOTHING':
         this.foto = "https://firebasestorage.googleapis.com/v0/b/samesouls-a0c25.appspot.com/o/merchan%2Fshirt-default.png?alt=media&token=7a0a9551-4c22-435f-8c26-5c1db4d3356a&_gl=1*wyidpd*_ga*MjEyNDUxODY3Ny4xNjY2MzY4MTYz*_ga_CW55HF8NVT*MTY4NTg3MDY4NC40Mi4xLjE2ODU4NzEwMzYuMC4wLjA.";
@@ -238,8 +237,6 @@ export class BannersComponent implements OnInit {
       let user: Usuario = this.profiles.filter(p => p.username == this.profile)[0];
       let type: PhotoType = this.bannerTypes.filter(b => b.name == this.bannerType)[0];
 
-      console.log("entra")
-
       this.myuuid = uuidv4();
 
       let nBannerPhotos: BannerPhotos = {
@@ -251,10 +248,26 @@ export class BannersComponent implements OnInit {
         photo: user.foto
       }
 
-      console.log("nBannerPhotos", nBannerPhotos)
       await this.bannerPhotosSrv.create(nBannerPhotos);
-
-      console.log("hola")
+      
+      let timerInterval
+      Swal.fire({
+        title: 'Se han actualizado los banners',
+        html: 'Se ha añadido un nuevo banner.',
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          this.router.navigate(['/backoffice']);
+        }
+      })
 
     } catch (e: any) {
       // alert(e.message)

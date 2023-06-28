@@ -114,9 +114,9 @@
     <div class="col-lg-4 mx-auto py-md-4">
         <ngx-paypal id="paypal-div" [config]="payPalConfig"></ngx-paypal>
     </div>
-    <div class="col-12 d-flex justify-content-end mt-5">
+    <!-- <div class="col-12 d-flex justify-content-end mt-5">
         <button class="btn btn-outline-light me-3" (click)="step = 'resume'">Next</button>
-    </div>
+    </div> -->
 </div>
 
 <div *ngIf="step == 'resume'">
@@ -141,19 +141,19 @@
             </ul>
         </div>
     </div>
-    <div class="row col-lg-12">
-        <div class="row col-lg-4"></div>
-        <div class="row col-lg-4 d-flex align-content-center justify-content-center ms-5 g-3 text-white"
+    <div class="row col-sm-12 col-md-12 col-lg-12">
+        <div class="row col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="row col-sm-4 col-md-4 col-lg-4 d-flex align-content-center justify-content-center ms-5 g-3 text-white"
             style="border: 1px solid white; border-radius: 20px;">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-6">
+            <div class="col-sm-1 col-md-1 col-lg-1"></div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
                 <h3><strong>Dirección de envío</strong></h3>
                 <p>{{form.value.address}}</p>
                 <p>{{form.value.city+", "+form.value.state+" "+form.value.cp}}</p>
                 <p>{{form.value.country}}</p>
                 <p>Teléfono: {{form.value.phone}}</p>
             </div>
-            <div class="col-lg-5">
+            <div class="col-sm-5 col-md-5 col-lg-5">
                 <h3><strong>Resumen del pedido</strong></h3>
                 <div class="d-flex justify-content-between">
                     <p class="card-text">Productos:</p>
@@ -174,12 +174,12 @@
             </div>
         </div>
     </div>
-    <div class="row col-lg-12">
-        <div class="row col-lg-4"></div>
-        <div class="row col-lg-4 ms-5 g-3">
+    <div class="row col-sm-12 col-md-12 col-lg-12">
+        <div class="row col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="row col-sm-4 col-md-4 col-lg-4 ms-5 g-3">
             <div class="col-12 d-flex justify-content-end ms-2">
                 <button class="btn btn-outline-light me-3" (click)="goTo('/shop')">Volver</button>
-                <button class="btn btn-light d-flex align-content-center" type="submit">
+                <button class="btn btn-light d-flex align-content-center" (click)="download()" type="submit">
                     <span class="material-symbols-outlined">print</span>
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0" />
                     <span class="ms-1">Imprimir</span>

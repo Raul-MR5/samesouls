@@ -191,6 +191,16 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  download() {
+    const a = document.createElement('a')
+    let url = "../../../../assets/img/recibo01.png"
+    a.href = url
+    a.download = url.split('/').pop()
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
   onUploadImg(event) {
 
     let cover = event.target.files[0];
@@ -242,7 +252,7 @@ export class CheckoutComponent implements OnInit {
     // }
   }
 
-  reset(){
+  reset() {
     this.form = this.formBuilder.group({
       foto: [this.user.foto],
       username: [this.user.username, [Validators.required]],
@@ -252,15 +262,15 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  volver(){
+  volver() {
     this.step = 'resume';
   }
 
-  selectState(){
+  selectState() {
     this.states = this.countrySrv.getAllStates()
   }
 
-  selectCity(){
+  selectCity() {
     this.cities = this.countrySrv.getAllCities()
   }
 

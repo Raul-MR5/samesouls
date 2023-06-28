@@ -31,27 +31,16 @@ import { Genre } from 'src/app/shared/models/genre.model';
 import { GenresService } from 'src/app/shared/services/genres.service';
 
 @Component({
-  selector: 'app-genres',
-  templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.scss']
+  selector: 'app-photo_types',
+  templateUrl: './photo_types.component.html',
+  styleUrls: ['./photo_types.component.scss']
 })
-export class GenresComponent implements OnInit {
+export class PhotoTypesComponent implements OnInit {
 
   myuuid;
 
   form: FormGroup;
   usuario: Usuario;
-  name;
-  photo;
-
-  foto;
-  front;
-  back;
-  model_front;
-  model_back;
-  model_side;
-
-  music;
 
   release: Release;
   canciones: any[] = [];
@@ -60,11 +49,6 @@ export class GenresComponent implements OnInit {
   productType: string;
   productTypes: ProductType[];
   photoType: PhotoType[];
-
-  nSong;
-  songTitle;
-  songAudio;
-  releaseTitle;
 
   releaseType: ReleaseType
   releaseTypes: ReleaseType[]
@@ -75,7 +59,7 @@ export class GenresComponent implements OnInit {
   bannerType: string
   bannerTypes: PhotoType[]
 
-  code;
+  name;
 
   prueba = []
 
@@ -125,12 +109,12 @@ export class GenresComponent implements OnInit {
 
       this.myuuid = uuidv4();
 
-      let nGenres: Genre = {
+      let nPhotoType: PhotoType = {
         id: this.myuuid,
-        code: this.code
+        name: this.name
       }
 
-      await this.genresSrv.create(nGenres);
+      await this.photoTypeSrv.create(nPhotoType);
       
       let timerInterval
       Swal.fire({

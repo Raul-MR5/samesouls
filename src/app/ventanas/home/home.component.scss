@@ -82,8 +82,12 @@
     position: relative;
 }
 .c-example__tilt {
-    width: 596px;
-    height: 640px;
+    width: 40vw;
+    height: 70vh;
+    // width: 37.25rem;
+    max-width: 596px;
+    // height: 40rem;
+    max-height: 640px;
     background: url(../../../assets/img/concierto2.jpg) no-repeat left -250px top -100px;
     cursor: pointer;
     margin: 0 auto;

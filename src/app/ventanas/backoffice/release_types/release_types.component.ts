@@ -31,11 +31,11 @@ import { Genre } from 'src/app/shared/models/genre.model';
 import { GenresService } from 'src/app/shared/services/genres.service';
 
 @Component({
-  selector: 'app-genres',
-  templateUrl: './genres.component.html',
-  styleUrls: ['./genres.component.scss']
+  selector: 'app-release_types',
+  templateUrl: './release_types.component.html',
+  styleUrls: ['./release_types.component.scss']
 })
-export class GenresComponent implements OnInit {
+export class ReleaseTypesComponent implements OnInit {
 
   myuuid;
 
@@ -75,7 +75,7 @@ export class GenresComponent implements OnInit {
   bannerType: string
   bannerTypes: PhotoType[]
 
-  code;
+  type;
 
   prueba = []
 
@@ -125,17 +125,17 @@ export class GenresComponent implements OnInit {
 
       this.myuuid = uuidv4();
 
-      let nGenres: Genre = {
+      let nReleaseType: ReleaseType = {
         id: this.myuuid,
-        code: this.code
+        type: this.type
       }
 
-      await this.genresSrv.create(nGenres);
+      await this.releaseTypeSrv.create(nReleaseType);
       
       let timerInterval
       Swal.fire({
-        title: 'Se han actualizado los géneros',
-        html: 'Se ha añadido un nuevo género.',
+        title: 'Se han actualizado los tipos de lanzamiento',
+        html: 'Se ha añadido un nuevo tipo de lanzamiento.',
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {
