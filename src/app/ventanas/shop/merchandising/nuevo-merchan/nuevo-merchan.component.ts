@@ -292,8 +292,8 @@ export class NuevoMerchanComponent implements OnInit {
                     id: this.myuuid,
                     code: merchanCode,
                     product: nProduct,
-                    prize: 9.99,
-                    stock: 100,
+                    prize: this.form.value.prize,
+                    stock: this.form.value.stock,
                     size: element,
                     created_at: new Date().getTime()
                   }
@@ -333,8 +333,8 @@ export class NuevoMerchanComponent implements OnInit {
               id: this.myuuid,
               code: merchanCode,
               product: nProduct,
-              prize: 9.99,
-              stock: 100,
+              prize: this.form.value.prize,
+              stock: this.form.value.stock,
               size: element,
               created_at: new Date().getTime()
             }

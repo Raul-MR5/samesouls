@@ -23,7 +23,7 @@ export class MerchandisingService {
     }
 
     getAllMatches(match: string): Observable<Merchandising[]> {
-        return this.firestore.collection<Merchandising>('merchandising', ref => ref.startAt(match).endAt(match + "\uf8ff")).valueChanges({ idField: 'id' });
+        return this.firestore.collection<Merchandising>('merchandising', ref => ref.orderBy('product.name').startAt(match).endAt(match + "\uf8ff")).valueChanges({ idField: 'id' });
     }
 
     getAllOrdered(): Observable<Merchandising[]> {

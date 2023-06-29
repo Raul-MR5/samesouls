@@ -118,15 +118,30 @@ export class ShopComponent implements OnInit {
     if (this.form.value.search.length > 0) {
       this.busqueda = true;
 
-      this.usuarioSrv.getAllMatchesArtista(this.form.value.search).subscribe(artistas => {
-        this.artistas = artistas;
+      this.merchandisingSrv.getAllMatches(this.form.value.search).subscribe(merchan => {
+        const unique = merchan.filter(
+          (obj, index) =>
+            merchan.findIndex((item) => item.code === obj.code) === index
+        );
+  
+        this.merchan = unique;
+  
+        this.merchan.forEach(u => {
+          this.productPhotoSrv.getByProduct(u.product.id).subscribe(photo => {
+            photo.forEach(p => {
+              if (((p.photo_type.name == 'DISK') || (p.photo_type.name == 'FRONT'))) {
+                this.photos[u.code] = p;
+              }
+            })
+          })
+        })
       });
       // this.usuarioSrv.getAllMatches(this.form.value.search).subscribe(artistas => {
       //   this.artistas = artistas;
       // });
 
     } else {
-      this.artistas = this.allArtistas
+      this.merchan = this.allMerchan
       this.busqueda = false;
     }
   }
